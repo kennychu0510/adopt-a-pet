@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import Images from '@/assets/index';
+import Images from "@/assets/index";
 import {
   ChevronDownIcon,
   ChevronRightIcon,
   CloseIcon,
   HamburgerIcon,
-} from '@chakra-ui/icons';
+} from "@chakra-ui/icons";
 import {
   Box,
   Button,
@@ -21,8 +21,8 @@ import {
   Text,
   useColorModeValue,
   useDisclosure,
-} from '@chakra-ui/react';
-import Image from 'next/image';
+} from "@chakra-ui/react";
+import Image from "next/image";
 
 export default function Nav() {
   const { isOpen, onToggle } = useDisclosure();
@@ -30,57 +30,57 @@ export default function Nav() {
   return (
     <Box
       borderBottom={1}
-      borderStyle={'solid'}
-      borderColor={useColorModeValue('gray.200', 'gray.900')}
-      display={'flex'}
-      justifyContent={'center'}
-      w={'100vw'}
+      borderStyle={"solid"}
+      borderColor={useColorModeValue("gray.200", "gray.900")}
+      display={"flex"}
+      justifyContent={"center"}
+      w={"100vw"}
     >
       <Flex
-        bg={useColorModeValue('white', 'gray.800')}
-        color={useColorModeValue('gray.600', 'white')}
-        minH={'60px'}
+        bg={useColorModeValue("white", "gray.800")}
+        color={useColorModeValue("gray.600", "white")}
+        minH={"60px"}
         py={{ base: 2 }}
         px={{ base: 4 }}
-        width={'8xl'}
-        align={'center'}
+        width={"8xl"}
+        align={"center"}
       >
         <Flex
-          flex={{ base: 1, md: 'auto' }}
+          flex={{ base: 1, md: "auto" }}
           ml={{ base: -2 }}
-          display={{ base: 'flex', md: 'none' }}
+          display={{ base: "flex", md: "none" }}
         >
           <IconButton
             onClick={onToggle}
             icon={
               isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />
             }
-            variant={'ghost'}
-            aria-label={'Toggle Navigation'}
+            variant={"ghost"}
+            aria-label={"Toggle Navigation"}
           />
         </Flex>
-        <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-          <Image src={Images.adopt} alt='icon' width={24} height={24} />
-          <Flex display={{ base: 'none', md: 'flex' }} ml={5}>
+        <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
+          <Image src={Images.adopt} alt="icon" width={24} height={24} />
+          <Flex display={{ base: "none", md: "flex" }} ml={5}>
             <DesktopNav />
           </Flex>
         </Flex>
 
         <Stack
           flex={{ base: 1, md: 0 }}
-          justify={'flex-end'}
-          direction={'row'}
+          justify={"flex-end"}
+          direction={"row"}
           spacing={6}
         >
           <Button
-            as={'a'}
-            fontSize={'sm'}
+            as={"a"}
+            fontSize={"sm"}
             fontWeight={600}
-            color={'white'}
-            bg={'brand.blue'}
-            href={'/post/adoption'}
+            color={"white"}
+            bg={"brand.blue"}
+            href={"/post/adoption"}
             _hover={{
-              bg: 'brand.blue',
+              bg: "brand.blue",
               opacity: 0.6,
             }}
           >
@@ -97,25 +97,25 @@ export default function Nav() {
 }
 
 const DesktopNav = () => {
-  const linkColor = useColorModeValue('gray.600', 'gray.200');
-  const linkHoverColor = useColorModeValue('gray.800', 'white');
-  const popoverContentBgColor = useColorModeValue('white', 'gray.800');
+  const linkColor = useColorModeValue("gray.600", "gray.200");
+  const linkHoverColor = useColorModeValue("gray.800", "white");
+  const popoverContentBgColor = useColorModeValue("white", "gray.800");
 
   return (
-    <Stack direction={'row'} spacing={4}>
+    <Stack direction={"row"} spacing={4}>
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
-          <Popover trigger={'hover'} placement={'bottom-start'}>
+          <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
               <Box
-                as='a'
+                as="a"
                 p={2}
-                href={navItem.href ?? '#'}
-                fontSize={'sm'}
+                href={navItem.href ?? "#"}
+                fontSize={"sm"}
                 fontWeight={500}
                 color={linkColor}
                 _hover={{
-                  textDecoration: 'none',
+                  textDecoration: "none",
                   color: linkHoverColor,
                 }}
               >
@@ -126,11 +126,11 @@ const DesktopNav = () => {
             {navItem.children && (
               <PopoverContent
                 border={0}
-                boxShadow={'xl'}
+                boxShadow={"xl"}
                 bg={popoverContentBgColor}
                 p={4}
-                rounded={'xl'}
-                minW={'sm'}
+                rounded={"xl"}
+                minW={"sm"}
               >
                 <Stack>
                   {navItem.children.map((child) => (
@@ -149,38 +149,38 @@ const DesktopNav = () => {
 const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
   return (
     <Box
-      as='a'
+      as="a"
       href={href}
-      role={'group'}
-      display={'block'}
+      role={"group"}
+      display={"block"}
       p={2}
-      rounded={'md'}
+      rounded={"md"}
       _hover={{
-        bg: useColorModeValue('brand.blue', 'brand.grey'),
+        bg: useColorModeValue("brand.blue", "brand.grey"),
         opacity: 0.6,
       }}
     >
-      <Stack direction={'row'} align={'center'}>
+      <Stack direction={"row"} align={"center"}>
         <Box>
           <Text
-            transition={'all .3s ease'}
-            _groupHover={{ color: 'white' }}
+            transition={"all .3s ease"}
+            _groupHover={{ color: "white" }}
             fontWeight={500}
           >
             {label}
           </Text>
-          <Text fontSize={'sm'}>{subLabel}</Text>
+          <Text fontSize={"sm"}>{subLabel}</Text>
         </Box>
         <Flex
-          transition={'all .3s ease'}
-          transform={'translateX(-10px)'}
+          transition={"all .3s ease"}
+          transform={"translateX(-10px)"}
           opacity={0}
-          _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
-          justify={'flex-end'}
-          align={'center'}
+          _groupHover={{ opacity: "100%", transform: "translateX(0)" }}
+          justify={"flex-end"}
+          align={"center"}
           flex={1}
         >
-          <Icon color={'white'} w={5} h={5} as={ChevronRightIcon} />
+          <Icon color={"white"} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
     </Box>
@@ -190,9 +190,9 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
 const MobileNav = () => {
   return (
     <Stack
-      bg={useColorModeValue('white', 'gray.800')}
+      bg={useColorModeValue("white", "gray.800")}
       p={4}
-      display={{ md: 'none' }}
+      display={{ md: "none" }}
     >
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
@@ -208,43 +208,43 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
     <Stack spacing={4} onClick={children && onToggle}>
       <Box
         py={2}
-        as='a'
-        href={href ?? '#'}
-        justifyContent='space-between'
-        alignItems='center'
+        as="a"
+        href={href ?? "#"}
+        justifyContent="space-between"
+        alignItems="center"
         _hover={{
-          textDecoration: 'none',
+          textDecoration: "none",
         }}
       >
         <Text
           fontWeight={600}
-          color={useColorModeValue('gray.600', 'gray.200')}
+          color={useColorModeValue("gray.600", "gray.200")}
         >
           {label}
         </Text>
         {children && (
           <Icon
             as={ChevronDownIcon}
-            transition={'all .25s ease-in-out'}
-            transform={isOpen ? 'rotate(180deg)' : ''}
+            transition={"all .25s ease-in-out"}
+            transform={isOpen ? "rotate(180deg)" : ""}
             w={6}
             h={6}
           />
         )}
       </Box>
 
-      <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
+      <Collapse in={isOpen} animateOpacity style={{ marginTop: "0!important" }}>
         <Stack
           mt={2}
           pl={4}
           borderLeft={1}
-          borderStyle={'solid'}
-          borderColor={useColorModeValue('gray.200', 'gray.700')}
-          align={'start'}
+          borderStyle={"solid"}
+          borderColor={useColorModeValue("gray.200", "gray.700")}
+          align={"start"}
         >
           {children &&
             children.map((child) => (
-              <Box as='a' key={child.label} py={2} href={child.href}>
+              <Box as="a" key={child.label} py={2} href={child.href}>
                 {child.label}
               </Box>
             ))}
@@ -263,35 +263,35 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
   {
-    label: 'Adopt',
+    label: "Adopt",
     children: [
       {
-        label: 'All',
-        subLabel: '',
-        href: '#',
+        label: "All",
+        subLabel: "",
+        href: "#",
       },
       {
-        label: 'Dogs',
-        subLabel: '',
-        href: '#',
+        label: "Dogs",
+        subLabel: "",
+        href: "#",
       },
       {
-        label: 'Cats',
-        subLabel: '',
-        href: '#',
+        label: "Cats",
+        subLabel: "",
+        href: "#",
       },
     ],
   },
   {
-    label: 'Find Owner',
-    href: '#',
+    label: "Find Owner",
+    href: "#",
   },
   {
-    label: 'Lost',
-    href: '#',
+    label: "Lost",
+    href: "#",
   },
   {
-    label: 'Contact Us',
-    href: '#',
+    label: "Contact Us",
+    href: "#",
   },
 ];

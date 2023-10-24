@@ -1,5 +1,4 @@
-import PetCard, { PetCardProps } from "@/components/PetCard";
-import { Box, Container, Text } from "@chakra-ui/react";
+import { PetCardProps } from "@/components/PetCard";
 import Images from "@/assets";
 import HorizontalSection from "@/components/HorizontalSection";
 

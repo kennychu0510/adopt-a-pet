@@ -1,17 +1,6 @@
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { PetCardProps } from "@/types";
+import { Card, CardBody, CardHeader, Stack, Text } from "@chakra-ui/react";
 import Image from "next/image";
-
-export type PetCardProps = {
-  name: string;
-  image: string;
-};
 
 export default function PetCard(props: PetCardProps) {
   return (

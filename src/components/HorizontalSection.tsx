@@ -6,7 +6,8 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import * as CSS from "csstype";
-import PetCard, { PetCardProps } from "./PetCard";
+import PetCard from "./PetCard";
+import { PetCardProps } from "@/types";
 
 type Props = {
   header: string;

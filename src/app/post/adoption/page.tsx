@@ -1,5 +1,5 @@
 import PostForm from "@/components/PostForm";
-import { Center, Text } from "@chakra-ui/react";
+import { Center } from "@chakra-ui/react";
 
 export default function adoption() {
   return (
