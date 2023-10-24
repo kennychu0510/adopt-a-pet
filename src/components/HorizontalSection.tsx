@@ -21,7 +21,7 @@ export default function HorizontalSection(props: Props) {
     { ssr: false },
   ) as ResponsiveValue<CSS.Property.FlexWrap>;
   return (
-    <section className="mb-4">
+    <Box mb={"4"}>
       <Text fontSize={"lg"} fontWeight={"bold"}>
         {props.header}
       </Text>
@@ -39,6 +39,6 @@ export default function HorizontalSection(props: Props) {
           <PetCard key={category.name} {...category} />
         ))}
       </Box>
-    </section>
+    </Box>
   );
 }

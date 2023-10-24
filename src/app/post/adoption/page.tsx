@@ -1,19 +1,18 @@
 import PostForm from "@/components/PostForm";
-import { Center } from "@chakra-ui/react";
+import { Box, Center } from "@chakra-ui/react";
 
 export default function adoption() {
   return (
     <main>
-      <Center
-        m={-4}
-        width={"100vw"}
-        height={"calc(100dvh - 100px)"}
+      <Box
+        mt={4}
+        mx={"auto"}
         display={"flex"}
         justifyContent={"center"}
         alignItems={"center"}
       >
         <PostForm />
-      </Center>
+      </Box>
     </main>
   );
 }

@@ -14,6 +14,7 @@ import {
   Flex,
   Icon,
   IconButton,
+  Link,
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -60,7 +61,9 @@ export default function Nav() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Image src={Images.adopt} alt="icon" width={24} height={24} />
+          <Link href="/">
+            <Image src={Images.adopt} alt="icon" width={24} height={24} />
+          </Link>
           <Flex display={{ base: "none", md: "flex" }} ml={5}>
             <DesktopNav />
           </Flex>

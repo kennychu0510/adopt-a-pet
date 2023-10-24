@@ -1,6 +1,6 @@
-import { PetCardProps } from "@/components/PetCard";
 import Images from "@/assets";
 import HorizontalSection from "@/components/HorizontalSection";
+import { PetCardProps } from "@/types";
 
 const CATEGORIES: PetCardProps[] = [
   {
