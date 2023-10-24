@@ -1,9 +1,6 @@
-import React from 'react'
+import { Text } from "@chakra-ui/react";
+import React from "react";
 
 export default function AdoptPage() {
-  return (
-    <div>
-      
-    </div>
-  )
+  return <main></main>;
 }
