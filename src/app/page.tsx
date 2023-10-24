@@ -1,26 +1,26 @@
-import PetCard, { PetCardProps } from '@/components/PetCard';
-import { Box, Container, Text } from '@chakra-ui/react';
-import Images from '@/assets';
-import HorizontalSection from '@/components/HorizontalSection';
+import PetCard, { PetCardProps } from "@/components/PetCard";
+import { Box, Container, Text } from "@chakra-ui/react";
+import Images from "@/assets";
+import HorizontalSection from "@/components/HorizontalSection";
 
 const CATEGORIES: PetCardProps[] = [
   {
-    name: 'all',
+    name: "all",
     image: Images.pets,
   },
   {
-    name: 'dog',
+    name: "dog",
     image: Images.dog,
   },
   {
-    name: 'cat',
+    name: "cat",
     image: Images.cat,
   },
 ];
 
 const NEW_PETS: PetCardProps[] = [
   {
-    name: 'Paw',
+    name: "Paw",
     image: Images.dog,
   },
 ];
@@ -28,8 +28,16 @@ const NEW_PETS: PetCardProps[] = [
 export default function Home() {
   return (
     <main>
-      <HorizontalSection items={CATEGORIES} header='Adopt a Pet' subHeader='Be a guardian angel' />
-      <HorizontalSection items={NEW_PETS} header='New pets to adopt' subHeader='Bring a pet home now!' />
+      <HorizontalSection
+        items={CATEGORIES}
+        header="Adopt a Pet"
+        subHeader="Be a guardian angel"
+      />
+      <HorizontalSection
+        items={NEW_PETS}
+        header="New pets to adopt"
+        subHeader="Bring a pet home now!"
+      />
     </main>
   );
 }
