@@ -24,20 +24,21 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 
-export default function NavBar() {
+export default function Nav() {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
-    <Box>
+    <Box
+      borderBottom={1}
+        borderStyle={"solid"}
+        borderColor={useColorModeValue("gray.200", "gray.900")}>
       <Flex
         bg={useColorModeValue("white", "gray.800")}
         color={useColorModeValue("gray.600", "white")}
         minH={"60px"}
         py={{ base: 2 }}
         px={{ base: 4 }}
-        borderBottom={1}
-        borderStyle={"solid"}
-        borderColor={useColorModeValue("gray.200", "gray.900")}
+        maxWidth={'8xl'}
         align={"center"}
       >
         <Flex
@@ -70,26 +71,16 @@ export default function NavBar() {
           <Button
             as={"a"}
             fontSize={"sm"}
-            fontWeight={400}
-            variant={"link"}
-            href={"#"}
-          >
-            Sign In
-          </Button>
-          <Button
-            as={"a"}
-            display={{ base: "none", md: "inline-flex" }}
-            fontSize={"sm"}
             fontWeight={600}
             color={"white"}
             bg={"brand.blue"}
-            href={"#"}
+            href={"/post/adoption"}
             _hover={{
               bg: "brand.blue",
               opacity: 0.6,
             }}
           >
-            Sign Up
+            Post
           </Button>
         </Stack>
       </Flex>
