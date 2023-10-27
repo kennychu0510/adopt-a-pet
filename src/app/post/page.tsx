@@ -1,7 +1,7 @@
-import Form from "@/components/form/AdoptionForm";
+import PostFormType from "@/components/form/FormType";
 import { Box } from "@chakra-ui/react";
 
-export default function AdoptionForm() {
+export default function Page() {
   return (
     <main>
       <Box
@@ -11,7 +11,7 @@ export default function AdoptionForm() {
         justifyContent={"center"}
         alignItems={"center"}
       >
-        <Form />
+        <PostFormType />
       </Box>
     </main>
   );

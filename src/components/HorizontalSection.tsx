@@ -36,7 +36,7 @@ export default function HorizontalSection(props: Props) {
         gap={5}
       >
         {props.items.map((category) => (
-          <PetCard key={category.name} {...category} />
+          <PetCard key={category.name} image={category.image} name={category.name} />
         ))}
       </Box>
     </Box>
