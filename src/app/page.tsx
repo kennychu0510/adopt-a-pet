@@ -1,21 +1,7 @@
 import Images from "@/assets";
 import HorizontalSection from "@/components/HorizontalSection";
+import { CATEGORIES } from "@/constants";
 import { PetCardProps } from "@/types";
-
-const CATEGORIES: PetCardProps[] = [
-  {
-    name: "all",
-    image: Images.pets,
-  },
-  {
-    name: "dog",
-    image: Images.dog,
-  },
-  {
-    name: "cat",
-    image: Images.cat,
-  },
-];
 
 const NEW_PETS: PetCardProps[] = [
   {

@@ -1,69 +1,112 @@
-"use client";
+'use client';
 
+import { submitAdoptionForm } from '@/app/serverActions/formSubmission';
+import Images from '@/assets';
 import {
   Box,
   Button,
+  Card,
+  Center,
   FormControl,
   FormLabel,
+  Heading,
   Input,
   InputGroup,
   InputLeftElement,
   Textarea,
-  VStack
-} from "@chakra-ui/react";
-import { BsPerson } from "react-icons/bs";
-import { MdOutlineEmail } from "react-icons/md";
+  VStack,
+  useMediaQuery
+} from '@chakra-ui/react';
+import Image from 'next/image';
+import { useState } from 'react';
+import { BsPerson } from 'react-icons/bs';
+import { MdOutlineEmail } from 'react-icons/md';
+import AnimalTypeDropdown from './AnimalTypeDropdown';
 
 export default function AdoptionForm() {
+  const [isLargeScreen] = useMediaQuery('(min-width: 35em)', {
+    ssr: false,
+  });
+  const minWidth = isLargeScreen ? 500 : 200;
+  const [type, setType] = useState('');
+
+  function onSubmit(form: FormData) {
+    form.append('type', type)
+    submitAdoptionForm(form);
+  }
+
   return (
-    <Box bg="white" borderRadius="lg">
-      <Box m={8} color="#0B0E3F">
-        <VStack spacing={5}>
-          <FormControl id="name">
-            <FormLabel>Your Name</FormLabel>
-            <InputGroup borderColor="#E0E1E7">
-              <InputLeftElement pointerEvents="none">
-                <BsPerson color="gray.800" />
-              </InputLeftElement>
-              <Input type="text" size="md" />
-            </InputGroup>
-          </FormControl>
-          <FormControl id="name">
-            <FormLabel>Contact</FormLabel>
-            <InputGroup borderColor="#E0E1E7">
-              <InputLeftElement pointerEvents="none">
-                <MdOutlineEmail color="gray.800" />
-              </InputLeftElement>
-              <Input type="text" size="md" />
-            </InputGroup>
-          </FormControl>
-          <FormControl id="name">
-            <FormLabel>Message</FormLabel>
-            <Textarea
-              borderColor="gray.300"
+    <form action={onSubmit}>
+      <Card bg='white' borderRadius='lg' minW={minWidth} p={8}>
+        <Center flexDir={'column'}>
+          <Image
+            objectFit='cover'
+            src={Images.adopt}
+            alt='adoption'
+            width={150}
+            height={150}
+            style={{ minWidth: 50 }}
+          />
+          <Heading color={'blue.600'} mt={1}>
+            Adoption
+          </Heading>
+        </Center>
+        <Box mt={2} color='#0B0E3F'>
+          <VStack spacing={5}>
+            <FormControl>
+              <FormLabel>Your Name</FormLabel>
+              <InputGroup borderColor='#E0E1E7'>
+                <InputLeftElement pointerEvents='none'>
+                  <BsPerson color='gray.800' />
+                </InputLeftElement>
+                <Input name='name' id='name' type='text' size='md' />
+              </InputGroup>
+            </FormControl>
+            <FormControl>
+              <FormLabel>Contact</FormLabel>
+              <InputGroup borderColor='#E0E1E7'>
+                <InputLeftElement pointerEvents='none'>
+                  <MdOutlineEmail color='gray.800' />
+                </InputLeftElement>
+                <Input
+                  name='contact'
+                  id='contact'
+                  type='text'
+                  size='md'
+                  placeholder='Phone or Email'
+                />
+              </InputGroup>
+            </FormControl>
+            <FormControl>
+              <FormLabel>Type</FormLabel>
+              <AnimalTypeDropdown type={type} setType={setType} />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Description</FormLabel>
+              <Textarea
+                name='description'
+                id='description'
+                borderColor='gray.300'
+                _hover={{
+                  borderRadius: 'gray.300',
+                }}
+                placeholder='Describe the pet you are putting up for adoption'
+              />
+            </FormControl>
+            <Button
+              variant='solid'
+              colorScheme='blue'
+              color='white'
               _hover={{
-                borderRadius: "gray.300",
+                opacity: 0.6,
               }}
-              placeholder="message"
-            />
-          </FormControl>
-          <Button
-            style={{
-              backgroundColor: "var(--chakra-colors-brand-blue)",
-            }}
-            variant="solid"
-            bg="brand.blue"
-            color="white"
-            _hover={{
-              opacity: 0.6,
-            }}
-          >
-            Send Message
-          </Button>
-        </VStack>
-      </Box>
-    </Box>
+              type='submit'
+            >
+              Submit
+            </Button>
+          </VStack>
+        </Box>
+      </Card>
+    </form>
   );
-};
-
-
+}

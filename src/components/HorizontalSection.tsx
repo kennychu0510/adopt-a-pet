@@ -1,13 +1,15 @@
-"use client";
+'use client';
 import {
   Box,
   ResponsiveValue,
   Text,
   useBreakpointValue,
-} from "@chakra-ui/react";
-import * as CSS from "csstype";
-import PetCard from "./PetCard";
-import { PetCardProps } from "@/types";
+  useMediaQuery,
+} from '@chakra-ui/react';
+import * as CSS from 'csstype';
+import PetCard from './PetCard';
+import { PetCardProps } from '@/types';
+import { Grid, GridItem } from '@chakra-ui/react';
 
 type Props = {
   header: string;
@@ -16,29 +18,34 @@ type Props = {
 };
 
 export default function HorizontalSection(props: Props) {
-  const flexWrap = useBreakpointValue(
-    { base: "no-wrap", md: "wrap" },
-    { ssr: false },
-  ) as ResponsiveValue<CSS.Property.FlexWrap>;
+  const [isLargeScreen] = useMediaQuery('(min-width: 35em)', {
+    ssr: false,
+  });
   return (
-    <Box mb={"4"}>
-      <Text fontSize={"lg"} fontWeight={"bold"}>
+    <Box mb={'4'}>
+      <Text fontSize={'lg'} fontWeight={'bold'}>
         {props.header}
       </Text>
-      <Text fontSize={"sm"} color={"grey"} mb={2}>
+      <Text fontSize={'sm'} color={'grey'} mb={2}>
         {props.subHeader}
       </Text>
-      <Box
-        flexWrap={flexWrap}
+      <Grid
+        gridTemplateColumns={'repeat(auto-fit, 220px)'}
+        flexWrap={'wrap'}
+        alignContent={'center'}
+        alignSelf={'center'}
+        justifyContent={isLargeScreen ? 'normal' : 'center'}
         p={2}
-        flexDirection={"row"}
-        display={"flex"}
         gap={5}
+        sx={{ overflowX: 'auto' }}
+        pb={8}
       >
         {props.items.map((category) => (
-          <PetCard key={category.name} image={category.image} name={category.name} />
+          <GridItem key={category.name} display={'flex'} justifyContent={'center'}>
+            <PetCard image={category.image} name={category.name} />
+          </GridItem>
         ))}
-      </Box>
+      </Grid>
     </Box>
   );
 }

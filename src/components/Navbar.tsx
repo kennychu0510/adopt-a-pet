@@ -81,10 +81,9 @@ export default function Nav() {
             fontWeight={600}
             color={"white"}
             bg={"blue.600"}
-            href={"/post/adoption"}
+            href={"/post"}
             _hover={{
               bg: "blue.600",
-              opacity: 0.6,
             }}
           >
             Post
@@ -159,8 +158,7 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
       p={2}
       rounded={"md"}
       _hover={{
-        bg: useColorModeValue("blue.600", "brand.grey"),
-        opacity: 0.6,
+        bg: 'blue.600',
       }}
     >
       <Stack direction={"row"} align={"center"}>
