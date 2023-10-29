@@ -2,50 +2,30 @@
 
 import { submitAdoptionForm } from '@/app/serverActions/formSubmission';
 import Images from '@/assets';
-import {
-  Box,
-  Button,
-  Card,
-  Center,
-  FormControl,
-  FormLabel,
-  Heading,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Textarea,
-  VStack,
-  useMediaQuery
-} from '@chakra-ui/react';
+import useIsLargeScreen from '@/hooks/useIsLargeScreen';
+import { Box, Button, Card, Center, FormControl, FormHelperText, FormLabel, Heading, Input, InputGroup, InputLeftElement, Textarea, VStack } from '@chakra-ui/react';
 import Image from 'next/image';
 import { useState } from 'react';
 import { BsPerson } from 'react-icons/bs';
 import { MdOutlineEmail } from 'react-icons/md';
 import AnimalTypeDropdown from './AnimalTypeDropdown';
-import useIsLargeScreen from '@/hooks/useIsLargeScreen';
+import UploadPhoto from './UploadPhoto';
 
 export default function AdoptionForm() {
-  const isLargeScreen = useIsLargeScreen()
-  const minWidth = isLargeScreen ? 500 : 300;
+  const isLargeScreen = useIsLargeScreen();
+  const minWidth = isLargeScreen ? 500 : 350;
   const [type, setType] = useState('');
 
   function onSubmit(form: FormData) {
-    form.append('type', type)
+    form.append('type', type);
     submitAdoptionForm(form);
   }
 
   return (
     <form action={onSubmit}>
-      <Card bg='white' borderRadius='lg' minW={minWidth} p={8}>
+      <Card bg='white' borderRadius='lg' minWidth={minWidth} p={8} variant={isLargeScreen ? 'elevated' : 'unstyled'}>
         <Center flexDir={'column'}>
-          <Image
-            objectFit='cover'
-            src={Images.adopt}
-            alt='adoption'
-            width={150}
-            height={150}
-            style={{ minWidth: 50 }}
-          />
+          <Image objectFit='cover' src={Images.adopt} alt='adoption' width={150} height={150} style={{ minWidth: 50 }} />
           <Heading color={'blue.600'} mt={1}>
             Adoption
           </Heading>
@@ -67,13 +47,7 @@ export default function AdoptionForm() {
                 <InputLeftElement pointerEvents='none'>
                   <MdOutlineEmail color='gray.800' />
                 </InputLeftElement>
-                <Input
-                  name='contact'
-                  id='contact'
-                  type='text'
-                  size='md'
-                  placeholder='Phone or Email'
-                />
+                <Input name='contact' id='contact' type='text' size='md' placeholder='Phone or Email' />
               </InputGroup>
             </FormControl>
             <FormControl>
@@ -91,18 +65,11 @@ export default function AdoptionForm() {
                 }}
                 placeholder='Describe the pet you are putting up for adoption'
               />
+              <FormHelperText>Max 500</FormHelperText>
             </FormControl>
             <FormControl>
               <FormLabel>Image</FormLabel>
-              <Textarea
-                name='description'
-                id='description'
-                borderColor='gray.300'
-                _hover={{
-                  borderRadius: 'gray.300',
-                }}
-                placeholder='Describe the pet you are putting up for adoption'
-              />
+              <UploadPhoto />
             </FormControl>
             <Button
               variant='solid'

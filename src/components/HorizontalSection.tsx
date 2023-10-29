@@ -1,7 +1,6 @@
 'use client';
-import useIsLargeScreen from '@/hooks/useIsLargeScreen';
 import { PetCardProps } from '@/types';
-import { Box, Flex, Grid, GridItem, Text } from '@chakra-ui/react';
+import { Box, Flex, Text } from '@chakra-ui/react';
 import PetCard from './PetCard';
 
 type Props = {
