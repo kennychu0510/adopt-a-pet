@@ -22,6 +22,25 @@ const NEW_PETS: PetCardProps[] = [
   },
 ];
 
+const MISSING_PETS: PetCardProps[] = [
+  {
+    name: "Bobo",
+    image: Images.dog,
+  },
+  {
+    name: "Paw",
+    image: Images.dog,
+  },
+  {
+    name: "Paw",
+    image: Images.dog,
+  },
+  {
+    name: "Paw",
+    image: Images.dog,
+  },
+]
+
 export default function Home() {
   return (
     <main>
@@ -34,6 +53,11 @@ export default function Home() {
         items={NEW_PETS}
         header="New pets to adopt"
         subHeader="Bring a pet home now!"
+      />
+      <HorizontalSection
+        items={MISSING_PETS}
+        header="Missing Pets"
+        subHeader="Save a pet!"
       />
     </main>
   );

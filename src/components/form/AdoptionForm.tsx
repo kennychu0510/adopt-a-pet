@@ -92,6 +92,18 @@ export default function AdoptionForm() {
                 placeholder='Describe the pet you are putting up for adoption'
               />
             </FormControl>
+            <FormControl>
+              <FormLabel>Image</FormLabel>
+              <Textarea
+                name='description'
+                id='description'
+                borderColor='gray.300'
+                _hover={{
+                  borderRadius: 'gray.300',
+                }}
+                placeholder='Describe the pet you are putting up for adoption'
+              />
+            </FormControl>
             <Button
               variant='solid'
               colorScheme='blue'
