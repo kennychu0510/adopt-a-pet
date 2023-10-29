@@ -1,35 +1,18 @@
-'use client';
-
-import { submitAdoptionForm } from '@/app/serverActions/formSubmission';
-import Images from '@/assets';
-import useIsLargeScreen from '@/hooks/useIsLargeScreen';
-import { Box, Button, Card, Center, FormControl, FormHelperText, FormLabel, Heading, Input, InputGroup, InputLeftAddon, InputLeftElement, Textarea, VStack } from '@chakra-ui/react';
-import Image from 'next/image';
-import { useState } from 'react';
+import FormCard from '@/components/form/FormCard';
+import { Box, Button, Center, FormControl, FormLabel, Heading, Input, InputGroup, InputLeftAddon, Textarea, VStack } from '@chakra-ui/react';
 import { BsPerson } from 'react-icons/bs';
 import { MdOutlineEmail } from 'react-icons/md';
-import AnimalTypeDropdown from './AnimalTypeDropdown';
-import UploadPhoto from './UploadPhoto';
-import FormCard from './FormCard';
 
-export default function AdoptionForm() {
-  const [type, setType] = useState('');
-
-  function onSubmit(form: FormData) {
-    form.append('type', type);
-    submitAdoptionForm(form);
-  }
-
+export default function page() {
   return (
-    <form action={onSubmit}>
+    <form>
       <FormCard>
-        <Center flexDir={'column'}>
-          <Image objectFit='cover' src={Images.adopt} alt='adoption' width={150} height={150} style={{ minWidth: 50 }} />
+        <Center>
           <Heading color={'blue.600'} mt={1}>
-            Adoption
+            Contact Us
           </Heading>
         </Center>
-        <Box mt={2} color='#0B0E3F'>
+        <Box mt={2}>
           <VStack spacing={5}>
             <FormControl>
               <FormLabel>Your Name</FormLabel>
@@ -50,25 +33,15 @@ export default function AdoptionForm() {
               </InputGroup>
             </FormControl>
             <FormControl>
-              <FormLabel>Type</FormLabel>
-              <AnimalTypeDropdown type={type} setType={setType} />
-            </FormControl>
-            <FormControl>
-              <FormLabel>Description</FormLabel>
+              <FormLabel>Your Message</FormLabel>
               <Textarea
-                name='description'
-                id='description'
+                name='message'
+                id='message'
                 borderColor='gray.300'
                 _hover={{
                   borderRadius: 'gray.300',
                 }}
-                placeholder='Describe the pet you are putting up for adoption'
               />
-              <FormHelperText>Max 500</FormHelperText>
-            </FormControl>
-            <FormControl>
-              <FormLabel>Image</FormLabel>
-              <UploadPhoto />
             </FormControl>
             <Button
               variant='solid'
@@ -79,7 +52,7 @@ export default function AdoptionForm() {
               }}
               type='submit'
             >
-              Submit
+              Send
             </Button>
           </VStack>
         </Box>
