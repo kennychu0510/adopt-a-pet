@@ -8,6 +8,18 @@ const NEW_PETS: PetCardProps[] = [
     name: "Paw",
     image: Images.dog,
   },
+  {
+    name: "Paw",
+    image: Images.dog,
+  },
+  {
+    name: "Paw",
+    image: Images.dog,
+  },
+  {
+    name: "Paw",
+    image: Images.dog,
+  },
 ];
 
 export default function Home() {

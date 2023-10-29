@@ -22,12 +22,11 @@ import { useState } from 'react';
 import { BsPerson } from 'react-icons/bs';
 import { MdOutlineEmail } from 'react-icons/md';
 import AnimalTypeDropdown from './AnimalTypeDropdown';
+import useIsLargeScreen from '@/hooks/useIsLargeScreen';
 
 export default function AdoptionForm() {
-  const [isLargeScreen] = useMediaQuery('(min-width: 35em)', {
-    ssr: false,
-  });
-  const minWidth = isLargeScreen ? 500 : 200;
+  const isLargeScreen = useIsLargeScreen()
+  const minWidth = isLargeScreen ? 500 : 300;
   const [type, setType] = useState('');
 
   function onSubmit(form: FormData) {

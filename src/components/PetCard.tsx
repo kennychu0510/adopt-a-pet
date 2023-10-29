@@ -1,6 +1,7 @@
-import { PetCardProps } from "@/types";
-import { Card, CardBody, CardHeader, Stack, Text } from "@chakra-ui/react";
-import Image from "next/image";
+import useIsLargeScreen from '@/hooks/useIsLargeScreen';
+import { PetCardProps } from '@/types';
+import { Card, CardBody, CardHeader, Stack, Text } from '@chakra-ui/react';
+import Image from 'next/image';
 
 export default function PetCard(props: PetCardProps) {
   return (
@@ -10,8 +11,8 @@ export default function PetCard(props: PetCardProps) {
           src={props.image}
           alt={props.name}
           style={{
-            objectFit: "cover",
-            width: "100%",
+            objectFit: 'cover',
+            width: '100%',
             height: 140,
             borderTopLeftRadius: 10,
             borderTopRightRadius: 10,
@@ -20,7 +21,7 @@ export default function PetCard(props: PetCardProps) {
       </CardHeader>
       <CardBody>
         <Stack>
-          <Text textAlign={"center"} textTransform={"capitalize"}>
+          <Text textAlign={'center'} textTransform={'capitalize'}>
             {props.name}
           </Text>
         </Stack>
