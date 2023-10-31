@@ -5,15 +5,14 @@ import Image from 'next/image';
 
 export default function PetCard(props: PetCardProps) {
   return (
-    <Card sx={{ w: 220 }} flexShrink={0}>
-      <CardHeader p={0} borderBottomWidth={1} borderBottomStyle={'solid'} borderBottomColor={'brand.white'}>
+    <Card sx={{ w: 220 }} flexShrink={0} mb={2}>
+      <CardHeader p={0} borderBottomWidth={1} borderBottomStyle={'solid'} borderBottomColor={'brand.white'} sx={{height: 140, position: 'relative'}}>
         <Image
           src={props.image}
           alt={props.name}
+          fill
           style={{
             objectFit: 'cover',
-            width: '100%',
-            height: 140,
             borderTopLeftRadius: 10,
             borderTopRightRadius: 10,
           }}

@@ -4,41 +4,41 @@ import { CATEGORIES } from "@/constants";
 import { PetCardProps } from "@/types";
 
 const NEW_PETS: PetCardProps[] = [
-  {
-    name: "Paw",
-    image: Images.dog,
-  },
-  {
-    name: "Paw",
-    image: Images.dog,
-  },
-  {
-    name: "Paw",
-    image: Images.dog,
-  },
-  {
-    name: "Paw",
-    image: Images.dog,
-  },
+  // {
+  //   name: "Paw",
+  //   image: Images.dog,
+  // },
+  // {
+  //   name: "Paw",
+  //   image: Images.dog,
+  // },
+  // {
+  //   name: "Paw",
+  //   image: Images.dog,
+  // },
+  // {
+  //   name: "Paw",
+  //   image: Images.dog,
+  // },
 ];
 
 const MISSING_PETS: PetCardProps[] = [
-  {
-    name: "Bobo",
-    image: Images.dog,
-  },
-  {
-    name: "Paw",
-    image: Images.dog,
-  },
-  {
-    name: "Paw",
-    image: Images.dog,
-  },
-  {
-    name: "Paw",
-    image: Images.dog,
-  },
+  // {
+  //   name: "Bobo",
+  //   image: Images.dog,
+  // },
+  // {
+  //   name: "Paw",
+  //   image: Images.dog,
+  // },
+  // {
+  //   name: "Paw",
+  //   image: Images.dog,
+  // },
+  // {
+  //   name: "Paw",
+  //   image: Images.dog,
+  // },
 ]
 
 export default function Home() {
