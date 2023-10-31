@@ -6,7 +6,7 @@ import Image from 'next/image';
 export default function PetCard(props: PetCardProps) {
   return (
     <Card sx={{ w: 220 }} flexShrink={0} mb={2}>
-      <CardHeader p={0} borderBottomWidth={1} borderBottomStyle={'solid'} borderBottomColor={'brand.white'} sx={{height: 140, position: 'relative'}}>
+      <CardHeader p={0} borderBottomColor={'brand.white'} sx={{height: 140, position: 'relative'}}>
         <Image
           src={props.image}
           alt={props.name}

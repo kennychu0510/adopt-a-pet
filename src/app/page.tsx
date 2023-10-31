@@ -48,16 +48,19 @@ export default function Home() {
         items={CATEGORIES}
         header="Adopt a Pet"
         subHeader="Be a guardian angel"
+        page="adopt"
       />
       <HorizontalSection
         items={NEW_PETS}
         header="New pets to adopt"
         subHeader="Bring a pet home now!"
+        page="adopt"
       />
       <HorizontalSection
         items={MISSING_PETS}
-        header="Missing Pets"
+        header="Lost Pets"
         subHeader="Save a pet!"
+        page="lost"
       />
     </main>
   );

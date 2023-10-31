@@ -1,5 +1,5 @@
 import FormCard from '@/components/form/FormCard';
-import { Box, Button, Center, FormControl, FormLabel, Heading, Input, InputGroup, InputLeftAddon, Textarea, VStack } from '@chakra-ui/react';
+import { Box, Button, Center, FormControl, FormHelperText, FormLabel, Heading, Input, InputGroup, InputLeftAddon, Textarea, VStack } from '@chakra-ui/react';
 import { BsPerson } from 'react-icons/bs';
 import { MdOutlineEmail } from 'react-icons/md';
 
@@ -41,7 +41,10 @@ export default function page() {
                 _hover={{
                   borderRadius: 'gray.300',
                 }}
+                maxLength={500}
               />
+              <FormHelperText>Max 500 characters</FormHelperText>
+
             </FormControl>
             <Button
               variant='solid'
