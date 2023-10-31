@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "npx prettier ./src --write && npx eslint --fix && next lint"
+    "lint": "npx prettier ./src --write && npx eslint --fix && next lint",
+    "gen-db-type": "npx supabase gen types typescript --project-id vzxnkcbyjsxmzpbbwjrx > database.types.ts"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",
@@ -15,13 +16,16 @@
     "@clerk/nextjs": "^4.25.6",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@supabase/auth-helpers-nextjs": "^0.8.4",
+    "@supabase/supabase-js": "^2.38.4",
     "antd": "^5.10.3",
     "framer-motion": "^10.16.4",
     "next": "13.5.6",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^4.11.0",
-    "react-multi-carousel": "^2.8.4"
+    "react-multi-carousel": "^2.8.4",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -33,6 +37,9 @@
     "eslint-plugin-unused-imports": "^3.0.0",
     "postcss": "^8",
     "prettier": "^3.0.3",
-    "typescript": "^5"
+    "supabase": "^1.110.1",
+    "supabase-to-zod": "^1.0.4",
+    "typescript": "^5",
+    "vitest": "^0.34.6"
   }
 }

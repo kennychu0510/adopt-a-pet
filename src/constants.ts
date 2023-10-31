@@ -17,8 +17,8 @@ export const CATEGORIES: PetCardProps[] = [
     image: '/assets/cat.png',
   },
   {
-    name: "parot",
-    image: '/assets/parot.jpeg'
+    name: "parrot",
+    image: '/assets/parrot.jpeg'
   },
   {
     name: "rabbit",

@@ -7,6 +7,7 @@ import { useState } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import useIsSmallScreen from '@/hooks/useIsSmallScreen';
+import Link from 'next/link';
 
 type Props = {
   header: string;
@@ -21,8 +22,8 @@ const responsive = {
     items: 5,
   },
   minDesktop: {
-    breakpoint: {max: 1420, min: 1000},
-    items: 4
+    breakpoint: { max: 1420, min: 1000 },
+    items: 4,
   },
   bigTablet: {
     breakpoint: { max: 1000, min: 720 },
@@ -47,10 +48,12 @@ export default function HorizontalSection(props: Props) {
       <Text fontSize={'sm'} color={'grey'} mb={2}>
         {props.subHeader}
       </Text>
-      <Carousel responsive={responsive} swipeable={true} >
+      <Carousel responsive={responsive} swipeable={true}>
         {props.items.map((category) => (
           <Box key={category.name} justifyContent={'center'} display={'flex'}>
-            <PetCard image={category.image} name={category.name} key={category.name} />
+            <Link href={`${props.page}/${category.name}`}>
+              <PetCard image={category.image} name={category.name} key={category.name} />
+            </Link>
           </Box>
         ))}
       </Carousel>

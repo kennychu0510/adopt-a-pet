@@ -11,6 +11,7 @@ import { MdOutlineEmail } from 'react-icons/md';
 import AnimalTypeDropdown from './AnimalTypeDropdown';
 import UploadPhoto from './UploadPhoto';
 import FormCard from './FormCard';
+import PrimaryButton from '../buttons/PrimaryButton';
 
 export default function AdoptionForm() {
   const [type, setType] = useState('');
@@ -63,6 +64,7 @@ export default function AdoptionForm() {
                   borderRadius: 'gray.300',
                 }}
                 placeholder='Describe the pet you are putting up for adoption'
+                maxLength={500}
               />
               <FormHelperText>Max 500</FormHelperText>
             </FormControl>
@@ -70,17 +72,7 @@ export default function AdoptionForm() {
               <FormLabel>Image</FormLabel>
               <UploadPhoto />
             </FormControl>
-            <Button
-              variant='solid'
-              colorScheme='blue'
-              color='white'
-              _hover={{
-                opacity: 0.6,
-              }}
-              type='submit'
-            >
-              Submit
-            </Button>
+            <PrimaryButton label='Submit'/>
           </VStack>
         </Box>
       </FormCard>
