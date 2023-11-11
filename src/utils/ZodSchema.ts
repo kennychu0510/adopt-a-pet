@@ -1,6 +1,8 @@
 import { PetTypeEnum } from '../types'
 import z from 'zod'
 
+export const FormTypeSchema = z.enum(['adoption', 'missing', 'wish'])
+
 export const AdoptionSchema = z.object({
   name: z.string(),
   description: z.string(),
