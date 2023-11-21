@@ -1,4 +1,5 @@
 import { AdoptionSchema, FormTypeSchema } from '@/utils/ZodSchema';
+import supabase from '@/utils/supabase';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { NextResponse } from 'next/server';
 import { ZodError } from 'zod';
@@ -22,10 +23,19 @@ export async function POST(request: Request) {
     switch (formType) {
       case 'adoption':
         const adoptionForm = AdoptionSchema.parse(form);
+        const { error } = await supabase
+          .from('Adoption')
+          .insert(adoptionForm);
+        if (error) {
+          return NextResponse.json(
+            { message: error.message },
+            { status: 500 }
+          );
+        }
         break;
     }
 
-    return NextResponse.json({ message: 'received valid form' });
+    return NextResponse.json({ message: 'update to database success' });
   } catch (error) {
     if (error instanceof ZodError) {
       return NextResponse.json({ message: error }, { status: 400 });
