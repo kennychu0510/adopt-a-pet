@@ -12,13 +12,41 @@ import AnimalTypeDropdown from './AnimalTypeDropdown';
 import UploadPhoto from './UploadPhoto';
 import FormCard from './FormCard';
 import PrimaryButton from '../buttons/PrimaryButton';
+import { UploadFile } from 'antd';
+import { getBase64 } from '@/utils/helper';
+import useSwr from 'swr'
+import { postForm } from '@/utils/swr';
 
 export default function AdoptionForm() {
   const [type, setType] = useState('');
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
+  // const { error, isLoading, mutate } = useSwr('/api/form', postForm, {
+  //   onErrorRetry: (error, key) => {
+  //     if (key === '/api/form') return
+  //   }
+  // })
 
-  function onSubmit(form: FormData) {
+  async function onSubmit(form: FormData) {
+    if (fileList[0] && fileList[0]?.originFileObj) {
+      const base64Image = await getBase64(fileList[0]?.originFileObj)
+      form.append('image', base64Image)
+    }
     form.append('type', type);
-    submitAdoptionForm(form);
+    const submittedForm = {
+      name: form.get('name'),
+      contact: form.get('contact'),
+      description: form.get('description'),
+      type: form.get('type'),
+      image: form.get('image') ?? undefined,
+    }
+    console.log(submittedForm)
+    const submissionResult = await fetch('/api/form?type=adoption', {
+      method: 'POST',
+      body: JSON.stringify(submittedForm)
+    })
+    const result = await submissionResult.json();
+    console.log({result})
+    // submitAdoptionForm(form);
   }
 
   return (
@@ -70,7 +98,10 @@ export default function AdoptionForm() {
             </FormControl>
             <FormControl>
               <FormLabel>Image</FormLabel>
-              <UploadPhoto />
+              <UploadPhoto 
+                fileList={fileList}
+                setFileList={setFileList}
+              />
             </FormControl>
             <PrimaryButton label='Submit'/>
           </VStack>

@@ -11,14 +11,17 @@ export async function submitAdoptionForm(form: FormData) {
     name: form.get('name'),
     contact: form.get('contact'),
     description: form.get('description'),
-    type: form.get('type')
+    type: form.get('type'),
+    image: form.get('image'),
   }) 
 
   // const {data, error} = await supabase.from('Adoption').insert({
   //   name: 
   // })
-  console.log(form.get('name'));
-  console.log(form.get('contact'));
-  console.log(form.get('description'));
-  console.log(form.get('type'));
+  console.log(validatedForm)
+  // console.log(form.get('name'));
+  // console.log(form.get('contact'));
+  // console.log(form.get('description'));
+  // console.log(form.get('type'));
+  // console.log(form.get('type'));
 }

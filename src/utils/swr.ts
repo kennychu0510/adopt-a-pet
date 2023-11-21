@@ -1,4 +1,8 @@
-//@ts-ignore
-const fetcher = (...args) => fetch(...args).then(res => res.json())
-
-export default fetcher
+export async function postForm(body: Object, formType: string) {
+  const result = await fetch(`/api/form?type=${formType}`, {
+    method: 'POST',
+    body: JSON.stringify(body)
+  });
+  const json = await result.json();
+  return json;
+}

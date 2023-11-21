@@ -1,24 +1,19 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Modal, Upload } from 'antd';
 import type { RcFile, UploadProps } from 'antd/es/upload';
 import type { UploadFile } from 'antd/es/upload/interface';
+import { getBase64 } from '@/utils/helper';
 
-const getBase64 = (file: RcFile): Promise<string> =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = (error) => reject(error);
-  });
 
-export default function UploadPhoto() {
+
+export default function UploadPhoto({fileList, setFileList}: {fileList: UploadFile<any>[], setFileList: Dispatch<SetStateAction<UploadFile<any>[]>>}) {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
   const [previewTitle, setPreviewTitle] = useState('');
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
+  
 
   const handlePreview = async (file: UploadFile) => {
     if (!file.url && !file.preview) {
