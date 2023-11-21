@@ -6,7 +6,8 @@ export const FormTypeSchema = z.enum(['adoption', 'missing', 'wish'])
 export const AdoptionSchema = z.object({
   name: z.string(),
   description: z.string(),
-  image: z.string().optional(),
+  image: z.string(),
   contact: z.string(),
-  type: PetTypeEnum
+  type: PetTypeEnum,
+  petName: z.string(),
 })

@@ -17,6 +17,7 @@ export interface Database {
           id: number
           image: string | null
           name: string
+          pet_name: string | null
           type: string
         }
         Insert: {
@@ -26,6 +27,7 @@ export interface Database {
           id?: number
           image?: string | null
           name: string
+          pet_name?: string | null
           type: string
         }
         Update: {
@@ -35,6 +37,7 @@ export interface Database {
           id?: number
           image?: string | null
           name?: string
+          pet_name?: string | null
           type?: string
         }
         Relationships: []

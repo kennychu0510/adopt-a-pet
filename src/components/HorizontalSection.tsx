@@ -49,31 +49,14 @@ export default function HorizontalSection(props: Props) {
         {props.subHeader}
       </Text>
       <Carousel responsive={responsive} swipeable={true}>
-        {props.items.map((category) => (
-          <Box key={category.name} justifyContent={'center'} display={'flex'}>
-            <Link href={`${props.page}/${category.name}`}>
-              <PetCard image={category.image} name={category.name} key={category.name} />
+        {props.items.map((item) => (
+          <Box key={item.name} justifyContent={'center'} display={'flex'}>
+            <Link href={`${props.page}/${item.name}`}>
+              <PetCard id={item.id} image={item.image} name={item.name} key={item.name} />
             </Link>
           </Box>
         ))}
       </Carousel>
-      {/* <Box position={'relative'}>
-        {showButtons && (
-          <IconButton aria-label='left-button' top={'50%'} left={'20px'} position={'absolute'} zIndex={2} transform={'translate(0%, -50%)'}>
-            <BiLeftArrowAlt size='40px' />
-          </IconButton>
-        )}
-        <Flex p={2} gap={5} sx={{ overflowX: 'hidden' }}>
-          {props.items.map((category) => (
-            <PetCard image={category.image} name={category.name} key={category.name} />
-          ))}
-        </Flex>
-        {showButtons && (
-          <IconButton aria-label='right-button' top={'50%'} right={'20px'} position={'absolute'} zIndex={2} transform={'translate(0%, -50%)'}>
-            <BiRightArrowAlt size='40px' />
-          </IconButton>
-        )}
-      </Box> */}
     </Box>
   );
 }

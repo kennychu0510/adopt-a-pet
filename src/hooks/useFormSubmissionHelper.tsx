@@ -1,7 +1,5 @@
-import { FormTypeSchema } from '@/utils/ZodSchema';
-import React, { useState } from 'react';
+import { AdoptionSchema, FormTypeSchema } from '@/utils/ZodSchema';
 import z from 'zod';
-import { toast } from 'react-toastify';
 
 export default function useFormSubmissionHelper({
   type,
@@ -9,17 +7,18 @@ export default function useFormSubmissionHelper({
   type: z.infer<typeof FormTypeSchema>;
 }) {
   async function handleFormSubmit(form: FormData) {
-    const submittedForm = {
+    const validatedForm = AdoptionSchema.parse({
       name: form.get('name'),
       contact: form.get('contact'),
+      pet_name: form.get('petName'),
       description: form.get('description'),
       type: form.get('type'),
-      image: form.get('image') ?? undefined,
-    };
-    console.log(submittedForm);
+      image: form.get('image'),
+    }) 
+    console.log(validatedForm);
     const submissionResult = await fetch(`/api/form?type=${type}`, {
       method: 'POST',
-      body: JSON.stringify(submittedForm),
+      body: JSON.stringify(validatedForm),
     });
     const result = await submissionResult.json();
     if (!submissionResult.ok) {

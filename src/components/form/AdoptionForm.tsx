@@ -16,6 +16,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { UploadFile } from 'antd';
+import { MdOutlinePets } from "react-icons/md";
 import Image from 'next/image';
 import { FormEvent, useState } from 'react';
 import { BsPerson } from 'react-icons/bs';
@@ -102,6 +103,15 @@ export default function AdoptionForm() {
             <FormControl>
               <FormLabel>Type</FormLabel>
               <AnimalTypeDropdown type={type} setType={setType} />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Pet Name</FormLabel>
+              <InputGroup borderColor='#E0E1E7'>
+                <InputLeftAddon pointerEvents='none'>
+                  <MdOutlinePets color='gray.800' />
+                </InputLeftAddon>
+                <Input name='petName' id='petName' type='text' size='md' />
+              </InputGroup>
             </FormControl>
             <FormControl>
               <FormLabel>Description</FormLabel>
