@@ -44,11 +44,18 @@ const MISSING_PETS: PetCardProps[] = [
 
 export default async function Home() {
   const adoptionList = await supabase.from('Adoption').select('*')
+  const lostList = await supabase.from('Missing').select('*')
   const NEW_PETS: PetCardProps[] = adoptionList.data?.map(item => ({
     id: item.id,
-    name: item.type as PetType,
+    name: item.petName,
     image: item.image ?? ''
   })) ?? []
+  const LOST_PETS: PetCardProps[] = lostList.data?.map(item => ({
+    id: item.id,
+    name: item.petName,
+    image: item.image ?? ''
+  })) ?? []
+
   return (
     <main>
       <HorizontalSection
@@ -64,7 +71,7 @@ export default async function Home() {
         page="adopt"
       />
       <HorizontalSection
-        items={MISSING_PETS}
+        items={LOST_PETS}
         header="Lost Pets"
         subHeader="Save a pet!"
         page="lost"

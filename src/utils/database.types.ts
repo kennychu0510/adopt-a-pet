@@ -17,7 +17,7 @@ export interface Database {
           id: number
           image: string | null
           name: string
-          pet_name: string | null
+          petName: string
           type: string
         }
         Insert: {
@@ -27,7 +27,7 @@ export interface Database {
           id?: number
           image?: string | null
           name: string
-          pet_name?: string | null
+          petName: string
           type: string
         }
         Update: {
@@ -37,7 +37,7 @@ export interface Database {
           id?: number
           image?: string | null
           name?: string
-          pet_name?: string | null
+          petName?: string
           type?: string
         }
         Relationships: []
@@ -48,7 +48,11 @@ export interface Database {
           description: string
           id: number
           image: string | null
+          lastSeen: string
+          lat: number
+          lng: number
           name: string
+          petName: string
           type: string
         }
         Insert: {
@@ -56,7 +60,11 @@ export interface Database {
           description: string
           id?: number
           image?: string | null
+          lastSeen: string
+          lat: number
+          lng: number
           name: string
+          petName: string
           type: string
         }
         Update: {
@@ -64,7 +72,11 @@ export interface Database {
           description?: string
           id?: number
           image?: string | null
+          lastSeen?: string
+          lat?: number
+          lng?: number
           name?: string
+          petName?: string
           type?: string
         }
         Relationships: []

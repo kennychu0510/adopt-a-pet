@@ -6,6 +6,6 @@ export type PetType = z.infer<typeof PetTypeEnum> | 'all'
 
 export type PetCardProps = {
   id: number;
-  name: PetType;
+  name: string;
   image: string;
 };

@@ -1,4 +1,4 @@
-import { AdoptionSchema, FormTypeSchema } from '@/utils/ZodSchema';
+import { AdoptionSchema, FormTypeSchema, MissingFormSchema } from '@/utils/ZodSchema';
 import z from 'zod';
 
 export default function useFormSubmissionHelper({
@@ -7,15 +7,29 @@ export default function useFormSubmissionHelper({
   type: z.infer<typeof FormTypeSchema>;
 }) {
   async function handleFormSubmit(form: FormData) {
-    const validatedForm = AdoptionSchema.parse({
-      name: form.get('name'),
-      contact: form.get('contact'),
-      pet_name: form.get('petName'),
-      description: form.get('description'),
-      type: form.get('type'),
-      image: form.get('image'),
-    }) 
-    console.log(validatedForm);
+    let validatedForm: any;
+    if (type === 'adoption') {
+      validatedForm = AdoptionSchema.parse({
+       name: form.get('name'),
+       contact: form.get('contact'),
+       petName: form.get('petName'),
+       description: form.get('description'),
+       type: form.get('type'),
+       image: form.get('image'),
+     }) 
+    } else if (type === 'missing') {
+      validatedForm = MissingFormSchema.parse({
+        name: form.get('name'),
+        contact: form.get('contact'),
+        petName: form.get('petName'),
+        description: form.get('description'),
+        type: form.get('type'),
+        image: form.get('image'),
+        lastSeen: form.get('lastSeen'),
+        lat: Number(form.get('lat')),
+        lng: Number(form.get('lng')),
+      }) 
+    }
     const submissionResult = await fetch(`/api/form?type=${type}`, {
       method: 'POST',
       body: JSON.stringify(validatedForm),
