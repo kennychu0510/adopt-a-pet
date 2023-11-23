@@ -1,5 +1,5 @@
 import { Database } from '@/utils/database.types';
-import { Box, Button, Flex, VStack } from '@chakra-ui/react';
+import { Box, Button, Card, Flex, VStack } from '@chakra-ui/react';
 import Image from 'next/image';
 import React from 'react';
 import Row from './detail/Row';
@@ -17,7 +17,7 @@ type Props = Database['public']['Tables']['Adoption']['Row'];
 export default function PetSummary(props: Props) {
   return (
     <Link href={`/adopt/${props.id}`} style={{ width: '100%' }}>
-      <Box borderWidth={1} borderRadius={10} borderColor={'blue.600'} w={'100%'} my={5} p={4}>
+      <Card borderRadius={10} w={'100%'} my={5} p={4}  _hover={{'backgroundColor': '#EDF2F7'}}>
         <Flex justify={'space-between'}>
           <VStack justifyContent={'space-between'} flexShrink={1}>
             <Row icon={<IoMdPricetag color='gray.800' />} content={props.petName} my={0}/>
@@ -26,7 +26,7 @@ export default function PetSummary(props: Props) {
           </VStack>
           <Image src={props.image!} alt={props.petName} width={150} height={150} style={{ borderRadius: 10, objectFit: 'cover', height: 150, marginTop: 'auto', marginBottom: 'auto'}} />
         </Flex>
-      </Box>
+      </Card>
     </Link>
   );
 }
