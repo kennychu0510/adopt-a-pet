@@ -21,14 +21,19 @@ dayjs.extend(relativeTime);
 
 export default async function AdoptPage({ params: { id } }: { params: { id: string } }) {
   const { error, data } = await supabase.from('Adoption').select('*').eq('id', id).limit(1).single();
+
+  if (!data) {
+    return <ErrorPage/>
+  }
+  
   const detail = data!;
 
-  const isEmail = emailSchema.safeParse(detail.contact).success;
+  const isEmail = emailSchema.safeParse(detail?.contact).success;
 
-  const contactLink = isEmail ? `mailto:${detail.contact}` : `tel:${detail.contact}`;
+  const contactLink = isEmail ? `mailto:${detail?.contact}` : `tel:${detail?.contact}`;
 
   return (
-    <DetailPageLayout error={error}>
+    <DetailPageLayout error={error || !data}>
       <Center>
         <VStack mb={2}>
           <PetImage image={detail.image!} />

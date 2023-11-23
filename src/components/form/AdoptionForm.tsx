@@ -50,7 +50,7 @@ export default function AdoptionForm() {
       toast.success('Form posted successfully!', ToastifyConfig);
       setTimeout(() => {
         router.push('/');
-      }, 2000);
+      }, 1000);
     } catch (error) {
       toast.error('Failed to Post Form!', ToastifyConfig);
       console.log(error);

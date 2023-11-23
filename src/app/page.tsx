@@ -4,45 +4,6 @@ import LoadingPage from '@/components/LoadingPage';
 import { CATEGORIES } from '@/constants';
 import { PetCardProps, PetType } from '@/types';
 import supabase from '@/utils/supabase';
-import { Suspense } from 'react';
-
-const NEW_PETS: PetCardProps[] = [
-  // {
-  //   name: "Paw",
-  //   image: Images.dog,
-  // },
-  // {
-  //   name: "Paw",
-  //   image: Images.dog,
-  // },
-  // {
-  //   name: "Paw",
-  //   image: Images.dog,
-  // },
-  // {
-  //   name: "Paw",
-  //   image: Images.dog,
-  // },
-];
-
-const MISSING_PETS: PetCardProps[] = [
-  // {
-  //   name: "Bobo",
-  //   image: Images.dog,
-  // },
-  // {
-  //   name: "Paw",
-  //   image: Images.dog,
-  // },
-  // {
-  //   name: "Paw",
-  //   image: Images.dog,
-  // },
-  // {
-  //   name: "Paw",
-  //   image: Images.dog,
-  // },
-];
 
 export default async function Home() {
   const adoptionList = await supabase.from('Adoption').select('*');

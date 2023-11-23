@@ -5,7 +5,7 @@ import FormCard from '../form/FormCard';
 import { Box, Center } from '@chakra-ui/react';
 
 type Props = {
-  error: PostgrestError | null;
+  error: any;
   children: React.ReactNode;
 };
 
@@ -15,12 +15,10 @@ export default function DetailPageLayout(props: Props) {
     return <ErrorPage />;
   }
   return (
-    <main>
-      <Center>
-        <Box maxW={500}>
-          <FormCard>{children}</FormCard>
-        </Box>
-      </Center>
-    </main>
+    <Center mt={4}>
+      <Box maxW={500}>
+        <FormCard>{children}</FormCard>
+      </Box>
+    </Center>
   );
 }

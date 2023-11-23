@@ -12,7 +12,7 @@ export default function ErrorPage() {
           <Image objectFit='cover' src={Images.adopt} alt='adoption' width={200} height={200} style={{ minWidth: 50 }} />
           <Text as={'i'}>Page not found</Text>
           <Link href={'/'}>
-            <Button variant={'outline'} colorScheme='blue' my={2}>
+            <Button colorScheme='blue' my={2}>
               Return to Homepage
             </Button>
           </Link>
