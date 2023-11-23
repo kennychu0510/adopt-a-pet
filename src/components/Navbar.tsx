@@ -85,7 +85,7 @@ export default function Nav() {
             fontSize={'sm'}
             fontWeight={600}
             color={'white'}
-            bg={'blue.600'}
+            colorScheme='blue'
             href={'/post'}
             _hover={{
               bg: 'blue.600',

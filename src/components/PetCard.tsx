@@ -1,4 +1,3 @@
-import useIsLargeScreen from '@/hooks/useIsLargeScreen';
 import { PetCardProps } from '@/types';
 import { Card, CardBody, CardHeader, Stack, Text } from '@chakra-ui/react';
 import Image from 'next/image';

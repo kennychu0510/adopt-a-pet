@@ -23,3 +23,5 @@ export const MissingFormSchema = z.object({
   lat: z.number(),
   lng: z.number(),
 })
+
+export const emailSchema = z.string().email()

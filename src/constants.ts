@@ -5,33 +5,39 @@ export const NavBarHeight = 44 + 8 * 2 + 2;
 
 export const CATEGORIES: PetCardProps[] = [
   {
-    id: 0,
+    id: 'all',
     name: "all",
     image: '/assets/pets.jpeg',
+    link: '/adoptType/all'
   },
   {
-    id: 1,
+    id: 'dog',
     name: "dog",
     image: '/assets/dog.png',
+    link: '/adoptType/dog'
   },
   {
-    id: 2,
+    id: 'cat',
     name: "cat",
     image: '/assets/cat.png',
+    link: '/adoptType/cat'
   },
   {
-    id: 3,
+    id: 'parrot',
     name: "parrot",
-    image: '/assets/parrot.jpeg'
+    image: '/assets/parrot.jpeg',
+    link: '/adoptType/parrot'
   },
   {
-    id: 4,
+    id: 'rabbit',
     name: "rabbit",
-    image: '/assets/rabbit.jpeg'
+    image: '/assets/rabbit.jpeg',
+    link: '/adoptType/rabbit'
   },
   {
-    id: 5,
+    id: 'turtle',
     name: "turtle",
-    image: '/assets/turtle.png'
+    image: '/assets/turtle.png',
+    link: '/adoptType/turtle'
   },
 ];
