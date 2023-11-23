@@ -33,7 +33,7 @@ export default async function AdoptPage({ params: { id } }: { params: { id: stri
   const contactLink = isEmail ? `mailto:${detail?.contact}` : `tel:${detail?.contact}`;
 
   return (
-    <DetailPageLayout error={error || !data}>
+    <DetailPageLayout error={error}>
       <Center>
         <VStack mb={2}>
           <PetImage image={detail.image!} />

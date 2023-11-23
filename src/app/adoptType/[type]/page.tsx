@@ -7,12 +7,16 @@ import React from 'react';
 import _ from 'lodash';
 import { getColorForAnimal } from '@/utils/helper';
 import Link from 'next/link';
+import ErrorPage from '@/components/ErrorPage';
 
 export default async function AdoptPage({ params: { type } }: { params: { type: string } }) {
   const { error, data } = type === 'all' ? await supabase.from('Adoption').select('*') : await supabase.from('Adoption').select('*').eq('type', type);
+  if (!data) {
+    return <ErrorPage/>
+  }
   const petTypes = _.uniqBy(data ?? [], 'type').map((item) => item.type);
   return (
-    <DetailPageLayout error={error || !data}>
+    <DetailPageLayout error={error}>
       <Center mb={2}>
         <Heading color={'blue.600'}>Adopt {type === 'all' ? 'a pet' : `a ${type}`}</Heading>
       </Center>

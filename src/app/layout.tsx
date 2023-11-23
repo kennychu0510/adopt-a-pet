@@ -26,7 +26,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <NavBar />
-          <Container maxW={'8xl'} p={'4'}>
+          <Container maxW={'8xl'} py={'4'} px={'8'}>
             {children}
           </Container>
           <ToastContainer />

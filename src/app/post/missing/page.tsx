@@ -23,6 +23,7 @@ import 'leaflet/dist/leaflet.css';
 import { toast } from 'react-toastify';
 import ToastifyConfig from '@/utils/toastify';
 import { getBase64 } from '@/utils/helper';
+import { HK_CENTER } from '@/constants';
 
 const customMarkerIcon = L.icon({
   iconUrl: '/assets/leaflet/marker-icon.png',
@@ -50,7 +51,7 @@ export default function Page() {
   const { handleFormSubmit } = useFormSubmissionHelper({ type: 'missing' });
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const [markerCoor, setMarkerCoor] = useState<L.LatLngExpression>([22.3193, 114.1694]);
+  const [markerCoor, setMarkerCoor] = useState<L.LatLngExpression>(HK_CENTER);
   const markerRef = useRef<L.Marker>(null);
 
   const disabledDate: RangePickerProps['disabledDate'] = (current) => {
@@ -148,7 +149,7 @@ export default function Page() {
               </FormControl>
               <FormControl>
                 <FormLabel>Last Seen Location</FormLabel>
-                <MapContainer center={[22.3193, 114.1694]} zoom={10} scrollWheelZoom={false} style={{ width: '100%', height: 300 }}>
+                <MapContainer center={HK_CENTER} zoom={10} scrollWheelZoom={false} style={{ width: '100%', height: 300 }}>
                   <MapComponent setMarkerCoor={setMarkerCoor} />
                   <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "npx prettier ./src --write && npx eslint --fix && next lint",
-    "gen-db-type": "npx supabase gen types typescript --project-id vzxnkcbyjsxmzpbbwjrx > database.types.ts"
+    "gen-db-type": "npx supabase gen types typescript --project-id vzxnkcbyjsxmzpbbwjrx > ./src/utils/database.types.ts"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",

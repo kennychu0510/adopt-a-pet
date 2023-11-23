@@ -15,7 +15,7 @@ export interface Database {
           created_at: string
           description: string | null
           id: number
-          image: string | null
+          image: string
           name: string
           petName: string
           type: string
@@ -25,7 +25,7 @@ export interface Database {
           created_at?: string
           description?: string | null
           id?: number
-          image?: string | null
+          image: string
           name: string
           petName: string
           type: string
@@ -35,7 +35,7 @@ export interface Database {
           created_at?: string
           description?: string | null
           id?: number
-          image?: string | null
+          image?: string
           name?: string
           petName?: string
           type?: string
@@ -44,10 +44,11 @@ export interface Database {
       }
       Missing: {
         Row: {
+          contact: string
           created_at: string
           description: string
           id: number
-          image: string | null
+          image: string
           lastSeen: string
           lat: number
           lng: number
@@ -56,10 +57,11 @@ export interface Database {
           type: string
         }
         Insert: {
+          contact: string
           created_at?: string
           description: string
           id?: number
-          image?: string | null
+          image: string
           lastSeen: string
           lat: number
           lng: number
@@ -68,10 +70,11 @@ export interface Database {
           type: string
         }
         Update: {
+          contact?: string
           created_at?: string
           description?: string
           id?: number
-          image?: string | null
+          image?: string
           lastSeen?: string
           lat?: number
           lng?: number

@@ -41,3 +41,5 @@ export const CATEGORIES: PetCardProps[] = [
     link: '/adoptType/turtle'
   },
 ];
+
+export const HK_CENTER: L.LatLngExpression = [22.3193, 114.1694]

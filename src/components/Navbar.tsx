@@ -1,7 +1,6 @@
 'use client';
 
 import Images from '@/assets/index';
-import useIsSmallScreen from '@/hooks/useIsSmallScreen';
 import {
   ChevronDownIcon,
   ChevronRightIcon,
@@ -24,9 +23,10 @@ import {
   useColorModeValue,
   useDisclosure,
 } from '@chakra-ui/react';
-import { Modal } from 'antd';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { RiSendPlaneFill } from "react-icons/ri";
+
 
 export default function Nav() {
   const { isOpen, onToggle } = useDisclosure();
@@ -46,7 +46,7 @@ export default function Nav() {
         color={useColorModeValue('gray.600', 'white')}
         minH={'60px'}
         py={{ base: 2 }}
-        px={{ base: 4 }}
+        px={{ base: 8 }}
         width={{base: '100%', md: '8xl'}}
         align={'center'}
       >
@@ -81,6 +81,7 @@ export default function Nav() {
           spacing={6}
         >
           <Button
+          leftIcon={<RiSendPlaneFill/>}
             as={'a'}
             fontSize={'sm'}
             fontWeight={600}
@@ -277,7 +278,7 @@ const NAV_ITEMS: Array<NavItem> = [
     href: '#',
   },
   {
-    label: 'Lost',
+    label: 'Missing',
     href: '#',
   },
   {

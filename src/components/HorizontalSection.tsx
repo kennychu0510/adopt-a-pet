@@ -49,7 +49,7 @@ export default function HorizontalSection(props: Props) {
       <Text fontSize={'sm'} color={'grey'} mb={2}>
         {props.subHeader}
       </Text>
-      <Box h={212}>
+      <Box h={212} mt={4}>
         <Carousel responsive={responsive} swipeable={true}>
           {props.items.map((item) => (
             <Box key={item.name} justifyContent={'center'} display={'flex'}>
