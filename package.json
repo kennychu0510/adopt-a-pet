@@ -42,7 +42,7 @@
     "eslint-plugin-unused-imports": "^3.0.0",
     "postcss": "^8",
     "prettier": "^3.0.3",
-    "supabase": "^1.113.2",
+    "supabase": "^1.110.3",
     "supabase-to-zod": "^1.0.4",
     "typescript": "^5",
     "vitest": "^0.34.6"
