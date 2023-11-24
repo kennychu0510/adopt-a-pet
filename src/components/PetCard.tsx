@@ -1,8 +1,8 @@
 import { PetCardProps } from '@/types';
-import { Card, CardBody, CardHeader, Stack, Text } from '@chakra-ui/react';
+import { Card, CardBody, CardHeader, Stack, Text, TextProps } from '@chakra-ui/react';
 import Image from 'next/image';
 
-export default function PetCard(props: PetCardProps) {
+export default function PetCard(props: PetCardProps & { textProps?: TextProps}) {
   return (
     <Card sx={{ w: 220 }} flexShrink={0} mb={2}>
       <CardHeader p={0} borderBottomColor={'brand.white'} sx={{height: 140, position: 'relative'}}>
@@ -19,7 +19,7 @@ export default function PetCard(props: PetCardProps) {
       </CardHeader>
       <CardBody>
         <Stack>
-          <Text textAlign={'center'} textTransform={'capitalize'}>
+          <Text textAlign={'center'} textTransform={'capitalize'} {...props.textProps}>
             {props.name}
           </Text>
         </Stack>

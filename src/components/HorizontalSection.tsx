@@ -9,6 +9,7 @@ import 'react-multi-carousel/lib/styles.css';
 import useIsSmallScreen from '@/hooks/useIsSmallScreen';
 import Link from 'next/link';
 import LoadingPage from './LoadingPage';
+import Images from '@/assets';
 
 type Props = {
   header: string;
@@ -40,7 +41,31 @@ const responsive = {
   },
 };
 
+const noAdoption: PetCardProps = {
+  id: 'no pets',
+  link: '/',
+  name: 'No pets for adoption right now!',
+  image: Images.noAdoption,
+};
+
+const noMissingPet: PetCardProps = {
+  id: 'no missing',
+  link: '/',
+  name: 'All pets are safe!',
+  image: Images.noMissing,
+};
+
 export default function HorizontalSection(props: Props) {
+  function getEmptyPlaceholder() {
+    switch (props.page) {
+      case 'adopt':
+        return [noAdoption];
+      case 'missing':
+        return [noMissingPet];
+      default:
+        return;
+    }
+  }
   return (
     <Box mb={'4'}>
       <Text fontSize={'lg'} fontWeight={'bold'}>
@@ -49,12 +74,12 @@ export default function HorizontalSection(props: Props) {
       <Text fontSize={'sm'} color={'grey'} mb={2}>
         {props.subHeader}
       </Text>
-      <Box h={212} mt={4}>
+      <Box minH={212} mt={4}>
         <Carousel responsive={responsive} swipeable={true}>
-          {props.items.map((item) => (
+          {(props.items.length > 0 ? props.items : getEmptyPlaceholder() ?? []).map((item) => (
             <Box key={item.name} justifyContent={'center'} display={'flex'}>
               <Link href={item.link}>
-                <PetCard {...item} />
+                <PetCard {...item}/>
               </Link>
             </Box>
           ))}
