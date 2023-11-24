@@ -9,6 +9,7 @@ export default function RootLayout({
     <main>
       <Box
         mt={4}
+        mb={4}
         mx={'auto'}
         display={'flex'}
         justifyContent={'center'}
