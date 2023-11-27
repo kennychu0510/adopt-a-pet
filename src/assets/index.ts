@@ -5,7 +5,6 @@ export default {
   missing: require("./missing.png"),
   noAdoption: require("./noAdoption.png"),
   noMissing: require("./noMissing.jpeg"),
-  noMissing: require("./noMissing.png"),
   noWish: require("./noWish.jpeg"),
   parrot: require("./parrot.jpeg"),
   pets: require("./pets.jpeg"),

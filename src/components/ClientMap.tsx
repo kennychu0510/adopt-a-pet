@@ -20,7 +20,6 @@ const customMarkerIcon = L.icon({
 
 export default function ClientMap({ latLng }: { latLng: L.LatLngExpression }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isOnScreen = useOnScreen(ref);
 
   return (
     <>

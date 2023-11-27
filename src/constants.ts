@@ -1,4 +1,3 @@
-import Images from "@/assets";
 import { PetCardProps } from "./types";
 
 export const NavBarHeight = 44 + 8 * 2 + 2;

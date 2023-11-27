@@ -1,5 +1,5 @@
 import { Database } from "@/utils/database.types";
-import { Box, Button, Card, Flex, VStack } from "@chakra-ui/react";
+import { Card, Flex, VStack } from "@chakra-ui/react";
 import Image from "next/image";
 import React from "react";
 import Row from "./detail/Row";

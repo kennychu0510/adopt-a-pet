@@ -15,7 +15,7 @@ import { FormEvent } from "react";
 import { toast } from "react-toastify";
 import { ZodError } from "zod";
 
-export default function page() {
+export default function Page() {
   const { handleFormSubmit } = useFormSubmissionHelper({ type: "wish" });
   const router = useRouter();
   const {

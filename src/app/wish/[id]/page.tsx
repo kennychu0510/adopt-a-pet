@@ -5,9 +5,7 @@ import { Center, VStack, Heading, Button, Text } from "@chakra-ui/react";
 import PageError from "@/components/ErrorPage";
 import Row from "@/components/detail/Row";
 import dayjs from "dayjs";
-import _ from "lodash";
 import {
-  MdOutlinePets,
   MdOutlineDescription,
   MdOutlineAccessTimeFilled,
   MdEmail,
@@ -16,8 +14,6 @@ import {
 import relativeTime from "dayjs/plugin/relativeTime";
 import { emailSchema } from "@/utils/ZodSchema";
 import Link from "next/link";
-import ClientMap from "@/components/ClientMap";
-import { IoLocationSharp } from "react-icons/io5";
 import { getImageForPetType } from "@/utils/helper";
 
 dayjs.extend(relativeTime);

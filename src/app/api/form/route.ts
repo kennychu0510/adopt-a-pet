@@ -5,13 +5,8 @@ import {
   WishSchema,
 } from "@/utils/ZodSchema";
 import supabase from "@/utils/supabase";
-import type { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
-
-type ResponseData = {
-  message: string;
-};
 
 export async function GET(request: Request) {
   return new Response("hello from next js");

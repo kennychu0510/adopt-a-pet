@@ -1,4 +1,3 @@
-import PetCard from "@/components/PetCard";
 import PetSummary from "@/components/PetSummary";
 import DetailPageLayout from "@/components/layouts/DetailPageLayout";
 import supabase from "@/utils/supabase";

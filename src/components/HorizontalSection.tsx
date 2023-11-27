@@ -1,14 +1,10 @@
 "use client";
 import { PetCardProps } from "@/types";
-import { Box, Flex, IconButton, Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import PetCard from "./PetCard";
-import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
-import { useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import useIsSmallScreen from "@/hooks/useIsSmallScreen";
 import Link from "next/link";
-import LoadingPage from "./LoadingPage";
 import Images from "@/assets";
 
 type Props = {

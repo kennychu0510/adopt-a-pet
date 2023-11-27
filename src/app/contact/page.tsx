@@ -1,7 +1,6 @@
 "use client";
 
 import FormCard from "@/components/form/FormCard";
-import { getBase64 } from "@/utils/helper";
 import ToastifyConfig from "@/utils/toastify";
 import {
   Box,
@@ -18,13 +17,12 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import router from "next/router";
-import { type } from "os";
 import { FormEvent, useState } from "react";
 import { BsPerson } from "react-icons/bs";
 import { MdOutlineEmail } from "react-icons/md";
 import { toast } from "react-toastify";
 
-export default function page() {
+export default function Page() {
   const [loading, setLoading] = useState(false);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {

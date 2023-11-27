@@ -8,7 +8,6 @@ import {
   Input,
 } from "@chakra-ui/react";
 import React from "react";
-import { BsPerson } from "react-icons/bs";
 import { MdOutlineEmail } from "react-icons/md";
 
 export default function ContactInput(props: FormControlProps) {

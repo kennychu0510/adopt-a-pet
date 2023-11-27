@@ -1,20 +1,14 @@
 import ErrorPage from "@/components/ErrorPage";
-import PetCard from "@/components/PetCard";
 import PetImage from "@/components/PetImage";
 import Row from "@/components/detail/Row";
-import FormCard from "@/components/form/FormCard";
 import DetailPageLayout from "@/components/layouts/DetailPageLayout";
 import supabase from "@/utils/supabase";
 import {
-  Box,
   Button,
   Center,
-  Flex,
   Heading,
-  Text,
   VStack,
 } from "@chakra-ui/react";
-import Image from "next/image";
 import React from "react";
 import {
   MdOutlinePets,
@@ -26,7 +20,6 @@ import { MdOutlineAccessTimeFilled } from "react-icons/md";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import _ from "lodash";
-import z from "zod";
 import { emailSchema } from "@/utils/ZodSchema";
 import Link from "next/link";
 

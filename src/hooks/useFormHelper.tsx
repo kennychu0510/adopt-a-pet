@@ -1,7 +1,7 @@
 "use client";
 
 import { UploadFile } from "antd";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function useFormHelper() {
   const [loading, setLoading] = useState(false);

@@ -1,4 +1,3 @@
-import { PostgrestError } from "@supabase/supabase-js";
 import React from "react";
 import ErrorPage from "../ErrorPage";
 import FormCard from "../form/FormCard";

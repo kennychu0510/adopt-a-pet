@@ -23,7 +23,7 @@ import {
   FormLabel,
   VStack,
 } from "@chakra-ui/react";
-import { DatePicker, UploadFile } from "antd";
+import { DatePicker } from "antd";
 import type { DatePickerProps, RangePickerProps } from "antd/es/date-picker";
 import dayjs from "dayjs";
 import L from "leaflet";
@@ -111,7 +111,7 @@ export default function Page() {
     if (date) {
       removeErrorOnChange("lastSeen");
     }
-  }, [date]);
+  }, [date, removeErrorOnChange]);
 
   return (
     <form onSubmit={onSubmit}>
