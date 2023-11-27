@@ -22,3 +22,11 @@ export function getColorForAnimal(animal: string) {
       return 'green'
   }
 }
+
+export function getTimestampMinusOneWeek(): string {
+  const today = new Date();
+  const oneWeekAgo = new Date(today.getTime() - 0 * 24 * 60 * 60 * 1000); // Subtracting 7 days in milliseconds
+
+  const timestamp = oneWeekAgo.toISOString(); // Converting to ISO string format
+  return timestamp;
+}

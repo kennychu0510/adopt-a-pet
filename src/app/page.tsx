@@ -3,11 +3,12 @@ import HorizontalSection from '@/components/HorizontalSection';
 import LoadingPage from '@/components/LoadingPage';
 import { CATEGORIES } from '@/constants';
 import { PetCardProps, PetType } from '@/types';
+import { getTimestampMinusOneWeek } from '@/utils/helper';
 import supabase from '@/utils/supabase';
 
 export default async function Home() {
   const adoptionList = await supabase.from('Adoption').select('*').limit(10).order('created_at', { ascending: false});
-  const missingList = await supabase.from('Missing').select('*').limit(10).order('created_at', { ascending: false});
+  const missingList = await supabase.from('Missing').select('*').gte('created_at', getTimestampMinusOneWeek()).limit(10).order('created_at', { ascending: false});
   const NEW_PETS: PetCardProps[] =
     adoptionList.data?.map((item) => ({
       id: String(item.id),

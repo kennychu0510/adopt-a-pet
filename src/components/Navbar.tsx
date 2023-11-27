@@ -275,11 +275,11 @@ const NAV_ITEMS: Array<NavItem> = [
   },
   {
     label: 'Wish List',
-    href: '#',
+    href: '/wish',
   },
   {
     label: 'Missing',
-    href: '#',
+    href: '/missing',
   },
   {
     label: 'Contact Us',

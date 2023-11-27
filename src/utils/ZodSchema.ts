@@ -24,4 +24,11 @@ export const MissingFormSchema = z.object({
   lng: z.number(),
 })
 
+export const WishSchema = z.object({
+  name: z.string(),
+  description: z.string(),
+  contact: z.string(),
+  type: PetTypeEnum
+})
+
 export const emailSchema = z.string().email()
