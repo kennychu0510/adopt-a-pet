@@ -1,3 +1,4 @@
+import { FORM_ERRORS } from "@/constants";
 import {
   FormControl,
   FormLabel,
@@ -20,7 +21,7 @@ export default function NameInput(props: FormControlProps) {
         </InputLeftAddon>
         <Input name="name" id="name" type="text" size="md" />
       </InputGroup>
-      <FormErrorMessage>Your name is required</FormErrorMessage>
+      <FormErrorMessage>{FORM_ERRORS.NAME}</FormErrorMessage>
     </FormControl>
   );
 }

@@ -6,6 +6,7 @@ import {
 } from "@chakra-ui/react";
 import { Dispatch, SetStateAction } from "react";
 import AnimalTypeDropdown from "../AnimalTypeDropdown";
+import { FORM_ERRORS } from "@/constants";
 
 export default function AnimalTypeInput(
   props: FormControlProps & {
@@ -17,7 +18,7 @@ export default function AnimalTypeInput(
     <FormControl {...props}>
       <FormLabel>Type</FormLabel>
       <AnimalTypeDropdown type={props.type} setType={props.setType} />
-      <FormErrorMessage>Pet type is required</FormErrorMessage>
+      <FormErrorMessage>{FORM_ERRORS.PET_TYPE}</FormErrorMessage>
     </FormControl>
   );
 }

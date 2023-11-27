@@ -1,3 +1,4 @@
+import { FORM_ERRORS } from "@/constants";
 import {
   FormControl,
   FormLabel,
@@ -26,7 +27,7 @@ export default function ContactInput(props: FormControlProps) {
           placeholder="Phone or Email"
         />
       </InputGroup>
-      <FormErrorMessage>Your contact is required</FormErrorMessage>
+      <FormErrorMessage>{FORM_ERRORS.CONTACT}</FormErrorMessage>
     </FormControl>
   );
 }

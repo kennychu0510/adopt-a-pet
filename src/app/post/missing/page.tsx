@@ -9,7 +9,7 @@ import ContactInput from "@/components/form/input/ContactInput";
 import DescriptionInput from "@/components/form/input/DescriptionInput";
 import NameInput from "@/components/form/input/NameInput";
 import TextFieldInput from "@/components/form/input/TextFieldInput";
-import { HK_CENTER } from "@/constants";
+import { FORM_ERRORS, HK_CENTER } from "@/constants";
 import useFormHelper from "@/hooks/useFormHelper";
 import useFormSubmissionHelper from "@/hooks/useFormSubmissionHelper";
 import { getBase64 } from "@/utils/helper";
@@ -145,7 +145,7 @@ export default function Page() {
                 onChange={removeErrorOnChange("petName")}
                 label="Pet Name"
                 id="petName"
-                errorMessage="Pet name is required"
+                errorMessage={FORM_ERRORS.PET_NAME}
                 icon={<MdOutlinePets color="gray.800" />}
               />
               <DescriptionInput
@@ -156,7 +156,7 @@ export default function Page() {
               <FormControl isInvalid={errors.has("lastSeen")}>
                 <FormLabel>Date and Time Missing</FormLabel>
                 <DatePicker disabledDate={disabledDate} showTime onOk={onOk} />
-                <FormErrorMessage>Date and time are required</FormErrorMessage>
+                <FormErrorMessage>{FORM_ERRORS.DATE}</FormErrorMessage>
               </FormControl>
               <FormControl>
                 <FormLabel>Last Seen Location</FormLabel>
@@ -185,7 +185,7 @@ export default function Page() {
               <FormControl isInvalid={errors.has("image")}>
                 <FormLabel>Image</FormLabel>
                 <UploadPhoto fileList={fileList} setFileList={setFileList} />
-                <FormErrorMessage>Image of pet is required</FormErrorMessage>
+                <FormErrorMessage>{FORM_ERRORS.IMAGE}</FormErrorMessage>
               </FormControl>
               <PrimaryButton label="Submit" isLoading={loading} />
             </VStack>

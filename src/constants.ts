@@ -42,3 +42,13 @@ export const CATEGORIES: PetCardProps[] = [
 ];
 
 export const HK_CENTER: L.LatLngExpression = [22.3193, 114.1694];
+
+export const FORM_ERRORS = {
+  NAME: 'Your name is required',
+  PET_TYPE: 'Pet type is required',
+  CONTACT: 'Your contact is required',
+  DESCRIPTION: 'Description is required',
+  PET_NAME: 'Pet name is required',
+  DATE: 'Date and time are required',
+  IMAGE: 'Image of pet is required'
+}

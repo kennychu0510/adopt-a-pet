@@ -1,3 +1,4 @@
+import { FORM_ERRORS } from "@/constants";
 import {
   FormControl,
   FormControlProps,
@@ -21,7 +22,7 @@ export default function DescriptionInput(props: FormControlProps) {
         maxLength={500}
       />
       <FormHelperText>Max 500 characters</FormHelperText>
-      <FormErrorMessage>Description is required</FormErrorMessage>
+      <FormErrorMessage>{FORM_ERRORS.DESCRIPTION}</FormErrorMessage>
     </FormControl>
   );
 }

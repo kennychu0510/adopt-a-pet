@@ -26,6 +26,7 @@ export default function AnimalTypeDropdown({
         as={Button}
         rightIcon={<ChevronDownIcon />}
         color={type ? "#000" : "#888"}
+        id="animal-type-select"
       >
         <Text textTransform={"capitalize"}>
           {type.length > 0 ? type : "Select a Type"}

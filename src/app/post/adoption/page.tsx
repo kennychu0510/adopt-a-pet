@@ -9,6 +9,7 @@ import ContactInput from "@/components/form/input/ContactInput";
 import DescriptionInput from "@/components/form/input/DescriptionInput";
 import NameInput from "@/components/form/input/NameInput";
 import TextFieldInput from "@/components/form/input/TextFieldInput";
+import { FORM_ERRORS } from "@/constants";
 import useFormHelper from "@/hooks/useFormHelper";
 import useFormSubmissionHelper from "@/hooks/useFormSubmissionHelper";
 import { getBase64 } from "@/utils/helper";
@@ -105,7 +106,7 @@ export default function Page() {
               onChange={removeErrorOnChange("petName")}
               label="Pet Name"
               id="petName"
-              errorMessage="Pet name is required"
+              errorMessage={FORM_ERRORS.PET_NAME}
               icon={<MdOutlinePets color="gray.800" />}
             />
             <DescriptionInput
