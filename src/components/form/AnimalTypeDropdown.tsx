@@ -1,5 +1,5 @@
-import { CATEGORIES } from '@/constants';
-import { ChevronDownIcon } from '@chakra-ui/icons';
+import { CATEGORIES } from "@/constants";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
   Button,
   Menu,
@@ -7,11 +7,11 @@ import {
   MenuItem,
   MenuList,
   Text,
-} from '@chakra-ui/react';
-import { Dispatch, SetStateAction } from 'react';
+} from "@chakra-ui/react";
+import { Dispatch, SetStateAction } from "react";
 
-const AnimalTypes = CATEGORIES.filter((item) => item.name !== 'all').map(
-  (item) => item.name
+const AnimalTypes = CATEGORIES.filter((item) => item.name !== "all").map(
+  (item) => item.name,
 );
 export default function AnimalTypeDropdown({
   type,
@@ -25,16 +25,16 @@ export default function AnimalTypeDropdown({
       <MenuButton
         as={Button}
         rightIcon={<ChevronDownIcon />}
-        color={type ? '#000' : '#888'}
+        color={type ? "#000" : "#888"}
       >
-        <Text textTransform={'capitalize'}>
-          {type.length > 0 ? type : 'Select a Type'}
+        <Text textTransform={"capitalize"}>
+          {type.length > 0 ? type : "Select a Type"}
         </Text>
       </MenuButton>
       <MenuList>
         {AnimalTypes.map((type) => (
           <MenuItem key={type} onClick={() => setType(type)}>
-            <Text textTransform={'capitalize'}>{type}</Text>
+            <Text textTransform={"capitalize"}>{type}</Text>
           </MenuItem>
         ))}
       </MenuList>

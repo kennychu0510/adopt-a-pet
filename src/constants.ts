@@ -5,41 +5,41 @@ export const NavBarHeight = 44 + 8 * 2 + 2;
 
 export const CATEGORIES: PetCardProps[] = [
   {
-    id: 'all',
+    id: "all",
     name: "all",
-    image: '/assets/pets.jpeg',
-    link: '/adoptType/all'
+    image: "/assets/pets.jpeg",
+    link: "/adoptType/all",
   },
   {
-    id: 'dog',
+    id: "dog",
     name: "dog",
-    image: '/assets/dog.png',
-    link: '/adoptType/dog'
+    image: "/assets/dog.png",
+    link: "/adoptType/dog",
   },
   {
-    id: 'cat',
+    id: "cat",
     name: "cat",
-    image: '/assets/cat.png',
-    link: '/adoptType/cat'
+    image: "/assets/cat.png",
+    link: "/adoptType/cat",
   },
   {
-    id: 'parrot',
+    id: "parrot",
     name: "parrot",
-    image: '/assets/parrot.jpeg',
-    link: '/adoptType/parrot'
+    image: "/assets/parrot.jpeg",
+    link: "/adoptType/parrot",
   },
   {
-    id: 'rabbit',
+    id: "rabbit",
     name: "rabbit",
-    image: '/assets/rabbit.jpeg',
-    link: '/adoptType/rabbit'
+    image: "/assets/rabbit.jpeg",
+    link: "/adoptType/rabbit",
   },
   {
-    id: 'turtle',
+    id: "turtle",
     name: "turtle",
-    image: '/assets/turtle.png',
-    link: '/adoptType/turtle'
+    image: "/assets/turtle.png",
+    link: "/adoptType/turtle",
   },
 ];
 
-export const HK_CENTER: L.LatLngExpression = [22.3193, 114.1694]
+export const HK_CENTER: L.LatLngExpression = [22.3193, 114.1694];

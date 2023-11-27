@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box } from "@chakra-ui/react";
 
 export default function RootLayout({
   children,
@@ -9,10 +9,10 @@ export default function RootLayout({
     <main>
       <Box
         mt={4}
-        mx={'auto'}
-        display={'flex'}
-        justifyContent={'center'}
-        alignItems={'center'}
+        mx={"auto"}
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
       >
         {children}
       </Box>

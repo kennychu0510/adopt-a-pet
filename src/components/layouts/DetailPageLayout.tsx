@@ -1,8 +1,8 @@
-import { PostgrestError } from '@supabase/supabase-js';
-import React from 'react';
-import ErrorPage from '../ErrorPage';
-import FormCard from '../form/FormCard';
-import { Box, Center } from '@chakra-ui/react';
+import { PostgrestError } from "@supabase/supabase-js";
+import React from "react";
+import ErrorPage from "../ErrorPage";
+import FormCard from "../form/FormCard";
+import { Box, Center } from "@chakra-ui/react";
 
 type Props = {
   error: any;

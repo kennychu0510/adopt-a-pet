@@ -1,12 +1,17 @@
-import { FormControl, FormControlProps, FormErrorMessage, FormLabel } from '@chakra-ui/react';
-import { Dispatch, SetStateAction } from 'react';
-import AnimalTypeDropdown from '../AnimalTypeDropdown';
+import {
+  FormControl,
+  FormControlProps,
+  FormErrorMessage,
+  FormLabel,
+} from "@chakra-ui/react";
+import { Dispatch, SetStateAction } from "react";
+import AnimalTypeDropdown from "../AnimalTypeDropdown";
 
 export default function AnimalTypeInput(
   props: FormControlProps & {
     type: string;
     setType: Dispatch<SetStateAction<string>>;
-  }
+  },
 ) {
   return (
     <FormControl {...props}>

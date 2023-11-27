@@ -1,8 +1,6 @@
-import React from 'react'
-import { Spinner } from '@chakra-ui/react'
+import React from "react";
+import { Spinner } from "@chakra-ui/react";
 
 export default function LoadingPage() {
-  return (
-    <Spinner/>
-  )
+  return <Spinner />;
 }

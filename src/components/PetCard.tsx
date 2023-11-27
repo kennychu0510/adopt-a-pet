@@ -1,18 +1,31 @@
-import { PetCardProps } from '@/types';
-import { Card, CardBody, CardHeader, Stack, Text, TextProps } from '@chakra-ui/react';
-import Image from 'next/image';
-import _ from 'lodash'
+import { PetCardProps } from "@/types";
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  Stack,
+  Text,
+  TextProps,
+} from "@chakra-ui/react";
+import Image from "next/image";
+import _ from "lodash";
 
-export default function PetCard(props: PetCardProps & { textProps?: TextProps, isWish?: boolean}) {
+export default function PetCard(
+  props: PetCardProps & { textProps?: TextProps; isWish?: boolean },
+) {
   return (
     <Card sx={{ w: 220 }} flexShrink={0} mb={2}>
-      <CardHeader p={0} borderBottomColor={'brand.white'} sx={{height: 140, position: 'relative'}}>
+      <CardHeader
+        p={0}
+        borderBottomColor={"brand.white"}
+        sx={{ height: 140, position: "relative" }}
+      >
         <Image
           src={props.image}
           alt={props.name}
           fill
           style={{
-            objectFit: 'cover',
+            objectFit: "cover",
             borderTopLeftRadius: 10,
             borderTopRightRadius: 10,
           }}
@@ -20,7 +33,11 @@ export default function PetCard(props: PetCardProps & { textProps?: TextProps, i
       </CardHeader>
       <CardBody>
         <Stack>
-          <Text textAlign={'center'} textTransform={'capitalize'} {...props.textProps}>
+          <Text
+            textAlign={"center"}
+            textTransform={"capitalize"}
+            {...props.textProps}
+          >
             {_.capitalize(props.name)}
           </Text>
         </Stack>

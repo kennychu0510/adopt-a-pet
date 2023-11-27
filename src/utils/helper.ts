@@ -10,16 +10,16 @@ export const getBase64 = (file: RcFile): Promise<string> =>
 
 export function getColorForAnimal(animal: string) {
   switch (animal) {
-    case 'dog':
-      return 'blue'
-    case 'cat':
-      return 'red'
-    case 'parrot':
-      return 'purple'
-    case 'rabbit':
-      return 'pink'
-    case 'turtle':
-      return 'green'
+    case "dog":
+      return "blue";
+    case "cat":
+      return "red";
+    case "parrot":
+      return "purple";
+    case "rabbit":
+      return "pink";
+    case "turtle":
+      return "green";
   }
 }
 
@@ -33,15 +33,15 @@ export function getTimestampMinusOneWeek(): string {
 
 export function getImageForPetType(type: string) {
   switch (type) {
-    case 'cat':
-      return '/assets/cat.png';
-    case 'parrot':
-      return '/assets/parrot.jpeg';
-    case 'rabbit':
-      return '/assets/rabbit.jpeg';
-    case 'turtle':
-      return '/assets/turtle.png';
+    case "cat":
+      return "/assets/cat.png";
+    case "parrot":
+      return "/assets/parrot.jpeg";
+    case "rabbit":
+      return "/assets/rabbit.jpeg";
+    case "turtle":
+      return "/assets/turtle.png";
     default:
-      return '/assets/dog.png';
+      return "/assets/dog.png";
   }
 }

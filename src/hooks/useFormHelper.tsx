@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { UploadFile } from 'antd';
-import React, { useEffect, useState } from 'react';
+import { UploadFile } from "antd";
+import React, { useEffect, useState } from "react";
 
 export default function useFormHelper() {
   const [loading, setLoading] = useState(false);
-  const [type, setType] = useState('');
+  const [type, setType] = useState("");
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [errors, setErrors] = useState<Set<string>>(new Set());
 
@@ -20,13 +20,13 @@ export default function useFormHelper() {
 
   useEffect(() => {
     if (type) {
-      removeErrorOnChange('type')();
+      removeErrorOnChange("type")();
     }
   }, [type]);
 
   useEffect(() => {
     if (fileList[0]) {
-      removeErrorOnChange('image')();
+      removeErrorOnChange("image")();
     }
   }, [fileList[0]]);
 
@@ -39,6 +39,6 @@ export default function useFormHelper() {
     setErrors,
     removeErrorOnChange,
     fileList,
-    setFileList
+    setFileList,
   };
 }
