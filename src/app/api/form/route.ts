@@ -1,4 +1,4 @@
-import { AdoptionSchema, FormTypeSchema, MissingFormSchema } from '@/utils/ZodSchema';
+import { AdoptionSchema, FormTypeSchema, MissingFormSchema, WishSchema } from '@/utils/ZodSchema';
 import supabase from '@/utils/supabase';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { NextResponse } from 'next/server';
@@ -22,28 +22,25 @@ export async function POST(request: Request) {
 
     if (formType === 'adoption') {
       const adoptionForm = AdoptionSchema.parse(form);
-        const { error } = await supabase
-          .from('Adoption')
-          .insert(adoptionForm);
-        if (error) {
-          return NextResponse.json(
-            { message: error.message },
-            { status: 500 }
-          );
-        }
+      const { error } = await supabase.from('Adoption').insert(adoptionForm);
+      if (error) {
+        return NextResponse.json({ message: error.message }, { status: 500 });
+      }
     } else if (formType === 'missing') {
       const missingForm = MissingFormSchema.parse(form);
-      const { error } = await supabase
-        .from('Missing')
-        .insert(missingForm);
+      const { error } = await supabase.from('Missing').insert(missingForm);
       if (error) {
-        return NextResponse.json(
-          { message: error.message },
-          { status: 500 }
-        );
+        return NextResponse.json({ message: error.message }, { status: 500 });
       }
+    } else if (formType === 'wish') {
+      const wishForm = WishSchema.parse(form);
+      const { error } = await supabase.from('Wish').insert(wishForm);
+      if (error) {
+        return NextResponse.json({ message: error.message }, { status: 500 });
+      }
+    } else {
+      throw new Error('Failed to process form type');
     }
-
 
     return NextResponse.json({ message: 'update to database success' });
   } catch (error) {

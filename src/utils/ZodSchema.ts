@@ -4,30 +4,30 @@ import z from 'zod'
 export const FormTypeSchema = z.enum(['adoption', 'missing', 'wish'])
 
 export const AdoptionSchema = z.object({
-  name: z.string(),
-  description: z.string(),
-  image: z.string(),
-  contact: z.string(),
+  name: z.string().min(1),
+  description: z.string().min(1),
+  image: z.string().min(1),
+  contact: z.string().min(1),
   type: PetTypeEnum,
-  petName: z.string(),
+  petName: z.string().min(1),
 })
 
 export const MissingFormSchema = z.object({
-  name: z.string(),
-  description: z.string(),
-  image: z.string(),
-  contact: z.string(),
+  name: z.string().min(1),
+  description: z.string().min(1),
+  image: z.string().min(1),
+  contact: z.string().min(1),
   type: PetTypeEnum,
-  petName: z.string(),
-  lastSeen: z.string(),
+  petName: z.string().min(1),
+  lastSeen: z.string().min(1),
   lat: z.number(),
   lng: z.number(),
 })
 
 export const WishSchema = z.object({
-  name: z.string(),
-  description: z.string(),
-  contact: z.string(),
+  name: z.string().min(1),
+  description: z.string().min(1),
+  contact: z.string().min(1),
   type: PetTypeEnum
 })
 

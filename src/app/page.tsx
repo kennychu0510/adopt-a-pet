@@ -1,8 +1,6 @@
-import Images from '@/assets';
 import HorizontalSection from '@/components/HorizontalSection';
-import LoadingPage from '@/components/LoadingPage';
 import { CATEGORIES } from '@/constants';
-import { PetCardProps, PetType } from '@/types';
+import { PetCardProps } from '@/types';
 import { getTimestampMinusOneWeek } from '@/utils/helper';
 import supabase from '@/utils/supabase';
 

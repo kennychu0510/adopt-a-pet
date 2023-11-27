@@ -36,14 +36,6 @@ const customMarkerIcon = L.icon({
   shadowSize: [41, 41],
 });
 
-const range = (start: number, end: number) => {
-  const result = [];
-  for (let i = start; i < end; i++) {
-    result.push(i);
-  }
-  return result;
-};
-
 export default function Page() {
   const [type, setType] = useState('');
   const [date, setDate] = useState<string>('');

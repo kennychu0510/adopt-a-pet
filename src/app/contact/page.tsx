@@ -1,11 +1,39 @@
+"use client"
+
 import FormCard from '@/components/form/FormCard';
+import { getBase64 } from '@/utils/helper';
+import ToastifyConfig from '@/utils/toastify';
 import { Box, Button, Center, FormControl, FormHelperText, FormLabel, Heading, Input, InputGroup, InputLeftAddon, Textarea, VStack } from '@chakra-ui/react';
+import router from 'next/router';
+import { type } from 'os';
+import { FormEvent, useState } from 'react';
 import { BsPerson } from 'react-icons/bs';
 import { MdOutlineEmail } from 'react-icons/md';
+import { toast } from 'react-toastify';
 
 export default function page() {
+  const [loading, setLoading] = useState(false);
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    try {
+      setLoading(true);
+      const form = new FormData(event.target as any);
+
+      // await handleFormSubmit(form);
+      toast.success('Form posted successfully!', ToastifyConfig);
+      setTimeout(() => {
+        router.push('/');
+      }, 1000);
+    } catch (error) {
+      toast.error('Failed to Post Form!', ToastifyConfig);
+      console.log(error);
+      setLoading(false);
+    }
+  }
+
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <FormCard>
         <Center>
           <Heading color={'blue.600'} mt={1}>
@@ -44,7 +72,6 @@ export default function page() {
                 maxLength={500}
               />
               <FormHelperText>Max 500 characters</FormHelperText>
-
             </FormControl>
             <Button
               variant='solid'
@@ -54,6 +81,7 @@ export default function page() {
                 opacity: 0.6,
               }}
               type='submit'
+              isLoading={loading}
             >
               Send
             </Button>
