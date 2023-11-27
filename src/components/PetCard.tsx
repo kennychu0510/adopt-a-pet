@@ -1,6 +1,7 @@
 import { PetCardProps } from '@/types';
 import { Card, CardBody, CardHeader, Stack, Text, TextProps } from '@chakra-ui/react';
 import Image from 'next/image';
+import _ from 'lodash'
 
 export default function PetCard(props: PetCardProps & { textProps?: TextProps, isWish?: boolean}) {
   return (
@@ -20,7 +21,7 @@ export default function PetCard(props: PetCardProps & { textProps?: TextProps, i
       <CardBody>
         <Stack>
           <Text textAlign={'center'} textTransform={'capitalize'} {...props.textProps}>
-            {props.name}
+            {_.capitalize(props.name)}
           </Text>
         </Stack>
       </CardBody>

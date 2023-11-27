@@ -1,7 +1,7 @@
 import HorizontalSection from '@/components/HorizontalSection';
 import { CATEGORIES } from '@/constants';
 import { PetCardProps } from '@/types';
-import { getTimestampMinusOneWeek } from '@/utils/helper';
+import { getImageForPetType, getTimestampMinusOneWeek } from '@/utils/helper';
 import supabase from '@/utils/supabase';
 
 export default async function Home() {
@@ -28,7 +28,7 @@ export default async function Home() {
     wishList.data?.map((item) => ({
       id: String(item.id),
       name: item.type,
-      image: '',
+      image: getImageForPetType(item.type),
       link: `/wish/${item.id}`,
     })) ?? [];
 

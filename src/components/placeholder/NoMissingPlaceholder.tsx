@@ -1,6 +1,6 @@
 import Images from '@/assets';
 import { Heading, VStack } from '@chakra-ui/react';
-import PetImage from './PetImage';
+import PetImage from '../PetImage';
 
 export default function NoMissingPlaceholder() {
   return (

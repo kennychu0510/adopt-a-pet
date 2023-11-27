@@ -33,7 +33,7 @@ export default async function AdoptPage({ params: { type } }: { params: { type: 
         <Text mr={1}>Total: </Text>
         <Text>{data?.length ?? 0}</Text>
       </Flex>
-      <VStack>{data?.map((item) => <PetSummary {...item} key={item.id} />)}</VStack>
+      <VStack>{data?.map((item) => <PetSummary page='adopt' {...item} key={item.id} />)}</VStack>
     </DetailPageLayout>
   );
 }

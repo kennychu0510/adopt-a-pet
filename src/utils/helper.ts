@@ -25,8 +25,23 @@ export function getColorForAnimal(animal: string) {
 
 export function getTimestampMinusOneWeek(): string {
   const today = new Date();
-  const oneWeekAgo = new Date(today.getTime() - 0 * 24 * 60 * 60 * 1000); // Subtracting 7 days in milliseconds
+  const oneWeekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000); // Subtracting 7 days in milliseconds
 
   const timestamp = oneWeekAgo.toISOString(); // Converting to ISO string format
   return timestamp;
+}
+
+export function getImageForPetType(type: string) {
+  switch (type) {
+    case 'cat':
+      return '/assets/cat.png';
+    case 'parrot':
+      return '/assets/parrot.jpeg';
+    case 'rabbit':
+      return '/assets/rabbit.jpeg';
+    case 'turtle':
+      return '/assets/turtle.png';
+    default:
+      return '/assets/dog.png';
+  }
 }

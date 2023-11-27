@@ -1,5 +1,5 @@
 import ErrorPage from '@/components/ErrorPage';
-import NoMissingPlaceholder from '@/components/NoMissingPlaceholder';
+import NoMissingPlaceholder from '@/components/placeholder/NoMissingPlaceholder';
 import PetSummary from '@/components/PetSummary';
 import DetailPageLayout from '@/components/layouts/DetailPageLayout';
 import { getTimestampMinusOneWeek } from '@/utils/helper';
@@ -26,7 +26,7 @@ export default async function MissingPage() {
             <Text mr={1}>Total: </Text>
             <Text>{data?.length ?? 0}</Text>
           </Flex>
-          <VStack>{data?.map((item) => <PetSummary {...item} key={item.id} isMissing />)}</VStack>
+          <VStack>{data?.map((item) => <PetSummary page='missing' {...item} key={item.id} />)}</VStack>
         </>
       ) : (
         <NoMissingPlaceholder />

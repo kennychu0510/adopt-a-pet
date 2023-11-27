@@ -1,8 +1,8 @@
 import ErrorPage from '@/components/ErrorPage';
-import NoMissingPlaceholder from '@/components/NoMissingPlaceholder';
 import PetSummary from '@/components/PetSummary';
 import DetailPageLayout from '@/components/layouts/DetailPageLayout';
-import { getTimestampMinusOneWeek } from '@/utils/helper';
+import NoWishListPlaceholder from '@/components/placeholder/NoWishListPlaceholder';
+import { getImageForPetType, getTimestampMinusOneWeek } from '@/utils/helper';
 import supabase from '@/utils/supabase';
 import { Center, Flex, Heading, Text, VStack } from '@chakra-ui/react';
 
@@ -28,26 +28,12 @@ export default async function WishListPage({ params: { type } }: { params: { typ
             <Text mr={1}>Total: </Text>
             <Text>{data?.length ?? 0}</Text>
           </Flex>
-          <VStack>{data?.map((item) => <PetSummary {...item} key={item.id} petName='' image={getImageForPetType(item.type)} />)}</VStack>
+          <VStack>{data?.map((item) => <PetSummary page='wish' {...item} key={item.id} petName='' image={getImageForPetType(item.type)} />)}</VStack>
         </>
       ) : (
-        <NoMissingPlaceholder />
+        <NoWishListPlaceholder />
       )}
     </DetailPageLayout>
   );
 }
 
-function getImageForPetType(type: string) {
-  switch (type) {
-    case 'cat':
-      return '/assets/cat.png';
-    case 'parrot':
-      return '/assets/parrot.png';
-    case 'rabbit':
-      return '/assets/rabbit.png';
-    case 'turtle':
-      return '/assets/turtle.png';
-    default:
-      return '/assets/dog.png';
-  }
-}

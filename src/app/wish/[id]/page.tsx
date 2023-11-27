@@ -11,14 +11,13 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import { emailSchema } from '@/utils/ZodSchema';
 import Link from 'next/link';
 import ClientMap from '@/components/ClientMap';
-import { IoLocationSharp } from "react-icons/io5";
-
+import { IoLocationSharp } from 'react-icons/io5';
+import { getImageForPetType } from '@/utils/helper';
 
 dayjs.extend(relativeTime);
 
-
 export default async function Page({ params: { id } }: { params: { id: string } }) {
-  const { error, data } = await supabase.from('Missing').select('*').eq('id', id).single();
+  const { error, data } = await supabase.from('Wish').select('*').eq('id', id).single();
 
   if (!data) {
     return <PageError />;
@@ -32,17 +31,18 @@ export default async function Page({ params: { id } }: { params: { id: string } 
     <DetailPageLayout error={error ?? !data}>
       <Center>
         <VStack mb={2}>
-          <PetImage image={data.image!} />
-          <Heading color={'red.600'}>{data?.petName} is Missing!</Heading>
+          <PetImage image={getImageForPetType(data.type)} />
+          <Heading color={'blue.600'} textAlign={'center'}>
+            {data.name} wants to adopt a {data.type}!
+          </Heading>
         </VStack>
       </Center>
-      <Row icon={<MdOutlinePets color='gray.800' />} content={_.capitalize(data.type)} />
       <Row icon={<MdOutlineDescription color='gray.800' />} content={data.description} />
       <Row icon={<MdOutlineAccessTimeFilled color='gray.800' />} content={'Lost since ' + dayjs(data.created_at).fromNow()} />
       <Row icon={isEmail ? <MdEmail color='gray.800' /> : <MdLocalPhone color='gray.800' />} content={data.contact} />
-      <Row icon={<IoLocationSharp/>} content={'Last Seen Location'} />
-      <ClientMap latLng={[data.lat, data.lng]}/>
-      <Text my={2} fontWeight={'bold'}>If you have seen the {data.petName}, please contact the {data.name}!</Text>
+      <Text my={2} fontWeight={'bold'}>
+        If you have a {data.type} and would like {data.name} to adopt, please contact the them!
+      </Text>
       <Center mt={4}>
         <Link href={contactLink}>
           <Button leftIcon={isEmail ? <MdEmail color='gray.800' /> : <MdLocalPhone color='gray.800' />} colorScheme='blue'>
@@ -53,4 +53,3 @@ export default async function Page({ params: { id } }: { params: { id: string } 
     </DetailPageLayout>
   );
 }
-

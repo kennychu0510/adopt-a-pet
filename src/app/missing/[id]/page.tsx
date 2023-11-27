@@ -33,7 +33,7 @@ export default async function Page({ params: { id } }: { params: { id: string } 
       <Center>
         <VStack mb={2}>
           <PetImage image={data.image!} />
-          <Heading color={'red.600'}>{data?.petName} is Missing!</Heading>
+          <Heading color={'red.600'} textAlign={'center'}>{data?.petName} is Missing!</Heading>
         </VStack>
       </Center>
       <Row icon={<MdOutlinePets color='gray.800' />} content={_.capitalize(data.type)} />
