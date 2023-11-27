@@ -1,28 +1,24 @@
 'use client';
 
 import SubmitButton from '@/components/buttons/SubmitButton';
-import AnimalTypeDropdown from '@/components/form/AnimalTypeDropdown';
 import FormCard from '@/components/form/FormCard';
 import AnimalTypeInput from '@/components/form/input/AnimalTypeInput';
 import ContactInput from '@/components/form/input/ContactInput';
 import DescriptionInput from '@/components/form/input/DescriptionInput';
 import NameInput from '@/components/form/input/NameInput';
+import useFormHelper from '@/hooks/useFormHelper';
 import useFormSubmissionHelper from '@/hooks/useFormSubmissionHelper';
 import ToastifyConfig from '@/utils/toastify';
-import { Box, Button, Center, FormControl, FormErrorMessage, FormHelperText, FormLabel, Heading, Input, InputGroup, InputLeftAddon, Textarea, VStack } from '@chakra-ui/react';
+import { Box, Center, Heading, VStack } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
-import { FormEvent, useEffect, useState } from 'react';
-import { BsPerson } from 'react-icons/bs';
-import { MdOutlineEmail } from 'react-icons/md';
+import { FormEvent } from 'react';
 import { toast } from 'react-toastify';
 import { ZodError } from 'zod';
 
 export default function page() {
-  const [loading, setLoading] = useState(false);
-  const [type, setType] = useState('');
-  const [errors, setErrors] = useState<Set<string>>(new Set());
   const { handleFormSubmit } = useFormSubmissionHelper({ type: 'wish' });
   const router = useRouter();
+  const { loading, setLoading, type, setType, errors, setErrors, removeErrorOnChange } = useFormHelper();
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -47,20 +43,6 @@ export default function page() {
     }
   }
 
-  function removeErrorOnChange(key: string) {
-    return () =>
-      setErrors((errors) => {
-        const newErrors = new Set(errors);
-        newErrors.delete(key);
-        return newErrors;
-      });
-  }
-
-  useEffect(() => {
-    if (type) {
-      removeErrorOnChange('type')();
-    }
-  }, [type]);
 
   return (
     <form onSubmit={onSubmit}>
@@ -76,7 +58,7 @@ export default function page() {
             <ContactInput isInvalid={errors.has('contact')} onChange={removeErrorOnChange('contact')} />
             <AnimalTypeInput isInvalid={errors.has('type')} type={type} setType={setType} />
             <DescriptionInput isInvalid={errors.has('description')} onChange={removeErrorOnChange('description')} />
-            <SubmitButton isLoading={loading}/>
+            <SubmitButton isLoading={loading} />
           </VStack>
         </Box>
       </FormCard>
