@@ -88,7 +88,7 @@ export default function HorizontalSection(props: Props) {
           {(props.items.length > 0 ? props.items : getEmptyPlaceholder() ?? []).map((item) => (
             <Box key={item.name} justifyContent={'center'} display={'flex'}>
               <Link href={item.link}>
-                <PetCard {...item}/>
+                <PetCard {...item} />
               </Link>
             </Box>
           ))}

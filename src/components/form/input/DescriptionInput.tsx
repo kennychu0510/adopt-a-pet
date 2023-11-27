@@ -11,7 +11,6 @@ export default function DescriptionInput(props: FormControlProps) {
         _hover={{
           borderRadius: 'gray.300',
         }}
-        placeholder='Describe the pet you wish to adopt'
         maxLength={500}
       />
       <FormHelperText>Max 500 characters</FormHelperText>

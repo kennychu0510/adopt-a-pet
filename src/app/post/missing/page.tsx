@@ -111,7 +111,7 @@ export default function Page() {
                 errorMessage='Pet name is required'
                 icon={<MdOutlinePets color='gray.800' />}
               />
-              <DescriptionInput isInvalid={errors.has('description')} onChange={removeErrorOnChange('description')} />
+              <DescriptionInput placeholder='Describe the pet you have lost. What are its main characteristics?' isInvalid={errors.has('description')} onChange={removeErrorOnChange('description')} />
               <FormControl isInvalid={errors.has('lastSeen')}>
                 <FormLabel>Date and Time Missing</FormLabel>
                 <DatePicker disabledDate={disabledDate} showTime onOk={onOk} />

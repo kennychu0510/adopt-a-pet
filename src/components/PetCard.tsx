@@ -2,7 +2,7 @@ import { PetCardProps } from '@/types';
 import { Card, CardBody, CardHeader, Stack, Text, TextProps } from '@chakra-ui/react';
 import Image from 'next/image';
 
-export default function PetCard(props: PetCardProps & { textProps?: TextProps}) {
+export default function PetCard(props: PetCardProps & { textProps?: TextProps, isWish?: boolean}) {
   return (
     <Card sx={{ w: 220 }} flexShrink={0} mb={2}>
       <CardHeader p={0} borderBottomColor={'brand.white'} sx={{height: 140, position: 'relative'}}>

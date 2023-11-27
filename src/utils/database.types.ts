@@ -42,6 +42,30 @@ export interface Database {
         }
         Relationships: []
       }
+      "Contact Us": {
+        Row: {
+          contact: string
+          created_at: string
+          id: number
+          message: string
+          name: string
+        }
+        Insert: {
+          contact: string
+          created_at?: string
+          id?: number
+          message: string
+          name: string
+        }
+        Update: {
+          contact?: string
+          created_at?: string
+          id?: number
+          message?: string
+          name?: string
+        }
+        Relationships: []
+      }
       Missing: {
         Row: {
           contact: string
@@ -86,7 +110,7 @@ export interface Database {
       }
       Wish: {
         Row: {
-          contact: string | null
+          contact: string
           created_at: string
           description: string
           id: number
@@ -94,7 +118,7 @@ export interface Database {
           type: string
         }
         Insert: {
-          contact?: string | null
+          contact: string
           created_at?: string
           description: string
           id?: number
@@ -102,7 +126,7 @@ export interface Database {
           type: string
         }
         Update: {
-          contact?: string | null
+          contact?: string
           created_at?: string
           description?: string
           id?: number

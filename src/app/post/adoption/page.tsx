@@ -73,7 +73,7 @@ export default function Page() {
               errorMessage='Pet name is required'
               icon={<MdOutlinePets color='gray.800' />}
             />
-            <DescriptionInput isInvalid={errors.has('description')} onChange={removeErrorOnChange('description')} />
+            <DescriptionInput placeholder='Describe the pet you want people to adopt.' isInvalid={errors.has('description')} onChange={removeErrorOnChange('description')} />
             <FormControl isInvalid={errors.has('image')}>
               <FormLabel>Image</FormLabel>
               <UploadPhoto fileList={fileList} setFileList={setFileList} />

@@ -43,7 +43,6 @@ export default function page() {
     }
   }
 
-
   return (
     <form onSubmit={onSubmit}>
       <FormCard>
@@ -57,7 +56,7 @@ export default function page() {
             <NameInput isInvalid={errors.has('name')} onChange={removeErrorOnChange('name')} />
             <ContactInput isInvalid={errors.has('contact')} onChange={removeErrorOnChange('contact')} />
             <AnimalTypeInput isInvalid={errors.has('type')} type={type} setType={setType} />
-            <DescriptionInput isInvalid={errors.has('description')} onChange={removeErrorOnChange('description')} />
+            <DescriptionInput placeholder='Describe about yourself, why do you want to adopt a pet?' isInvalid={errors.has('description')} onChange={removeErrorOnChange('description')} />
             <SubmitButton isLoading={loading} />
           </VStack>
         </Box>

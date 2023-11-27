@@ -7,7 +7,7 @@ import supabase from '@/utils/supabase';
 export default async function Home() {
   const adoptionList = await supabase.from('Adoption').select('*').limit(10).order('created_at', { ascending: false });
   const missingList = await supabase.from('Missing').select('*').gte('created_at', getTimestampMinusOneWeek()).limit(10).order('created_at', { ascending: false });
-  const wishList = await supabase.from('Missing').select('*').gte('created_at', getTimestampMinusOneWeek()).limit(10).order('created_at', { ascending: false });
+  const wishList = await supabase.from('Wish').select('*').gte('created_at', getTimestampMinusOneWeek()).limit(10).order('created_at', { ascending: false });
 
   const NEW_PETS: PetCardProps[] =
     adoptionList.data?.map((item) => ({
@@ -27,8 +27,8 @@ export default async function Home() {
   const WISH_LIST: PetCardProps[] =
     wishList.data?.map((item) => ({
       id: String(item.id),
-      name: item.petName,
-      image: item.image ?? '',
+      name: item.type,
+      image: '',
       link: `/wish/${item.id}`,
     })) ?? [];
 
