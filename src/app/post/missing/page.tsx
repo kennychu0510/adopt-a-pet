@@ -1,29 +1,32 @@
 'use client';
 
-import FormCard from '@/components/form/FormCard';
-import { Box, Center, FormControl, FormHelperText, FormLabel, Heading, Input, InputGroup, InputLeftAddon, Textarea, VStack } from '@chakra-ui/react';
-import Image from 'next/image';
-import React, { FormEvent, FormEventHandler, useCallback, useMemo, useRef, useState } from 'react';
 import Images from '@/assets';
 import PrimaryButton from '@/components/buttons/PrimaryButton';
-import AnimalTypeDropdown from '@/components/form/AnimalTypeDropdown';
+import FormCard from '@/components/form/FormCard';
 import UploadPhoto from '@/components/form/UploadPhoto';
-import { type } from 'os';
-import { BsPerson } from 'react-icons/bs';
-import { MdOutlineEmail, MdOutlinePets } from 'react-icons/md';
-import useFormSubmissionHelper from '@/hooks/useFormSubmissionHelper';
-import { UploadFile } from 'antd';
-import { useRouter } from 'next/navigation';
-import { DatePicker, Space } from 'antd';
-import type { DatePickerProps, RangePickerProps } from 'antd/es/date-picker';
-import L from 'leaflet';
-import { MapContainer, TileLayer, useMap, Marker, Popup, useMapEvents, useMapEvent } from 'react-leaflet';
-import dayjs, { Dayjs } from 'dayjs';
-import 'leaflet/dist/leaflet.css';
-import { toast } from 'react-toastify';
-import ToastifyConfig from '@/utils/toastify';
-import { getBase64 } from '@/utils/helper';
+import AnimalTypeInput from '@/components/form/input/AnimalTypeInput';
+import ContactInput from '@/components/form/input/ContactInput';
+import DescriptionInput from '@/components/form/input/DescriptionInput';
+import NameInput from '@/components/form/input/NameInput';
+import TextFieldInput from '@/components/form/input/TextFieldInput';
 import { HK_CENTER } from '@/constants';
+import useFormHelper from '@/hooks/useFormHelper';
+import useFormSubmissionHelper from '@/hooks/useFormSubmissionHelper';
+import { getBase64 } from '@/utils/helper';
+import ToastifyConfig from '@/utils/toastify';
+import { Box, Center, FormControl, FormErrorMessage, FormHelperText, FormLabel, VStack } from '@chakra-ui/react';
+import { DatePicker, UploadFile } from 'antd';
+import type { DatePickerProps, RangePickerProps } from 'antd/es/date-picker';
+import dayjs from 'dayjs';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import React, { FormEvent, useEffect, useRef, useState } from 'react';
+import { MdOutlinePets } from 'react-icons/md';
+import { MapContainer, Marker, TileLayer, useMapEvent } from 'react-leaflet';
+import { toast } from 'react-toastify';
+import { ZodError } from 'zod';
 
 const customMarkerIcon = L.icon({
   iconUrl: '/assets/leaflet/marker-icon.png',
@@ -37,14 +40,13 @@ const customMarkerIcon = L.icon({
 });
 
 export default function Page() {
-  const [type, setType] = useState('');
   const [date, setDate] = useState<string>('');
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
   const { handleFormSubmit } = useFormSubmissionHelper({ type: 'missing' });
-  const [loading, setLoading] = useState(false);
   const router = useRouter();
+
   const [markerCoor, setMarkerCoor] = useState<L.LatLngExpression>(HK_CENTER);
   const markerRef = useRef<L.Marker>(null);
+  const { loading, setLoading, type, setType, errors, setErrors, removeErrorOnChange, fileList, setFileList } = useFormHelper();
 
   const disabledDate: RangePickerProps['disabledDate'] = (current) => {
     return current && current > dayjs().startOf('day');
@@ -59,28 +61,37 @@ export default function Page() {
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
-      setLoading(true)
+      setLoading(true);
       const form = new FormData(event.target as any);
       const latLng = markerRef.current?.getLatLng();
       if (fileList[0] && fileList[0]?.originFileObj) {
         const base64Image = await getBase64(fileList[0]?.originFileObj);
         form.append('image', base64Image);
       }
-      form.append('type', type)
-      form.append('lat', String(latLng?.lat))
-      form.append('lng', String(latLng?.lng))
-      form.append('lastSeen', date)    
-      await handleFormSubmit(form)
+      form.append('type', type);
+      form.append('lat', String(latLng?.lat));
+      form.append('lng', String(latLng?.lng));
+      form.append('lastSeen', date);
+      await handleFormSubmit(form);
       toast.success('Form posted successfully!', ToastifyConfig);
       setTimeout(() => {
         router.push('/');
       }, 2000);
     } catch (error) {
-      toast.error('Failed to Post Form!', ToastifyConfig);
+      toast.error('Please check your form!', ToastifyConfig);
+      if (error instanceof ZodError) {
+        setErrors(new Set(Object.keys(error.formErrors.fieldErrors)));
+      }
       console.log(error);
       setLoading(false);
     }
   }
+
+  useEffect(() => {
+    if (date) {
+      removeErrorOnChange('lastSeen');
+    }
+  }, [date]);
 
   return (
     <form onSubmit={onSubmit}>
@@ -89,55 +100,22 @@ export default function Page() {
           <Image objectFit='cover' src={Images.missing} alt='adoption' width={150} height={150} style={{ minWidth: 50 }} />
           <Box mt={2} color='#0B0E3F' w={'100%'}>
             <VStack spacing={5}>
-              <FormControl>
-                <FormLabel>Your Name</FormLabel>
-                <InputGroup borderColor='#E0E1E7'>
-                  <InputLeftAddon pointerEvents='none'>
-                    <BsPerson color='gray.800' />
-                  </InputLeftAddon>
-                  <Input name='name' id='name' type='text' size='md' />
-                </InputGroup>
-              </FormControl>
-              <FormControl>
-                <FormLabel>Contact</FormLabel>
-                <InputGroup borderColor='#E0E1E7'>
-                  <InputLeftAddon pointerEvents='none'>
-                    <MdOutlineEmail color='gray.800' />
-                  </InputLeftAddon>
-                  <Input name='contact' id='contact' type='text' size='md' placeholder='Phone or Email' />
-                </InputGroup>
-              </FormControl>
-              <FormControl>
-                <FormLabel>Type</FormLabel>
-                <AnimalTypeDropdown type={type} setType={setType} />
-              </FormControl>
-              <FormControl>
-                <FormLabel>Pet Name</FormLabel>
-                <InputGroup borderColor='#E0E1E7'>
-                  <InputLeftAddon pointerEvents='none'>
-                    <MdOutlinePets color='gray.800' />
-                  </InputLeftAddon>
-                  <Input name='petName' id='petName' type='text' size='md' />
-                </InputGroup>
-              </FormControl>
-              <FormControl>
-                <FormLabel>Description</FormLabel>
-                <Textarea
-                  name='description'
-                  id='description'
-                  borderColor='gray.300'
-                  _hover={{
-                    borderRadius: 'gray.300',
-                  }}
-                  placeholder='Describe the pet you have lost, when was the last time you saw them? Any special characteristics and traits of your pet?'
-                  maxLength={500}
-                  rows={5}
-                />
-                <FormHelperText>Max 500</FormHelperText>
-              </FormControl>
-              <FormControl>
+              <NameInput isInvalid={errors.has('name')} onChange={removeErrorOnChange('name')} />
+              <ContactInput isInvalid={errors.has('contact')} onChange={removeErrorOnChange('contact')} />
+              <AnimalTypeInput isInvalid={errors.has('type')} type={type} setType={setType} />
+              <TextFieldInput
+                isInvalid={errors.has('petName')}
+                onChange={removeErrorOnChange('petName')}
+                label='Pet Name'
+                id='petName'
+                errorMessage='Pet name is required'
+                icon={<MdOutlinePets color='gray.800' />}
+              />
+              <DescriptionInput isInvalid={errors.has('description')} onChange={removeErrorOnChange('description')} />
+              <FormControl isInvalid={errors.has('lastSeen')}>
                 <FormLabel>Date and Time Missing</FormLabel>
                 <DatePicker disabledDate={disabledDate} showTime onOk={onOk} />
+                <FormErrorMessage>Date and time are required</FormErrorMessage>
               </FormControl>
               <FormControl>
                 <FormLabel>Last Seen Location</FormLabel>
@@ -153,9 +131,10 @@ export default function Page() {
                 </MapContainer>
                 <FormHelperText>Click or Drag to move marker</FormHelperText>
               </FormControl>
-              <FormControl>
+              <FormControl isInvalid={errors.has('image')}>
                 <FormLabel>Image</FormLabel>
                 <UploadPhoto fileList={fileList} setFileList={setFileList} />
+                <FormErrorMessage>Image of pet is required</FormErrorMessage>
               </FormControl>
               <PrimaryButton label='Submit' isLoading={loading} />
             </VStack>

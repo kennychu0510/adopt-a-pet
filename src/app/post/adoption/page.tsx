@@ -1,41 +1,31 @@
 'use client';
 
 import Images from '@/assets';
-import { getBase64 } from '@/utils/helper';
-import {
-  Box,
-  Center,
-  FormControl,
-  FormHelperText,
-  FormLabel,
-  Heading,
-  Input,
-  InputGroup,
-  InputLeftAddon,
-  Textarea,
-  VStack,
-} from '@chakra-ui/react';
-import { UploadFile } from 'antd';
-import { MdOutlinePets } from "react-icons/md";
-import Image from 'next/image';
-import { FormEvent, useState } from 'react';
-import { BsPerson } from 'react-icons/bs';
-import { MdOutlineEmail } from 'react-icons/md';
-import { toast } from 'react-toastify';
-import useFormSubmissionHelper from '@/hooks/useFormSubmissionHelper';
-import ToastifyConfig from '@/utils/toastify';
-import { useRouter } from 'next/navigation';
 import PrimaryButton from '@/components/buttons/PrimaryButton';
-import AnimalTypeDropdown from '@/components/form/AnimalTypeDropdown';
 import FormCard from '@/components/form/FormCard';
 import UploadPhoto from '@/components/form/UploadPhoto';
+import AnimalTypeInput from '@/components/form/input/AnimalTypeInput';
+import ContactInput from '@/components/form/input/ContactInput';
+import DescriptionInput from '@/components/form/input/DescriptionInput';
+import NameInput from '@/components/form/input/NameInput';
+import TextFieldInput from '@/components/form/input/TextFieldInput';
+import useFormHelper from '@/hooks/useFormHelper';
+import useFormSubmissionHelper from '@/hooks/useFormSubmissionHelper';
+import { getBase64 } from '@/utils/helper';
+import ToastifyConfig from '@/utils/toastify';
+import { Box, Center, FormControl, FormErrorMessage, FormLabel, Heading, VStack } from '@chakra-ui/react';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { FormEvent } from 'react';
+import { MdOutlinePets } from 'react-icons/md';
+import { toast } from 'react-toastify';
+import { ZodError } from 'zod';
 
 export default function Page() {
-  const [type, setType] = useState('');
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
   const { handleFormSubmit } = useFormSubmissionHelper({ type: 'adoption' });
-  const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { loading, setLoading, type, setType, errors, setErrors, removeErrorOnChange, fileList, setFileList } = useFormHelper();
+
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
@@ -52,7 +42,10 @@ export default function Page() {
         router.push('/');
       }, 1000);
     } catch (error) {
-      toast.error('Failed to Post Form!', ToastifyConfig);
+      toast.error('Please check your form!', ToastifyConfig);
+      if (error instanceof ZodError) {
+        setErrors(new Set(Object.keys(error.formErrors.fieldErrors)));
+      }
       console.log(error);
       setLoading(false);
     }
@@ -62,74 +55,29 @@ export default function Page() {
     <form onSubmit={onSubmit}>
       <FormCard>
         <Center flexDir={'column'}>
-          <Image
-            objectFit='cover'
-            src={Images.adopt}
-            alt='adoption'
-            width={150}
-            height={150}
-            style={{ minWidth: 50 }}
-          />
+          <Image objectFit='cover' src={Images.adopt} alt='adoption' width={150} height={150} style={{ minWidth: 50 }} />
           <Heading color={'blue.600'} mt={1}>
             Adoption
           </Heading>
         </Center>
         <Box mt={2} color='#0B0E3F'>
           <VStack spacing={5}>
-            <FormControl>
-              <FormLabel>Your Name</FormLabel>
-              <InputGroup borderColor='#E0E1E7'>
-                <InputLeftAddon pointerEvents='none'>
-                  <BsPerson color='gray.800' />
-                </InputLeftAddon>
-                <Input name='name' id='name' type='text' size='md' />
-              </InputGroup>
-            </FormControl>
-            <FormControl>
-              <FormLabel>Contact</FormLabel>
-              <InputGroup borderColor='#E0E1E7'>
-                <InputLeftAddon pointerEvents='none'>
-                  <MdOutlineEmail color='gray.800' />
-                </InputLeftAddon>
-                <Input
-                  name='contact'
-                  id='contact'
-                  type='text'
-                  size='md'
-                  placeholder='Phone or Email'
-                />
-              </InputGroup>
-            </FormControl>
-            <FormControl>
-              <FormLabel>Type</FormLabel>
-              <AnimalTypeDropdown type={type} setType={setType} />
-            </FormControl>
-            <FormControl>
-              <FormLabel>Pet Name</FormLabel>
-              <InputGroup borderColor='#E0E1E7'>
-                <InputLeftAddon pointerEvents='none'>
-                  <MdOutlinePets color='gray.800' />
-                </InputLeftAddon>
-                <Input name='petName' id='petName' type='text' size='md' />
-              </InputGroup>
-            </FormControl>
-            <FormControl>
-              <FormLabel>Description</FormLabel>
-              <Textarea
-                name='description'
-                id='description'
-                borderColor='gray.300'
-                _hover={{
-                  borderRadius: 'gray.300',
-                }}
-                placeholder='Describe the pet you are putting up for adoption'
-                maxLength={500}
-              />
-              <FormHelperText>Max 500</FormHelperText>
-            </FormControl>
-            <FormControl>
+            <NameInput isInvalid={errors.has('name')} onChange={removeErrorOnChange('name')} />
+            <ContactInput isInvalid={errors.has('contact')} onChange={removeErrorOnChange('contact')} />
+            <AnimalTypeInput isInvalid={errors.has('type')} type={type} setType={setType} />
+            <TextFieldInput
+              isInvalid={errors.has('petName')}
+              onChange={removeErrorOnChange('petName')}
+              label='Pet Name'
+              id='petName'
+              errorMessage='Pet name is required'
+              icon={<MdOutlinePets color='gray.800' />}
+            />
+            <DescriptionInput isInvalid={errors.has('description')} onChange={removeErrorOnChange('description')} />
+            <FormControl isInvalid={errors.has('image')}>
               <FormLabel>Image</FormLabel>
               <UploadPhoto fileList={fileList} setFileList={setFileList} />
+              <FormErrorMessage>Image of pet is required</FormErrorMessage>
             </FormControl>
             <PrimaryButton label='Submit' isLoading={loading} />
           </VStack>

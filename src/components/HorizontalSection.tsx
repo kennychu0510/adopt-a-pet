@@ -55,6 +55,13 @@ const noMissingPet: PetCardProps = {
   image: Images.noMissing,
 };
 
+const noWishList: PetCardProps = {
+  id: 'no wish list',
+  link: '/',
+  name: 'No wishes this week!',
+  image: Images.noWish,
+};
+
 export default function HorizontalSection(props: Props) {
   function getEmptyPlaceholder() {
     switch (props.page) {
@@ -62,6 +69,8 @@ export default function HorizontalSection(props: Props) {
         return [noAdoption];
       case 'missing':
         return [noMissingPet];
+      case 'wish':
+        return [noWishList]
       default:
         return;
     }
