@@ -9,6 +9,11 @@ export default defineConfig({
     },
   },
 
+  env: {
+    ...process.env,
+    rootURL: 'http://localhost:3000'
+  },
+
   e2e: {
     setupNodeEvents(on, config) {
     },
