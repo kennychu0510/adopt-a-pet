@@ -20,6 +20,7 @@ export default function DescriptionInput(props: FormControlProps) {
           borderRadius: "gray.300",
         }}
         maxLength={500}
+        placeholder={props.placeholder}
       />
       <FormHelperText>Max 500 characters</FormHelperText>
       <FormErrorMessage>{FORM_ERRORS.DESCRIPTION}</FormErrorMessage>
