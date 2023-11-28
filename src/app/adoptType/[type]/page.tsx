@@ -8,6 +8,7 @@ import { getColorForAnimal } from "@/utils/helper";
 import Link from "next/link";
 import ErrorPage from "@/components/ErrorPage";
 
+export const revalidate = 0
 export default async function AdoptPage({
   params: { type },
 }: {
