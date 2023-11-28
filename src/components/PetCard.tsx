@@ -43,7 +43,7 @@ export default function PetCard(
             {...props.textProps}
           >
             {_.capitalize(props.name)}
-            {props.badge && <Badge ml={2} colorScheme={props.badgeColor ?? 'green'}>{props.badge}</Badge>}
+            {props.badge && <Badge ml={props.name ? 2 : 0} colorScheme={props.badgeColor ?? 'green'}>{props.badge}</Badge>}
           </Text>
         </Stack>
       </CardBody>

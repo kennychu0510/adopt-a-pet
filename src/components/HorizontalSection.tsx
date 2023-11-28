@@ -43,7 +43,7 @@ const noAdoption: PetCardProps = {
   name: "",
   image: Images.noAdoption,
   badgeColor: 'purple',
-  badge: 'No pets for adoption right now!'
+  badge: 'No pets for adoption!'
 };
 
 const noMissingPet: PetCardProps = {
@@ -92,7 +92,7 @@ export default function HorizontalSection(props: Props) {
             : getEmptyPlaceholder() ?? []
           ).map((item) => (
             <Box key={item.name} justifyContent={"center"} display={"flex"}>
-              <Link href={item.link}>
+              <Link href={item.link} id={`hor-sec-link-${item.name}`}>
                 <PetCard {...item}/>
               </Link>
             </Box>

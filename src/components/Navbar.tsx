@@ -125,6 +125,7 @@ const DesktopNav = () => {
                   textDecoration: "none",
                   color: linkHoverColor,
                 }}
+                itemID={`nav-${navItem.label}`}
               >
                 {navItem.label}
               </Box>
