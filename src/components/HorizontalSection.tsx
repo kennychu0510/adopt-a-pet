@@ -40,22 +40,28 @@ const responsive = {
 const noAdoption: PetCardProps = {
   id: "no pets",
   link: "/",
-  name: "No pets for adoption right now!",
+  name: "",
   image: Images.noAdoption,
+  badgeColor: 'purple',
+  badge: 'No pets for adoption right now!'
 };
 
 const noMissingPet: PetCardProps = {
   id: "no missing",
   link: "/",
-  name: "All pets are safe!",
+  name: "",
   image: Images.noMissing,
+  badge: 'All pets are safe!',
+  badgeColor: 'blue'
 };
 
 const noWishList: PetCardProps = {
   id: "no wish list",
   link: "/",
-  name: "No wishes this week!",
+  name: "",
   image: Images.noWish,
+  badge: 'No wishes this week!',
+  badgeColor: 'purple'
 };
 
 export default function HorizontalSection(props: Props) {
@@ -87,7 +93,7 @@ export default function HorizontalSection(props: Props) {
           ).map((item) => (
             <Box key={item.name} justifyContent={"center"} display={"flex"}>
               <Link href={item.link}>
-                <PetCard {...item} />
+                <PetCard {...item}/>
               </Link>
             </Box>
           ))}

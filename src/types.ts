@@ -9,4 +9,6 @@ export type PetCardProps = {
   name: string;
   image: string;
   link: string;
+  badge?: string;
+  badgeColor?: string;
 };
