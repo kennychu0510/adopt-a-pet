@@ -1,5 +1,6 @@
 "use client";
 
+import PrimaryButton from "@/components/buttons/PrimaryButton";
 import SubmitButton from "@/components/buttons/SubmitButton";
 import FormCard from "@/components/form/FormCard";
 import AnimalTypeInput from "@/components/form/input/AnimalTypeInput";
@@ -79,7 +80,7 @@ export default function Page() {
               isInvalid={errors.has("description")}
               onChange={removeErrorOnChange("description")}
             />
-            <SubmitButton isLoading={loading} />
+            <PrimaryButton label="Submit" isLoading={loading} />
           </VStack>
         </Box>
       </FormCard>

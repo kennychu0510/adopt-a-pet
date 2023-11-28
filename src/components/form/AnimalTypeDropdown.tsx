@@ -27,6 +27,7 @@ export default function AnimalTypeDropdown({
         rightIcon={<ChevronDownIcon />}
         color={type ? "#000" : "#888"}
         id="animal-type-select"
+        itemID="animal-type-select"
       >
         <Text textTransform={"capitalize"}>
           {type.length > 0 ? type : "Select a Type"}
@@ -34,7 +35,7 @@ export default function AnimalTypeDropdown({
       </MenuButton>
       <MenuList>
         {AnimalTypes.map((type) => (
-          <MenuItem key={type} onClick={() => setType(type)}>
+          <MenuItem key={type} onClick={() => setType(type)} itemID={`animal-type-${type}`}>
             <Text textTransform={"capitalize"}>{type}</Text>
           </MenuItem>
         ))}
