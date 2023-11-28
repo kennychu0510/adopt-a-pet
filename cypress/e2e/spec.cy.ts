@@ -144,3 +144,39 @@ describe('Post Wish Form', () => {
     cy.location('pathname').should('eq', '/')
   });
 });
+
+
+describe('Contact Us Form', () => {
+  it('contact us form to work properly', () => {
+    cy.visit(`${ROOT_URL}/contact`);
+    cy.get('[type="submit"]').click();
+
+    cy.contains(FORM_ERRORS.NAME).should('exist')
+    cy.contains(FORM_ERRORS.CONTACT).should('exist')
+    cy.contains(FORM_ERRORS.DESCRIPTION).should('exist')
+
+    cy.get('#name').type('John');
+    cy.contains(FORM_ERRORS.NAME).should('not.exist');
+
+    cy.get('#contact').type('johnchan@gmail.com');
+    cy.contains(FORM_ERRORS.CONTACT).should('not.exist');
+
+
+    cy.get('#description').type('Nice Website!');
+    cy.contains(FORM_ERRORS.DESCRIPTION).should('not.exist');
+
+    cy.intercept(
+      {
+        method: 'POST',
+        url: `${ROOT_URL}/api/*`,
+      },
+      { message: 'update to database success' }
+    );
+
+    cy.get('[type="submit"]').click();
+
+    cy.contains('Message sent successfully!').should('exist')
+
+    cy.location('pathname').should('eq', '/')
+  });
+});

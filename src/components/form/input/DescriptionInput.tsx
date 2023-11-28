@@ -8,10 +8,10 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 
-export default function DescriptionInput(props: FormControlProps) {
+export default function DescriptionInput(props: FormControlProps & {label?: string}) {
   return (
     <FormControl {...props}>
-      <FormLabel>Description</FormLabel>
+      <FormLabel>{props.label ? props.label : 'Description'}</FormLabel>
       <Textarea
         name="description"
         id="description"

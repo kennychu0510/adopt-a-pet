@@ -1,7 +1,7 @@
 import { PetTypeEnum } from "../types";
 import z from "zod";
 
-export const FormTypeSchema = z.enum(["adoption", "missing", "wish"]);
+export const FormTypeSchema = z.enum(["adoption", "missing", "wish", "contact"]);
 
 export const AdoptionSchema = z.object({
   name: z.string().min(1),
@@ -32,3 +32,9 @@ export const WishSchema = z.object({
 });
 
 export const emailSchema = z.string().email();
+
+export const ContactUsSchema = z.object({
+  name: z.string().min(1),
+  message: z.string().min(1),
+  contact: z.string().min(1),
+})
