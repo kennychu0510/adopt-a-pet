@@ -17,14 +17,15 @@ export default function TextFieldInput(
     icon: React.ReactNode;
   },
 ) {
+  const {errorMessage, ...remainingProps} = props
   return (
-    <FormControl {...props}>
+    <FormControl {...remainingProps}>
       <FormLabel>{props.label}</FormLabel>
       <InputGroup borderColor="#E0E1E7">
         <InputLeftAddon pointerEvents="none">{props.icon}</InputLeftAddon>
         <Input name={props.id} id={props.id} type="text" size="md" />
       </InputGroup>
-      <FormErrorMessage>{props.errorMessage}</FormErrorMessage>
+      <FormErrorMessage>{errorMessage}</FormErrorMessage>
     </FormControl>
   );
 }

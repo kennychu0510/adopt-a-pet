@@ -14,10 +14,11 @@ export default function AnimalTypeInput(
     setType: Dispatch<SetStateAction<string>>;
   },
 ) {
+  const {type, setType, ...remainingProps} = props
   return (
-    <FormControl {...props}>
+    <FormControl {...remainingProps}>
       <FormLabel>Type</FormLabel>
-      <AnimalTypeDropdown type={props.type} setType={props.setType} />
+      <AnimalTypeDropdown type={type} setType={setType} />
       <FormErrorMessage>{FORM_ERRORS.PET_TYPE}</FormErrorMessage>
     </FormControl>
   );
