@@ -6,6 +6,7 @@ import { getImageForPetType, getTimestampMinusOneWeek } from "@/utils/helper";
 import supabase from "@/utils/supabase";
 import { Center, Flex, Heading, Text, VStack } from "@chakra-ui/react";
 
+export const revalidate = 0;
 export default async function WishListPage({
   params: { type },
 }: {
