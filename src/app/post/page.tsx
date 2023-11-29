@@ -1,6 +1,7 @@
 "use client";
 
 import Images from "@/assets";
+import useBetterMediaQuery from "@/hooks/useBetterMediaQuery";
 import {
   Box,
   Button,
@@ -15,7 +16,6 @@ import {
   VStack,
   Wrap,
   WrapItem,
-  useMediaQuery,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -94,9 +94,7 @@ const PostType = ({
   description: string;
   icon: string;
 }) => {
-  const [isLargeScreen] = useMediaQuery("(min-width: 35em)", {
-    ssr: false,
-  });
+  const isLargeScreen = useBetterMediaQuery("(min-width: 35em)");
   const minWidth = isLargeScreen ? 500 : 200;
 
   return (
