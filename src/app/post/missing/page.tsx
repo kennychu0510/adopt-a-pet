@@ -9,7 +9,7 @@ import ContactInput from "@/components/form/input/ContactInput";
 import DescriptionInput from "@/components/form/input/DescriptionInput";
 import NameInput from "@/components/form/input/NameInput";
 import TextFieldInput from "@/components/form/input/TextFieldInput";
-import { FORM_ERRORS, HK_CENTER } from "@/constants";
+import { FORM_ERRORS, HK_CENTER_LNG, HK_CENTER_LAT } from "@/constants";
 import useFormHelper from "@/hooks/useFormHelper";
 import useFormSubmissionHelper from "@/hooks/useFormSubmissionHelper";
 import { getBase64 } from "@/utils/helper";
@@ -26,7 +26,7 @@ import {
 import { DatePicker } from "antd";
 import type { DatePickerProps, RangePickerProps } from "antd/es/date-picker";
 import dayjs from "dayjs";
-import L from "leaflet";
+import L, { LatLng } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import dynamic from "next/dynamic";
 import Image from "next/image";
@@ -46,7 +46,7 @@ export default function Page() {
     [],
   );
 
-  const [markerCoor, setMarkerCoor] = useState<L.LatLngExpression>(HK_CENTER);
+  const [markerCoor, setMarkerCoor] = useState<L.LatLng>(new LatLng(HK_CENTER_LAT, HK_CENTER_LNG));
   const {
     loading,
     setLoading,
@@ -77,14 +77,14 @@ export default function Page() {
     try {
       setLoading(true);
       const form = new FormData(event.target as any);
-      const latLng = markerCoor as any;
+      
       if (fileList[0] && fileList[0]?.originFileObj) {
         const base64Image = await getBase64(fileList[0]?.originFileObj);
         form.append("image", base64Image);
       }
       form.append("type", type);
-      form.append("lat", String(latLng.lat));
-      form.append("lng", String(latLng.lng));
+      form.append("lat", String(markerCoor.lat));
+      form.append("lng", String(markerCoor.lng));
       form.append("lastSeen", date);
       await handleFormSubmit(form);
       toast.success("Form posted successfully!", ToastifyConfig);

@@ -18,8 +18,8 @@ const LeafletMap = ({
   markerCoor,
   setMarkerCoor,
 }: {
-  markerCoor: L.LatLngExpression;
-  setMarkerCoor: React.Dispatch<React.SetStateAction<L.LatLngExpression>>;
+  markerCoor: L.LatLng;
+  setMarkerCoor: React.Dispatch<React.SetStateAction<L.LatLng>>;
 }) => {
   return (
     <MapContainer
@@ -43,7 +43,7 @@ const LeafletMap = ({
 const MapComponent = ({
   setMarkerCoor,
 }: {
-  setMarkerCoor: React.Dispatch<React.SetStateAction<L.LatLngExpression>>;
+  setMarkerCoor: React.Dispatch<React.SetStateAction<L.LatLng>>;
 }) => {
   useMapEvent("click", (e) => {
     setMarkerCoor(e.latlng);
