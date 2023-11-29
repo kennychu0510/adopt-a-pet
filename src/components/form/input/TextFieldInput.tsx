@@ -17,7 +17,7 @@ export default function TextFieldInput(
     icon: React.ReactNode;
   },
 ) {
-  const {errorMessage, ...remainingProps} = props
+  const { errorMessage, ...remainingProps } = props;
   return (
     <FormControl {...remainingProps}>
       <FormLabel>{props.label}</FormLabel>

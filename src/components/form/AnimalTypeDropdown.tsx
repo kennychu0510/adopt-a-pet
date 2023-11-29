@@ -35,7 +35,11 @@ export default function AnimalTypeDropdown({
       </MenuButton>
       <MenuList>
         {AnimalTypes.map((type) => (
-          <MenuItem key={type} onClick={() => setType(type)} itemID={`animal-type-${type}`}>
+          <MenuItem
+            key={type}
+            onClick={() => setType(type)}
+            itemID={`animal-type-${type}`}
+          >
             <Text textTransform={"capitalize"}>{type}</Text>
           </MenuItem>
         ))}

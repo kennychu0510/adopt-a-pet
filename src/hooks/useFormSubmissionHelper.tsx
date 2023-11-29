@@ -42,12 +42,12 @@ export default function useFormSubmissionHelper({
         contact: form.get("contact"),
         type: form.get("type"),
       });
-    } else if (type === 'contact') {
+    } else if (type === "contact") {
       validatedForm = ContactUsSchema.parse({
         name: form.get("name"),
         message: form.get("description"),
         contact: form.get("contact"),
-      })
+      });
     }
     const submissionResult = await fetch(`/api/form?type=${type}`, {
       method: "POST",

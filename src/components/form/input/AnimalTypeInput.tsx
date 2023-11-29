@@ -14,7 +14,7 @@ export default function AnimalTypeInput(
     setType: Dispatch<SetStateAction<string>>;
   },
 ) {
-  const {type, setType, ...remainingProps} = props
+  const { type, setType, ...remainingProps } = props;
   return (
     <FormControl {...remainingProps}>
       <FormLabel>Type</FormLabel>

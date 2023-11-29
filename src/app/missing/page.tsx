@@ -6,7 +6,7 @@ import { getTimestampMinusOneWeek } from "@/utils/helper";
 import supabase from "@/utils/supabase";
 import { Center, Flex, Heading, Text, VStack } from "@chakra-ui/react";
 
-export const revalidate = 0
+export const revalidate = 0;
 export default async function MissingPage() {
   const { error, data } = await supabase
     .from("Missing")

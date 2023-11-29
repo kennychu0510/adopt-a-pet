@@ -42,8 +42,8 @@ const noAdoption: PetCardProps = {
   link: "/",
   name: "",
   image: Images.noAdoption,
-  badgeColor: 'purple',
-  badge: 'No pets for adoption!'
+  badgeColor: "purple",
+  badge: "No pets for adoption!",
 };
 
 const noMissingPet: PetCardProps = {
@@ -51,8 +51,8 @@ const noMissingPet: PetCardProps = {
   link: "/",
   name: "",
   image: Images.noMissing,
-  badge: 'All pets are safe!',
-  badgeColor: 'blue'
+  badge: "All pets are safe!",
+  badgeColor: "blue",
 };
 
 const noWishList: PetCardProps = {
@@ -60,8 +60,8 @@ const noWishList: PetCardProps = {
   link: "/",
   name: "",
   image: Images.noWish,
-  badge: 'No wishes this week!',
-  badgeColor: 'purple'
+  badge: "No wishes this week!",
+  badgeColor: "purple",
 };
 
 export default function HorizontalSection(props: Props) {
@@ -93,7 +93,7 @@ export default function HorizontalSection(props: Props) {
           ).map((item) => (
             <Box key={item.name} justifyContent={"center"} display={"flex"}>
               <Link href={item.link} id={`hor-sec-link-${item.name}`}>
-                <PetCard {...item}/>
+                <PetCard {...item} />
               </Link>
             </Box>
           ))}

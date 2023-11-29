@@ -75,7 +75,7 @@ export default function Page() {
   ) => {
     if (value) {
       setDate(new Date(value!.toString()).toISOString());
-      removeErrorOnChange('lastSeen')()
+      removeErrorOnChange("lastSeen")();
     }
   };
 
@@ -151,8 +151,10 @@ export default function Page() {
               <FormControl isInvalid={errors.has("lastSeen")}>
                 <FormLabel>Date and Time Missing</FormLabel>
                 <DatePicker disabledDate={disabledDate} showTime onOk={onOk} />
-                
-                {errors.has("lastSeen") && <FormErrorMessage>{FORM_ERRORS.DATE}</FormErrorMessage>}
+
+                {errors.has("lastSeen") && (
+                  <FormErrorMessage>{FORM_ERRORS.DATE}</FormErrorMessage>
+                )}
               </FormControl>
               <FormControl>
                 <FormLabel>Last Seen Location</FormLabel>

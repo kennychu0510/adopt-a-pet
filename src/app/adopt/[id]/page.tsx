@@ -3,12 +3,7 @@ import PetImage from "@/components/PetImage";
 import Row from "@/components/detail/Row";
 import DetailPageLayout from "@/components/layouts/DetailPageLayout";
 import supabase from "@/utils/supabase";
-import {
-  Button,
-  Center,
-  Heading,
-  VStack,
-} from "@chakra-ui/react";
+import { Button, Center, Heading, VStack } from "@chakra-ui/react";
 import React from "react";
 import {
   MdOutlinePets,

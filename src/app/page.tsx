@@ -4,10 +4,10 @@ import { PetCardProps } from "@/types";
 import { getImageForPetType, getTimestampMinusOneWeek } from "@/utils/helper";
 import supabase from "@/utils/supabase";
 import dayjs from "dayjs";
-import isToday from 'dayjs/plugin/isToday'
-dayjs.extend(isToday)
+import isToday from "dayjs/plugin/isToday";
+dayjs.extend(isToday);
 
-export const revalidate = 0
+export const revalidate = 0;
 
 export default async function Home() {
   const adoptionList = await supabase
@@ -34,7 +34,7 @@ export default async function Home() {
       name: item.petName,
       image: item.image ?? "",
       link: `/adopt/${item.id}`,
-      badge: dayjs(item.created_at).isToday() ? 'NEW' : undefined
+      badge: dayjs(item.created_at).isToday() ? "NEW" : undefined,
     })) ?? [];
   const MISSING_PETS: PetCardProps[] =
     missingList.data?.map((item) => ({
@@ -42,7 +42,7 @@ export default async function Home() {
       name: item.petName,
       image: item.image ?? "",
       link: `/missing/${item.id}`,
-      badge: dayjs(item.created_at).isToday() ? 'NEW' : undefined
+      badge: dayjs(item.created_at).isToday() ? "NEW" : undefined,
     })) ?? [];
 
   const WISH_LIST: PetCardProps[] =
@@ -51,7 +51,7 @@ export default async function Home() {
       name: item.type,
       image: getImageForPetType(item.type),
       link: `/wish/${item.id}`,
-      badge: dayjs(item.created_at).isToday() ? 'NEW' : undefined
+      badge: dayjs(item.created_at).isToday() ? "NEW" : undefined,
     })) ?? [];
 
   return (
