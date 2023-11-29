@@ -1,5 +1,6 @@
 import { FORM_ERRORS } from '../../src/constants';
 import { createClient } from '@supabase/supabase-js';
+import 'cypress-network-idle'
 
 beforeEach(async () => {
   const supabase = createClient(
@@ -16,6 +17,7 @@ beforeEach(async () => {
 describe('Post Missing Form', () => {
   it('post missing form to work properly', () => {
     cy.visit(`${Cypress.env('rootURL')}/post/missing`);
+    cy.waitForNetworkIdle(500)
     cy.get('[type="submit"]').click()
 
     cy.contains(FORM_ERRORS.NAME).should('exist');

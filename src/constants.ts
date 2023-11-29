@@ -41,7 +41,10 @@ export const CATEGORIES: PetCardProps[] = [
   },
 ];
 
-export const HK_CENTER: L.LatLngExpression = [22.3193, 114.1694];
+export const HK_CENTER_LAT = 22.3193
+export const HK_CENTER_LNG = 114.1694
+export const HK_CENTER: L.LatLngExpression = [HK_CENTER_LAT, HK_CENTER_LNG];
+
 
 export const FORM_ERRORS = {
   NAME: "Your name is required",

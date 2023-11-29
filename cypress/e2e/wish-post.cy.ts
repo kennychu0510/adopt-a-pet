@@ -1,5 +1,7 @@
 import { FORM_ERRORS } from '../../src/constants';
 import { createClient } from '@supabase/supabase-js';
+import 'cypress-network-idle'
+
 
 beforeEach(async () => {
   const supabase = createClient(
@@ -40,7 +42,7 @@ describe('Post Wish Form', () => {
 
     cy.contains('Form posted successfully!').should('exist');
 
-    cy.location('pathname').should('eq', '/');
+    cy.location('pathname', {timeout: 5000}).should('eq', '/')
     cy.get('[itemid="nav-Wish List"]').click();
     cy.location('pathname', {timeout: 5000}).should('eq', '/wish');
     cy.contains('Cat').should('exist')
