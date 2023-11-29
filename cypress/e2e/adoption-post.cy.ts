@@ -1,5 +1,6 @@
 import { FORM_ERRORS } from '../../src/constants';
 import { createClient } from '@supabase/supabase-js';
+import 'cypress-network-idle'
 
 const ROOT_URL = 'http://localhost:3000';
 
@@ -18,6 +19,7 @@ beforeEach(async () => {
 describe('Post Adoption Form', () => {
   it('post adoption form to work properly', () => {
     cy.visit(`${ROOT_URL}/post/adoption`);
+    cy.waitForNetworkIdle(500)
     cy.get('[type="submit"]').click();
     
     cy.contains('Please check your form!', {timeout: 5000}).should('exist');
