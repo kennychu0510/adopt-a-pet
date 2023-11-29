@@ -13,7 +13,6 @@ export default async function MissingPage() {
     .select("*")
     .gte("created_at", getTimestampMinusOneWeek())
     .order("created_at", { ascending: false });
-  console.log({ error, data });
   if (!data) {
     return <ErrorPage />;
   }

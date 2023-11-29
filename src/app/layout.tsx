@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { Providers } from "./providers";
 import NavBar from "@/components/Navbar";
 import { Container } from "@chakra-ui/react";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import { ToastContainer } from "react-toastify";
+import "./globals.css";
+import { Providers } from "./providers";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -23,6 +23,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+
       <body className={inter.className}>
         <Providers>
           <NavBar />
