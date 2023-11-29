@@ -155,7 +155,7 @@ export default function Page() {
                   markerCoor={markerCoor}
                   setMarkerCoor={setMarkerCoor}
                 />
-                <FormHelperText>Click or Drag to move marker</FormHelperText>
+                <FormHelperText>Click map to set marker</FormHelperText>
               </FormControl>
               <FormControl isInvalid={errors.has("image")}>
                 <FormLabel>Image</FormLabel>

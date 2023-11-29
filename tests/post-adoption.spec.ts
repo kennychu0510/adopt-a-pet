@@ -47,7 +47,7 @@ test('post adoption form working properly', async ({ page }) => {
   await expect(page).toHaveURL(ROOT_URL);
   await page.waitForLoadState('networkidle');
 
-  expect(page.getByText('Mew')).toBeVisible();
+  expect(page.locator('[itemid="adopt"]').getByText('Mew')).toBeVisible();
 
   await page.locator('#hor-sec-link-all').click();
   await expect(page).toHaveURL(ROOT_URL + '/adoptType/all');
@@ -71,8 +71,8 @@ test('post adoption form working properly', async ({ page }) => {
   await expect(page).toHaveURL(ROOT_URL);
   await page.waitForLoadState('networkidle');
 
-  expect(page.getByText('Mew')).toBeVisible();
-  expect(page.getByText('Jack')).toBeVisible();
+  expect(page.locator('[itemid="adopt"]').getByText('Mew')).toBeVisible();
+  expect(page.locator('[itemid="adopt"]').getByText('Jack')).toBeVisible();
 
   await page.locator('#hor-sec-link-all').click();
   await expect(page).toHaveURL(ROOT_URL + '/adoptType/all');
@@ -81,10 +81,4 @@ test('post adoption form working properly', async ({ page }) => {
   expect(page.getByText('Mew')).toBeVisible();
   expect(page.getByText('Jack')).toBeVisible();
 
-});
-
-test('click all', async ({ page }) => {
-  await page.goto(ROOT_URL);
-  await page.locator('#hor-sec-link-all').click();
-  await expect(page).toHaveURL(ROOT_URL + '/adoptType/all');
 });
