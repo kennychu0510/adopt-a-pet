@@ -16,7 +16,7 @@ beforeEach(async () => {
 describe('Post Missing Form', () => {
   it('post missing form to work properly', () => {
     cy.visit(`${Cypress.env('rootURL')}/post/missing`);
-    cy.contains('Submit').click();
+    cy.get('[type="submit"]').click()
 
     cy.contains(FORM_ERRORS.NAME).should('exist');
     cy.contains(FORM_ERRORS.CONTACT).should('exist');

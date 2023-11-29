@@ -19,7 +19,8 @@ describe('Post Adoption Form', () => {
   it('post adoption form to work properly', () => {
     cy.visit(`${ROOT_URL}/post/adoption`);
     cy.get('[type="submit"]').click();
-
+    
+    cy.contains('Please check your form!', {timeout: 5000}).should('exist');
     cy.contains(FORM_ERRORS.NAME).should('exist');
     cy.contains(FORM_ERRORS.CONTACT).should('exist');
     cy.contains(FORM_ERRORS.PET_TYPE).should('exist');
