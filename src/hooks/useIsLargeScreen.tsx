@@ -1,9 +1,7 @@
 "use client";
-import { useMediaQuery } from "@chakra-ui/react";
+import useBetterMediaQuery from "./useBetterMediaQuery";
 
 export default function useIsLargeScreen(minWidth?: number) {
-  const [isLargeScreen] = useMediaQuery(`(min-width: ${minWidth ?? 35}em)`, {
-    ssr: false,
-  });
+  const isLargeScreen = useBetterMediaQuery(`(min-width: ${minWidth ?? 35}em)`);
   return isLargeScreen;
 }
