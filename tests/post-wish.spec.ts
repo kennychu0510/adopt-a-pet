@@ -75,12 +75,23 @@ test('post missing form working properly', async ({ page }) => {
   expect(page.getByText('Parrot')).toBeVisible();
   expect(page.getByText('Turtle')).toBeVisible();
 
+
   await page.locator('a').filter({has: page.getByText('Parrot')}).click()
-  
+  await page.waitForTimeout(200)
   await page.waitForLoadState('networkidle');
   expect(page.getByText('John wants to adopt a parrot!')).toBeVisible()
   expect(page.getByText('johnchan@gmail.com')).toBeVisible()
   expect(page.locator('a[href="mailto:johnchan@gmail.com"] > button')).toBeVisible()
 
+  await page.goBack()
+  await expect(page).toHaveURL(ROOT_URL + '/wish');
+  await page.waitForLoadState('networkidle');
+
+  await page.locator('a').filter({has: page.getByText('Turtle')}).click()
+  await page.waitForTimeout(200)
+  await page.waitForLoadState('networkidle');
+  expect(page.getByText('I like turtles!')).toBeVisible()
+  expect(page.getByText('99998888')).toBeVisible()
+  expect(page.locator('a[href="tel:99998888"] > button')).toBeVisible()  
 });
 

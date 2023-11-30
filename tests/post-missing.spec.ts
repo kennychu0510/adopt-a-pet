@@ -84,7 +84,7 @@ test('post missing form working properly', async ({ page }) => {
   await page.waitForLoadState('networkidle');
 
   expect(page.locator('[itemid="missing"]').getByText('Mew')).toBeVisible();
-  expect(page.getByText('Jack')).toBeVisible();
+  expect(page.locator('[itemid="missing"]').getByText('Jack')).toBeVisible();
 
   await page.locator('[itemid="nav-Missing"]').click();
   await expect(page).toHaveURL(ROOT_URL + '/missing');
