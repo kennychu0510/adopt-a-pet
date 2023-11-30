@@ -5,8 +5,8 @@ export default function PetImage({ image }: { image: string }) {
     <Image
       src={image}
       alt={"pet image"}
+      objectFit="cover"
       style={{
-        objectFit: "cover",
         borderRadius: 10,
       }}
       height={250}

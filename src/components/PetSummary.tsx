@@ -57,10 +57,9 @@ export default function PetSummary(props: Props) {
             alt={props.petName}
             width={150}
             height={150}
+            objectFit="cover"
             style={{
               borderRadius: 10,
-              objectFit: "cover",
-              height: 150,
               marginTop: "auto",
               marginBottom: "auto",
             }}
