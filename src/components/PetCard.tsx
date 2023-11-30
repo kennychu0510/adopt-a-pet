@@ -25,11 +25,11 @@ export default function PetCard(
         sx={{ height: 140, position: "relative" }}
       >
         <Image
+          objectFit="cover"
           src={props.image}
           alt={props.name}
           layout="fill"
           style={{
-            objectFit: "cover",
             borderTopLeftRadius: 10,
             borderTopRightRadius: 10,
           }}
