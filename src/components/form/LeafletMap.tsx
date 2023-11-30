@@ -1,7 +1,10 @@
+"use client"
+
 import { HK_CENTER } from "@/constants";
 import L from "leaflet";
 import React from "react";
 import { MapContainer, Marker, TileLayer, useMapEvent } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 
 const customMarkerIcon = L.icon({
   iconUrl: "/assets/leaflet/marker-icon.png",
@@ -18,8 +21,8 @@ const LeafletMap = ({
   markerCoor,
   setMarkerCoor,
 }: {
-  markerCoor: L.LatLng;
-  setMarkerCoor: React.Dispatch<React.SetStateAction<L.LatLng>>;
+  markerCoor: {lat: number, lng: number};
+  setMarkerCoor: React.Dispatch<React.SetStateAction<{lat: number, lng: number}>>;
 }) => {
   return (
     <MapContainer
@@ -43,7 +46,7 @@ const LeafletMap = ({
 const MapComponent = ({
   setMarkerCoor,
 }: {
-  setMarkerCoor: React.Dispatch<React.SetStateAction<L.LatLng>>;
+  setMarkerCoor: React.Dispatch<React.SetStateAction<{lat: number, lng: number}>>;
 }) => {
   useMapEvent("click", (e) => {
     setMarkerCoor(e.latlng);
