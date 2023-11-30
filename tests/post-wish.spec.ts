@@ -1,4 +1,4 @@
-import { FORM_ERRORS } from '@/constants';
+import { FORM_ERRORS } from '../src/constants';
 import supabase from '../src/utils/supabase';
 import { test, expect } from '@playwright/test';
 import { createClient } from '@supabase/supabase-js';
