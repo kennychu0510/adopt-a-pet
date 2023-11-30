@@ -8,7 +8,7 @@ import {
   TextProps,
 } from "@chakra-ui/react";
 import { Badge } from "@chakra-ui/react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import _ from "lodash";
 
 export default function PetCard(
@@ -27,7 +27,7 @@ export default function PetCard(
         <Image
           src={props.image}
           alt={props.name}
-          fill
+          layout="fill"
           style={{
             objectFit: "cover",
             borderTopLeftRadius: 10,

@@ -23,7 +23,7 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { usePathname } from "next/navigation";
 import { RiSendPlaneFill } from "react-icons/ri";
 

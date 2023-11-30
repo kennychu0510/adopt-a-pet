@@ -1,6 +1,6 @@
 import { Database } from "@/utils/database.types";
 import { Card, Flex, VStack } from "@chakra-ui/react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import React from "react";
 import Row from "./detail/Row";
 import _ from "lodash";

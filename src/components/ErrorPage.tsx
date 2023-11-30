@@ -1,5 +1,5 @@
 import { Box, Center, Text, VStack, Button } from "@chakra-ui/react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import React from "react";
 import Images from "@/assets";
 import Link from "next/link";

@@ -23,7 +23,7 @@ import {
   Heading,
   VStack,
 } from "@chakra-ui/react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
 import { MdOutlinePets } from "react-icons/md";
