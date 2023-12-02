@@ -69,11 +69,7 @@ export default function Page() {
         </Wrap>
         <ButtonGroup justifyContent={"center"} mt={8}>
           <Link href={pathName + `/${formType}`}>
-            <Button
-              mx={"auto"}
-              colorScheme="blue"
-              onClick={() => console.log({ formType })}
-            >
+            <Button mx={"auto"} colorScheme="blue">
               Next
             </Button>
           </Link>

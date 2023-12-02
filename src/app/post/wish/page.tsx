@@ -9,6 +9,7 @@ import DescriptionInput from "@/components/form/input/DescriptionInput";
 import NameInput from "@/components/form/input/NameInput";
 import useFormHelper from "@/hooks/useFormHelper";
 import useFormSubmissionHelper from "@/hooks/useFormSubmissionHelper";
+import { handleFetchError } from "@/utils/errorHelper";
 import ToastifyConfig from "@/utils/toastify";
 import { Box, Center, Heading, VStack } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
@@ -42,11 +43,10 @@ export default function Page() {
         router.push("/");
       }, 1000);
     } catch (error) {
-      toast.error("Please check your form!", ToastifyConfig);
-      if (error instanceof ZodError) {
-        console.log(error.formErrors.fieldErrors);
-        setErrors(new Set(Object.keys(error.formErrors.fieldErrors)));
-      }
+      handleFetchError({
+        error,
+        setErrors,
+      });
       console.log(error);
       setLoading(false);
     }

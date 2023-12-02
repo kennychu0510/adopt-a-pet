@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { HK_CENTER } from "@/constants";
 import L from "leaflet";
@@ -21,8 +21,10 @@ const LeafletMap = ({
   markerCoor,
   setMarkerCoor,
 }: {
-  markerCoor: {lat: number, lng: number};
-  setMarkerCoor: React.Dispatch<React.SetStateAction<{lat: number, lng: number}>>;
+  markerCoor: { lat: number; lng: number };
+  setMarkerCoor: React.Dispatch<
+    React.SetStateAction<{ lat: number; lng: number }>
+  >;
 }) => {
   return (
     <MapContainer
@@ -46,7 +48,9 @@ const LeafletMap = ({
 const MapComponent = ({
   setMarkerCoor,
 }: {
-  setMarkerCoor: React.Dispatch<React.SetStateAction<{lat: number, lng: number}>>;
+  setMarkerCoor: React.Dispatch<
+    React.SetStateAction<{ lat: number; lng: number }>
+  >;
 }) => {
   useMapEvent("click", (e) => {
     setMarkerCoor(e.latlng);

@@ -19,6 +19,8 @@ import Link from "next/link";
 import ClientMap from "@/components/ClientMap";
 import { IoLocationSharp } from "react-icons/io5";
 
+export const revalidate = 0;
+
 dayjs.extend(relativeTime);
 
 export default async function Page({

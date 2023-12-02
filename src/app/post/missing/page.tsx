@@ -1,4 +1,4 @@
-import PostMissingForm from '@/components/form/PostMissingForm';
+import PostMissingForm from "@/components/form/PostMissingForm";
 
 export default function Page() {
   return <PostMissingForm />;

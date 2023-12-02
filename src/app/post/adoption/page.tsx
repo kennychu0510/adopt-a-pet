@@ -12,6 +12,7 @@ import TextFieldInput from "@/components/form/input/TextFieldInput";
 import { FORM_ERRORS } from "@/constants";
 import useFormHelper from "@/hooks/useFormHelper";
 import useFormSubmissionHelper from "@/hooks/useFormSubmissionHelper";
+import { handleFetchError } from "@/utils/errorHelper";
 import { getBase64 } from "@/utils/helper";
 import ToastifyConfig from "@/utils/toastify";
 import {
@@ -61,10 +62,10 @@ export default function Page() {
         router.push("/");
       }, 1000);
     } catch (error) {
-      toast.error("Please check your form!", ToastifyConfig);
-      if (error instanceof ZodError) {
-        setErrors(new Set(Object.keys(error.formErrors.fieldErrors)));
-      }
+      handleFetchError({
+        error,
+        setErrors,
+      });
       console.log(error);
       setLoading(false);
     }

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   AdoptionSchema,
@@ -7,6 +7,7 @@ import {
   MissingFormSchema,
   WishSchema,
 } from "@/utils/ZodSchema";
+import { ServerError } from "@/utils/errorHelper";
 import z from "zod";
 
 export default function useFormSubmissionHelper({
@@ -57,7 +58,7 @@ export default function useFormSubmissionHelper({
     });
     const result = await submissionResult.json();
     if (!submissionResult.ok) {
-      throw new Error(result.message);
+      throw new ServerError("fetch failed");
     }
     return result;
   }

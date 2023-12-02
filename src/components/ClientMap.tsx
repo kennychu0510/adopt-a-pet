@@ -24,7 +24,7 @@ export default function ClientMap({ latLng }: { latLng: L.LatLngExpression }) {
   return (
     <>
       <MapContainer
-        center={HK_CENTER}
+        center={latLng}
         zoom={16}
         scrollWheelZoom={false}
         style={{ width: "100%", height: 300 }}
@@ -41,21 +41,3 @@ export default function ClientMap({ latLng }: { latLng: L.LatLngExpression }) {
     </>
   );
 }
-
-const MapInteraction = ({
-  zoomIn,
-  latLng,
-}: {
-  zoomIn: boolean;
-  latLng: L.LatLngExpression;
-}) => {
-  const [done, setDone] = useState(false);
-  const map = useMap();
-  useEffect(() => {
-    if (zoomIn && !done) {
-      map.flyTo(latLng, 16);
-      setDone(true);
-    }
-  }, [zoomIn, done]);
-  return null;
-};

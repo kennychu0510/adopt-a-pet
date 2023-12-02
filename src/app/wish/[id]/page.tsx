@@ -16,6 +16,8 @@ import { emailSchema } from "@/utils/ZodSchema";
 import Link from "next/link";
 import { getImageForPetType } from "@/utils/helper";
 
+export const revalidate = 0;
+
 dayjs.extend(relativeTime);
 
 export default async function Page({
