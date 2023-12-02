@@ -20,6 +20,7 @@ import Link from "next/link";
 
 dayjs.extend(relativeTime);
 
+export const revalidate = 0;
 export default async function AdoptPage({
   params: { id },
 }: {
