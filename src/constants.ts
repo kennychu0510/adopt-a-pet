@@ -1,4 +1,11 @@
-import { PetCardProps } from "./types";
+export type PetCardProps = {
+  id: string;
+  name: string;
+  image: string;
+  link: string;
+  badge?: string;
+  badgeColor?: string;
+};
 
 export const NavBarHeight = 44 + 8 * 2 + 2;
 
@@ -54,3 +61,5 @@ export const FORM_ERRORS = {
   DATE: "Date and time are required",
   IMAGE: "Image of pet is required",
 };
+
+export const ADMIN_TOKEN = 'adopt-a-pet-token'

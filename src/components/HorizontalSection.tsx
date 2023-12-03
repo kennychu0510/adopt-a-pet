@@ -1,5 +1,5 @@
 "use client";
-import { PetCardProps } from "@/types";
+import { PetCardProps } from "@/constants";
 import { Box, Text } from "@chakra-ui/react";
 import PetCard from "./PetCard";
 import Carousel from "react-multi-carousel";

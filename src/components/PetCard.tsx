@@ -1,4 +1,4 @@
-import { PetCardProps } from "@/types";
+import { PetCardProps } from "@/constants";
 import {
   Card,
   CardBody,
