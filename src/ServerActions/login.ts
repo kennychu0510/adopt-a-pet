@@ -1,10 +1,11 @@
 "use server";
 
 import jwt from "jsonwebtoken";
+import { ENV } from "../../env";
 
-const USERNAME = "admin";
-const PASSWORD = "admin";
-const SECRET = "adoptApetAdmin";
+const USERNAME = ENV.ADMIN_USERNAME;
+const PASSWORD = ENV.ADMIN_PASSWORD;
+const SECRET = ENV.JWT_SECRET;
 
 export async function Login(
   previousState: any,
