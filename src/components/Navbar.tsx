@@ -34,15 +34,15 @@ export default function Nav() {
   const { isOpen, onToggle } = useDisclosure();
   const { adminToken } = useAdminToken();
   const pathname = usePathname();
-  const [isAdmin, setIsAdmin] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     if (adminToken !== null || pathname.includes("/admin/manage")) {
-      setIsAdmin(true)
+      setIsAdmin(true);
     } else {
-      setIsAdmin(false)
+      setIsAdmin(false);
     }
-  }, [adminToken, pathname])
+  }, [adminToken, pathname]);
 
   return (
     <Box
