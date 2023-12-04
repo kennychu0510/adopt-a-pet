@@ -27,7 +27,7 @@ export default function PetSummary(props: Props) {
       _hover={{ backgroundColor: "#EDF2F7" }}
     >
       <Link href={`/${props.page}/${props.id}`} style={{ width: "100%" }}>
-        <Flex justify={"space-between"}>
+        <Flex justify={"space-between"} opacity={!props.show ? 0.4 : 1}>
           <VStack
             justifyContent={props.petName ? "space-between" : "space-around"}
             flexShrink={1}
