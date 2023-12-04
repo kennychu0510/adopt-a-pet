@@ -31,6 +31,7 @@ export default async function AdoptPage({
     .select("*")
     .eq("id", id)
     .limit(1)
+    .is("show", true)
     .single();
 
   if (!data) {

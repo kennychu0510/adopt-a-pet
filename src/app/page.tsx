@@ -1,31 +1,21 @@
 import HorizontalSection from "@/components/HorizontalSection";
 import { CATEGORIES, PetCardProps } from "@/constants";
-import { getImageForPetType, getTimestampMinusOneWeek } from "@/utils/helper";
-import supabase from "@/utils/supabase";
+import { getImageForPetType } from "@/utils/helper";
 import dayjs from "dayjs";
 import isToday from "dayjs/plugin/isToday";
+import {
+  getAdoptionListForLanding,
+  getMissingListForLanding,
+  getWishListForLanding,
+} from "./api/supabase";
 dayjs.extend(isToday);
 
 export const revalidate = 0;
 
 export default async function Home() {
-  const adoptionList = await supabase
-    .from("Adoption")
-    .select("*")
-    .limit(10)
-    .order("created_at", { ascending: false });
-  const missingList = await supabase
-    .from("Missing")
-    .select("*")
-    .gte("created_at", getTimestampMinusOneWeek())
-    .limit(10)
-    .order("created_at", { ascending: false });
-  const wishList = await supabase
-    .from("Wish")
-    .select("*")
-    .gte("created_at", getTimestampMinusOneWeek())
-    .limit(10)
-    .order("created_at", { ascending: false });
+  const adoptionList = await getAdoptionListForLanding();
+  const missingList = await getMissingListForLanding();
+  const wishList = await getWishListForLanding();
 
   const NEW_PETS: PetCardProps[] =
     adoptionList.data?.map((item) => ({

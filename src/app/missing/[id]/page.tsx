@@ -32,6 +32,7 @@ export default async function Page({
     .from("Missing")
     .select("*")
     .eq("id", id)
+    .is("show", true)
     .single();
 
   if (!data) {

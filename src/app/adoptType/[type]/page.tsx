@@ -16,8 +16,12 @@ export default async function AdoptPage({
 }) {
   const { error, data } =
     type === "all"
-      ? await supabase.from("Adoption").select("*")
-      : await supabase.from("Adoption").select("*").eq("type", type);
+      ? await supabase.from("Adoption").select("*").is("show", true)
+      : await supabase
+          .from("Adoption")
+          .select("*")
+          .eq("type", type)
+          .is("show", true);
   if (!data) {
     return <ErrorPage />;
   }

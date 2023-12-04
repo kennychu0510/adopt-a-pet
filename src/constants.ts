@@ -62,4 +62,4 @@ export const FORM_ERRORS = {
   IMAGE: "Image of pet is required",
 };
 
-export const ADMIN_TOKEN = 'adopt-a-pet-token'
+export const ADMIN_TOKEN = "adopt-a-pet-token";

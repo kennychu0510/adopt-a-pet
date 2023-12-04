@@ -29,6 +29,7 @@ export default async function Page({
     .from("Wish")
     .select("*")
     .eq("id", id)
+    .is("show", true)
     .single();
 
   if (!data) {

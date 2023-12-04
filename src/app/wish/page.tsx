@@ -19,11 +19,13 @@ export default async function WishListPage({
         .eq("type", type)
         .gte("created_at", getTimestampMinusOneWeek())
         .order("created_at", { ascending: false })
+        .is("show", true)
     : await supabase
         .from("Wish")
         .select("*")
         .gte("created_at", getTimestampMinusOneWeek())
-        .order("created_at", { ascending: false });
+        .order("created_at", { ascending: false })
+        .is("show", true);
 
   if (!data) {
     return <ErrorPage />;
