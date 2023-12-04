@@ -26,6 +26,7 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/legacy/image";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { RiSendPlaneFill } from "react-icons/ri";
 import { RiAdminFill } from "react-icons/ri";
 
@@ -33,7 +34,15 @@ export default function Nav() {
   const { isOpen, onToggle } = useDisclosure();
   const { adminToken } = useAdminToken();
   const pathname = usePathname();
-  const isAdmin = adminToken !== null || pathname.includes("/admin/manage");
+  const [isAdmin, setIsAdmin] = useState(false)
+
+  useEffect(() => {
+    if (adminToken !== null || pathname.includes("/admin/manage")) {
+      setIsAdmin(true)
+    } else {
+      setIsAdmin(false)
+    }
+  }, [adminToken, pathname])
 
   return (
     <Box
