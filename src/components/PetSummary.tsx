@@ -9,7 +9,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
 import { IoMdPricetag } from "react-icons/io";
 import Link from "next/link";
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 
 dayjs.extend(relativeTime);
 
@@ -28,7 +28,10 @@ export default function PetSummary(props: Props) {
       _hover={{ backgroundColor: "#EDF2F7" }}
     >
       <Link href={`/${props.page}/${props.id}`} style={{ width: "100%" }}>
-        <motion.div initial={{opacity: props.show ? 1: 0.4}} animate={{opacity: props.show ? 1: 0.4}}>
+        <motion.div
+          initial={{ opacity: props.show ? 1 : 0.4 }}
+          animate={{ opacity: props.show ? 1 : 0.4 }}
+        >
           <Flex justify={"space-between"}>
             <VStack
               justifyContent={props.petName ? "space-between" : "space-around"}
