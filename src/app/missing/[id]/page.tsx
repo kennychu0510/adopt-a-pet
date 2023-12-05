@@ -65,7 +65,7 @@ export default async function Page({
       />
       <Row
         icon={<MdOutlineAccessTimeFilled color="gray.800" />}
-        content={"Lost since " + dayjs(data.created_at).fromNow()}
+        content={"Last seen " + dayjs(data.lastSeen).fromNow()}
       />
       <Row
         icon={
