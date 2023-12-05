@@ -13,7 +13,7 @@ export default function FormCard({ children }: { children: React.ReactNode }) {
       minWidth={minWidth}
       p={8}
       variant={isSmallScreen ? "unstyled" : "elevated"}
-      paddingX={isSmallScreen ? 10 : 6}
+      paddingX={isSmallScreen ? 6 : 10}
     >
       {children}
     </Card>
