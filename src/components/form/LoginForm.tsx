@@ -37,7 +37,7 @@ export function LoginForm() {
       localStorage.setItem(ADMIN_TOKEN, state.message);
       toast.success("Login Success!", ToastifyConfig);
       setTimeout(() => {
-        location.replace("/");
+        location.replace("/admin/manage");
       }, 2000);
     } else {
       toast.error(state.message, ToastifyConfig);

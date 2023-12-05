@@ -4,12 +4,15 @@ import {
   Badge,
   Box,
   Button,
+  Card,
   Flex,
   Tab,
   TabList,
   TabPanel,
   TabPanels,
   Tabs,
+  Text,
+  Textarea,
   VStack,
 } from "@chakra-ui/react";
 import PetSummary from "../PetSummary";
@@ -31,6 +34,10 @@ import { getImageForPetType } from "@/utils/helper";
 import useAdminToken from "@/hooks/useAdminToken";
 import { useRouter } from "next/navigation";
 import AdminGuard from "./AdminGuard";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
 
 const TabLabel = ["Adoption", "Wish", "Missing", "Messages"];
 type Table = keyof Database["public"]["Tables"];
@@ -93,6 +100,14 @@ export default function PostManager(props: Props) {
                 setList={setWishList}
                 table="Wish"
               />
+            </TabPanel>
+            <TabPanel>
+              <Flex justify={"flex-end"}>
+                <Badge>Total: {data.messages?.length ?? 0}</Badge>
+              </Flex>
+              {data.messages?.map((message) => (
+                <MessageDisplay {...message} key={message.id} />
+              ))}
             </TabPanel>
           </TabPanels>
         </Tabs>
@@ -229,5 +244,19 @@ function DisplayItem({
         </form>
       </Flex>
     </PetSummary>
+  );
+}
+
+function MessageDisplay(props: Message) {
+  return (
+    <Card key={props.id} borderRadius={10} w={"100%"} my={5} p={4}>
+      <VStack alignItems={"flex-start"}>
+        <Text fontWeight={"bold"}>{props.name}</Text>
+        <Text noOfLines={5}>{props.message}</Text>
+        <Flex justify={"flex-end"} width={"100%"}>
+          <Text color={"grey"}>{dayjs(props.created_at).fromNow()}</Text>
+        </Flex>
+      </VStack>
+    </Card>
   );
 }
