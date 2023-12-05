@@ -9,6 +9,8 @@ import Logout from "@/components/admin/Logout";
 import PostManager from "@/components/admin/PostManager";
 import { Box, Button, Center, Heading, VStack } from "@chakra-ui/react";
 
+export const revalidate = 0;
+
 export default async function Page() {
   const [adoptionList, wishList, missingList, messages] = await Promise.all([
     getAdoption(),

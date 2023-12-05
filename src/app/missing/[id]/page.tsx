@@ -80,7 +80,7 @@ export default async function Page({
       <Row icon={<IoLocationSharp />} content={"Last Seen Location"} />
       <ClientMap latLng={[data.lat, data.lng]} />
       <Text my={2} fontWeight={"bold"}>
-        If you have seen the {data.petName}, please contact the {data.name}!
+        If you have seen {data.petName}, please contact {data.name}!
       </Text>
       <Center mt={4}>
         <Link href={contactLink}>

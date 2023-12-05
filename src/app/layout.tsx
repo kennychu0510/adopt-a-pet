@@ -5,7 +5,7 @@ import { Inter } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 import "./globals.css";
 import { Providers } from "./providers";
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from "@vercel/analytics/react";
 
 import "react-toastify/dist/ReactToastify.css";
 

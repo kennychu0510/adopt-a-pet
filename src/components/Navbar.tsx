@@ -304,12 +304,12 @@ const NAV_ITEMS: Array<NavItem> = [
     href: "/adoptType/all",
   },
   {
-    label: "Wish List",
-    href: "/wish",
-  },
-  {
     label: "Missing",
     href: "/missing",
+  },
+  {
+    label: "Wish List",
+    href: "/wish",
   },
   {
     label: "Contact Us",

@@ -39,7 +39,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(relativeTime);
 
-const TabLabel = ["Adoption", "Wish", "Missing", "Messages"];
+const TabLabel = ["Adoption", "Missing", "Wish", "Messages"];
 type Table = keyof Database["public"]["Tables"];
 
 type Adoption = Database["public"]["Tables"]["Adoption"]["Row"];
