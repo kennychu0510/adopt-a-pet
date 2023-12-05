@@ -1,3 +1,5 @@
+"use client"
+
 import { Database } from "@/utils/database.types";
 import { Card, Flex, VStack } from "@chakra-ui/react";
 import Image from "next/legacy/image";
