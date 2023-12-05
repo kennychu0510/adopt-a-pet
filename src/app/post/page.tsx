@@ -1,7 +1,6 @@
 "use client";
 
 import Images from "@/assets";
-import useBetterMediaQuery from "@/hooks/useBetterMediaQuery";
 import {
   Box,
   Button,
@@ -49,7 +48,12 @@ export default function Page() {
 
   return (
     <Flex>
-      <Card color="white" borderRadius="lg" p={8} boxShadow={"xl"}>
+      <Card
+        color="white"
+        borderRadius="lg"
+        p={{ base: 0, sm: 8 }}
+        boxShadow={{ base: "none", sm: "2xl" }}
+      >
         <Wrap spacing={5}>
           <WrapItem>
             <Box>
@@ -90,11 +94,8 @@ const PostType = ({
   description: string;
   icon: string;
 }) => {
-  const isLargeScreen = useBetterMediaQuery("(min-width: 35em)");
-  const minWidth = isLargeScreen ? 500 : 200;
-
   return (
-    <Card variant="outline" w={"100%"} minWidth={minWidth}>
+    <Card variant="outline" w={"100%"} minWidth={{ base: 200, sm: 500 }}>
       <CardBody>
         <Radio value={id}>
           <Flex alignItems={"center"}>

@@ -1,19 +1,24 @@
-"use client";
-import useIsSmallScreen from "@/hooks/useIsSmallScreen";
 import { Card } from "@chakra-ui/react";
 import React from "react";
 
 export default function FormCard({ children }: { children: React.ReactNode }) {
-  const isSmallScreen = useIsSmallScreen();
-  const minWidth = isSmallScreen ? "100vw" : 500;
   return (
     <Card
       bg="white"
       borderRadius="lg"
-      minWidth={minWidth}
+      minWidth={{
+        base: "100vw",
+        sm: 500,
+      }}
       p={8}
-      variant={isSmallScreen ? "unstyled" : "elevated"}
-      paddingX={isSmallScreen ? 6 : 10}
+      variant={{
+        base: "unstyled",
+        sm: "elevated",
+      }}
+      paddingX={{
+        base: 6,
+        sm: 10,
+      }}
     >
       {children}
     </Card>
