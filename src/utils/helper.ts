@@ -34,14 +34,14 @@ export function getTimestampMinusOneWeek(): string {
 export function getImageForPetType(type: string) {
   switch (type) {
     case "cat":
-      return "/assets/cat.png";
+      return "/assets/cat.jpeg";
     case "parrot":
       return "/assets/parrot.jpeg";
     case "rabbit":
       return "/assets/rabbit.jpeg";
     case "turtle":
-      return "/assets/turtle.png";
+      return "/assets/turtle.jpeg";
     default:
-      return "/assets/dog.png";
+      return "/assets/dog.jpeg";
   }
 }

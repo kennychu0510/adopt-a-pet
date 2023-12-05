@@ -19,13 +19,13 @@ export const CATEGORIES: PetCardProps[] = [
   {
     id: "dog",
     name: "dog",
-    image: "/assets/dog.png",
+    image: "/assets/dog.jpeg",
     link: "/adoptType/dog",
   },
   {
     id: "cat",
     name: "cat",
-    image: "/assets/cat.png",
+    image: "/assets/cat.jpeg",
     link: "/adoptType/cat",
   },
   {
@@ -43,7 +43,7 @@ export const CATEGORIES: PetCardProps[] = [
   {
     id: "turtle",
     name: "turtle",
-    image: "/assets/turtle.png",
+    image: "/assets/turtle.jpeg",
     link: "/adoptType/turtle",
   },
 ];
