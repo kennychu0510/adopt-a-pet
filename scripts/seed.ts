@@ -1,8 +1,10 @@
-import { AdoptionSchema, MissingFormSchema } from '@/utils/ZodSchema';
-import supabase from '@/utils/supabase';
+import { AdoptionSchema, MissingFormSchema } from '../src/utils/ZodSchema';
+import supabase from '../src/utils/supabase';
 import z from 'zod';
 import fs from 'fs';
 import path from 'path';
+import { ENV } from '../env';
+
 
 function toBase64(filePath: string) {
   const img = fs.readFileSync(filePath);
@@ -11,9 +13,9 @@ function toBase64(filePath: string) {
   return prefix + Buffer.from(img).toString('base64');
 }
 
-const dog1Img = toBase64('./images/dog1.jpeg');
-const dog4Img = toBase64('./images/dog4.jpeg');
-const cat1Img = toBase64('./images/cat1.jpeg');
+const dog1Img = toBase64(__dirname + '/images/dog1.jpeg');
+const dog4Img = toBase64(__dirname + '/images/dog4.jpeg');
+const cat1Img = toBase64(__dirname + '/images/cat1.jpeg');
 
 type AdoptionForm = z.infer<typeof AdoptionSchema>;
 type MissingForm = z.infer<typeof MissingFormSchema>;
@@ -55,8 +57,11 @@ const missingData: MissingForm[] = [
 async function main() {
   console.log('Seeding...');
   try {
+    await supabase.from('Adoption').insert(adoptionData)
     console.log('Seeding Done');
   } catch (error) {
     console.log('Seeding Failed', error);
   }
 }
+
+main()

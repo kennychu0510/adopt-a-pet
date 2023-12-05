@@ -18,7 +18,7 @@ export default async function Page() {
   ]);
 
   return (
-    <VStack h={"80dvh"}>
+    <VStack minH={"80dvh"}>
       <Center>
         <AdminGuard />
         <VStack>
@@ -35,7 +35,7 @@ export default async function Page() {
           />
         </VStack>
       </Center>
-      <Center mt={"auto"}>
+      <Center mt={"auto"} mb={4}>
         <Logout />
       </Center>
     </VStack>

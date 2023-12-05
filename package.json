@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "npx prettier ./src --write && npx eslint --fix && next lint",
-    "gen-db-type": "npx supabase gen types typescript --project-id vzxnkcbyjsxmzpbbwjrx > ./src/utils/database.types.ts"
+    "gen-db-type": "npx supabase gen types typescript --project-id vzxnkcbyjsxmzpbbwjrx > ./src/utils/database.types.ts",
+    "seed": "npx ts-node ./scripts/seed.ts"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",
@@ -21,7 +22,7 @@
     "antd": "^5.10.3",
     "dayjs": "^1.11.10",
     "dotenv": "^16.3.1",
-    "framer-motion": "^10.16.4",
+    "framer-motion": "^10.16.12",
     "g": "^2.0.1",
     "jsonwebtoken": "^9.0.2",
     "next": "^14.0.3",

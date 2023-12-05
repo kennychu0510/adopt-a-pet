@@ -1,30 +1,23 @@
-"use client";
-import { Database } from "@/utils/database.types";
-import {
-  Box,
-  Button,
-  Flex,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-  VStack,
-} from "@chakra-ui/react";
-import PetSummary from "../PetSummary";
-import { FaTrashAlt } from "react-icons/fa";
-import { onHideAdoption } from "@/ServerActions/formActions";
-import { useFormState, useFormStatus } from "react-dom";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import ToastifyConfig from "@/utils/toastify";
+'use client';
+import { Database } from '@/utils/database.types';
+import { Badge, Box, Button, Flex, Tab, TabList, TabPanel, TabPanels, Tabs, VStack } from '@chakra-ui/react';
+import PetSummary from '../PetSummary';
+import { FaTrashAlt } from 'react-icons/fa';
+import { onDeleteItem, onHideItem } from '@/ServerActions/formActions';
+import { useFormState, useFormStatus } from 'react-dom';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import ToastifyConfig from '@/utils/toastify';
+import { AnimatePresence, motion } from 'framer-motion';
+import { getImageForPetType } from '@/utils/helper';
 
-const TabLabel = ["Adoption", "Wish", "Missing", "Messages"];
+const TabLabel = ['Adoption', 'Wish', 'Missing', 'Messages'];
+type Table = keyof Database['public']['Tables'];
 
-type Adoption = Database["public"]["Tables"]["Adoption"]["Row"];
-type Missing = Database["public"]["Tables"]["Missing"]["Row"];
-type Wish = Database["public"]["Tables"]["Wish"]["Row"];
-type Message = Database["public"]["Tables"]["Contact Us"]["Row"];
+type Adoption = Database['public']['Tables']['Adoption']['Row'];
+type Missing = Database['public']['Tables']['Missing']['Row'];
+type Wish = Database['public']['Tables']['Wish']['Row'];
+type Message = Database['public']['Tables']['Contact Us']['Row'];
 
 type Props = {
   data: {
@@ -38,8 +31,10 @@ type Props = {
 export default function PostManager(props: Props) {
   const { data } = props;
   const [adoptionList, setAdoptionList] = useState(data.adoptionList ?? []);
+  const [missingList, setMissingList] = useState(data.missingList ?? []);
+  const [wishList, setWishList] = useState(data.wishList ?? []);
   return (
-    <Tabs colorScheme="orange">
+    <Tabs colorScheme='orange'>
       <TabList>
         {TabLabel.map((tab) => (
           <Tab key={tab}>{tab}</Tab>
@@ -47,50 +42,77 @@ export default function PostManager(props: Props) {
       </TabList>
       <TabPanels>
         <TabPanel>
-          {adoptionList?.map((item) => (
-            <VStack key={item.id}>
-              <AdoptionItem detail={item} setAdoptionList={setAdoptionList} />
-            </VStack>
-          ))}
+          <DisplayItemWrapper list={adoptionList} setList={setAdoptionList} table='Adoption' />
         </TabPanel>
         <TabPanel>
-          <p>two!</p>
+          <DisplayItemWrapper list={missingList} setList={setMissingList} table='Missing' />
         </TabPanel>
         <TabPanel>
-          <p>three!</p>
+          <DisplayItemWrapper
+            list={wishList.map((item) => ({
+              ...item,
+              petName: item.type,
+              image: getImageForPetType(item.type),
+            }))}
+            setList={setWishList}
+            table='Wish'
+          />
         </TabPanel>
       </TabPanels>
     </Tabs>
   );
 }
 
+function DisplayItemWrapper({ list, setList, table }: { list: ListItem[]; setList: Dispatch<SetStateAction<Array<any>>>; table: Table }) {
+  return (
+    <>
+      <Flex justify={'flex-end'}>
+        <Badge>Total: {list.length}</Badge>
+      </Flex>
+      <AnimatePresence>
+        {list?.map((item) => (
+          <motion.div key={item.id} animate={{ x: 0, opacity: 1 }} exit={{ opacity: 0, x: -300 }} transition={{ ease: 'easeOut', duration: 0.3 }}>
+            <VStack key={item.id}>
+              <DisplayItem
+                detail={item}
+                setList={setList}
+                table={table}
+              />
+            </VStack>
+          </motion.div>
+        ))}
+      </AnimatePresence>
+    </>
+  );
+}
+
 function HideButton({ show }: { show: boolean }) {
   const { pending } = useFormStatus();
   return (
-    <Button
-      colorScheme={show ? "blackAlpha" : "gray"}
-      type="submit"
-      isLoading={pending}
-    >
-      {show ? "Hide" : "Unhide"}
+    <Button colorScheme={show ? 'blackAlpha' : 'gray'} type='submit' isLoading={pending}>
+      {show ? 'Hide' : 'Unhide'}
     </Button>
   );
 }
 
-function AdoptionItem({
-  detail,
-  setAdoptionList,
-}: {
-  detail: Adoption;
-  setAdoptionList: Dispatch<SetStateAction<Adoption[]>>;
-}) {
-  const [hideItemState, hideItemAction] = useFormState(onHideAdoption, null);
+function DeleteButton() {
+  const { pending } = useFormStatus();
+  return (
+    <Button leftIcon={<FaTrashAlt />} colorScheme={'red'} isLoading={pending} type='submit'>
+      Delete
+    </Button>
+  );
+}
+
+type ListItem = Database['public']['Tables']['Adoption']['Row'];
+
+function DisplayItem({ detail, setList, table }: { detail: ListItem; setList: Dispatch<SetStateAction<Array<any>>>; table: Table }) {
+  const [hideItemState, hideItemAction] = useFormState(onHideItem, null);
+  const [deleteItemState, deleteItemAction] = useFormState(onDeleteItem, null);
   useEffect(() => {
     if (hideItemState === null) return;
-    console.log(hideItemState);
-    if (hideItemState?.includes("success")) {
-      toast.success(hideItemState, ToastifyConfig);
-      setAdoptionList(
+    if (hideItemState?.includes('success')) {
+      setList(
         (list) =>
           list?.map((item) => {
             if (item.id === detail.id) {
@@ -99,30 +121,35 @@ function AdoptionItem({
                 show: !item.show,
               };
             } else return item;
-          }),
+          })
       );
     } else {
-      toast.error(
-        `Failed to ${detail.show ? "hide" : "unhide"} item!`,
-        ToastifyConfig,
-      );
+      toast.error(`Failed to ${detail.show ? 'hide' : 'unhide'} item!`, ToastifyConfig);
     }
   }, [hideItemState]);
+  useEffect(() => {
+    if (deleteItemState === null) return;
+    if (deleteItemState?.includes('success')) {
+      setList((list) => list.filter((item) => item.id !== detail.id));
+    } else {
+      toast.error(`Failed to delete item!`, ToastifyConfig);
+    }
+  }, [deleteItemState]);
+
   return (
     <PetSummary {...detail}>
-      <Flex mt={4} justify={"space-between"}>
+      <Flex mt={4} justify={'space-between'}>
         <form action={hideItemAction}>
-          <input type="hidden" name="id" value={detail.id} />
-          <input
-            type="hidden"
-            name="show"
-            value={JSON.stringify(detail.show)}
-          />
+          <input type='hidden' name='id' value={detail.id} />
+          <input type='hidden' name='table' value={table} />
+          <input type='hidden' name='show' value={JSON.stringify(detail.show)} />
           <HideButton show={detail.show} />
         </form>
-        <Button leftIcon={<FaTrashAlt />} colorScheme={"red"}>
-          Delete
-        </Button>
+        <form action={deleteItemAction}>
+          <input type='hidden' name='id' value={detail.id} />
+          <input type='hidden' name='table' value={table} />
+          <DeleteButton />
+        </form>
       </Flex>
     </PetSummary>
   );

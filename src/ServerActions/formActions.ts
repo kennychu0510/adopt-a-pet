@@ -1,35 +1,53 @@
-"use server";
+'use server';
 
-import supabase from "@/utils/supabase";
-import jwt from "jsonwebtoken";
-import { z } from "zod";
+import { Database } from '@/utils/database.types';
+import supabase from '@/utils/supabase';
+import jwt from 'jsonwebtoken';
+import { z } from 'zod';
+
+
+enum TableType {
+  Adoption = 'Adoption',
+  Missing = 'Missing',
+  ContactUs = 'Contact Us',
+  Wish = 'Wish',
+}
 
 function parseError(error: unknown) {
   if (error instanceof Error) {
     return `error: ${error.message}`;
   }
-  return "unknown error";
+  return 'unknown error';
 }
 
-export async function onHideAdoption(
-  previousState: any,
-  formData: FormData,
-): Promise<string> {
+export async function onHideItem(previousState: any, formData: FormData): Promise<string> {
   try {
-    const id = formData.get("id");
-    const show = formData.get("show");
+    const id = formData.get('id');
+    const table = formData.get('table');
+    const show = formData.get('show');
     const idResult = z.number().parse(Number(id));
-    const showLiteral = z
-      .union([z.literal("true"), z.literal("false")])
-      .parse(show);
+    const showLiteral = z.union([z.literal('true'), z.literal('false')]).parse(show);
+    const tableResult = z.enum([TableType.Adoption, TableType.Wish, TableType.Missing, TableType.Wish]).parse(table);
     const showResult = JSON.parse(showLiteral) as boolean;
 
-    const { error } = await supabase
-      .from("Adoption")
-      .update({ show: !showResult })
-      .eq("id", idResult);
+    const { error } = await supabase.from(tableResult).update({ show: !showResult }).eq('id', idResult);
     if (error) throw new Error(error.message);
-    return `${showResult ? "Hide" : "Unhide"} item success!`;
+    return `${showResult ? 'Hide' : 'Unhide'} item success!`;
+  } catch (error) {
+    return parseError(error);
+  }
+}
+
+export async function onDeleteItem(previousState: any, formData: FormData): Promise<string> {
+  try {
+    const id = formData.get('id');
+    const table = formData.get('table');
+
+    const idResult = z.number().parse(Number(id));
+    const tableResult = z.enum([TableType.Adoption, TableType.Wish, TableType.Missing, TableType.Wish]).parse(table);
+    const { error } = await supabase.from(tableResult).delete().eq('id', idResult);
+    if (error) throw new Error(error.message);
+    return `delete item success!`;
   } catch (error) {
     return parseError(error);
   }
