@@ -47,7 +47,7 @@ export async function onHideItem(
     const tokenResult = z.string().parse(token);
     const jwtResult = jwt.verify(tokenResult, ENV.JWT_SECRET);
     if (!isJWTValid(jwtResult)) {
-      throw new Error('Credentials Expired! Log in again!')
+      throw new Error("Credentials Expired! Log in again!");
     }
 
     const { error } = await supabase
@@ -82,9 +82,8 @@ export async function onDeleteItem(
     const tokenResult = z.string().parse(token);
     const jwtResult = jwt.verify(tokenResult, ENV.JWT_SECRET);
     if (!isJWTValid(jwtResult)) {
-      throw new Error('Credentials Expired! Log in again!')
+      throw new Error("Credentials Expired! Log in again!");
     }
-
 
     const { error } = await supabase
       .from(tableResult)
