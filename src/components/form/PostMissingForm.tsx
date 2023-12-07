@@ -34,6 +34,7 @@ import { FormEvent, useMemo, useState } from "react";
 import { MdOutlinePets } from "react-icons/md";
 import { toast } from "react-toastify";
 import { ZodError } from "zod";
+import "./DatePicker.css";
 
 export default function PostMissingForm() {
   const [date, setDate] = useState<string>("");
@@ -62,7 +63,7 @@ export default function PostMissingForm() {
   } = useFormHelper();
 
   const disabledDate: RangePickerProps["disabledDate"] = (current) => {
-    return current && current > dayjs().startOf("day");
+    return current && current > dayjs().endOf("day");
   };
 
   const onOk = (
@@ -143,8 +144,13 @@ export default function PostMissingForm() {
                 onChange={removeErrorOnChange("description")}
               />
               <FormControl isInvalid={errors.has("lastSeen")}>
-                <FormLabel>Date and Time Missing</FormLabel>
-                <DatePicker disabledDate={disabledDate} showTime onOk={onOk} />
+                <FormLabel>Date Missing</FormLabel>
+                <DatePicker
+                  disabledDate={disabledDate}
+                  onChange={onOk}
+                  size="middle"
+                  placement="bottomRight"
+                />
 
                 {errors.has("lastSeen") && (
                   <FormErrorMessage>{FORM_ERRORS.DATE}</FormErrorMessage>
