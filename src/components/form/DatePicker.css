@@ -1,3 +1,4 @@
-.ant-picker-input > input::placeholder {
-  font-size: 16px;
+.ant-picker-input > input::placeholder,
+.ant-picker-input > input {
+  font-size: 16px !important;
 }

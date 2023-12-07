@@ -30,7 +30,7 @@ import dayjs from "dayjs";
 import dynamic from "next/dynamic";
 import Image from "next/legacy/image";
 import { useRouter } from "next/navigation";
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useMemo, useRef, useState } from "react";
 import { MdOutlinePets } from "react-icons/md";
 import { toast } from "react-toastify";
 import { ZodError } from "zod";
@@ -66,12 +66,14 @@ export default function PostMissingForm() {
     return current && current > dayjs().endOf("day");
   };
 
-  const onOk = (
+  const onDateChange = (
     value: DatePickerProps["value"] | RangePickerProps["value"],
   ) => {
     if (value) {
       setDate(new Date(value!.toString()).toISOString());
       removeErrorOnChange("lastSeen")();
+    } else {
+      setDate("");
     }
   };
 
@@ -147,7 +149,7 @@ export default function PostMissingForm() {
                 <FormLabel>Date Missing</FormLabel>
                 <DatePicker
                   disabledDate={disabledDate}
-                  onChange={onOk}
+                  onChange={onDateChange}
                   size="middle"
                   placement="bottomRight"
                 />
