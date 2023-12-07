@@ -21,9 +21,8 @@ export async function Login(
     };
   }
 
-  const timestampIn24Hours = new Date(
-    new Date().getTime() + 24 * 60 * 60 * 1000,
-  );
+  const timestampIn24Hours = new Date().getTime() + 24 * 60 * 60 * 1000
+
 
   const token = jwt.sign(
     {

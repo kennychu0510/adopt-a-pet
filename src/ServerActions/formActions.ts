@@ -5,6 +5,7 @@ import supabase from "@/utils/supabase";
 import jwt from "jsonwebtoken";
 import { z } from "zod";
 import { ENV } from "../../env";
+import { isJWTValid } from "./jwtHelper";
 
 enum TableType {
   Adoption = "Adoption",
@@ -44,7 +45,10 @@ export async function onHideItem(
       .parse(table);
     const showResult = JSON.parse(showLiteral) as boolean;
     const tokenResult = z.string().parse(token);
-    jwt.verify(tokenResult, ENV.JWT_SECRET);
+    const jwtResult = jwt.verify(tokenResult, ENV.JWT_SECRET);
+    if (!isJWTValid(jwtResult)) {
+      throw new Error('Credentials Expired! Log in again!')
+    }
 
     const { error } = await supabase
       .from(tableResult)
@@ -76,7 +80,11 @@ export async function onDeleteItem(
       ])
       .parse(table);
     const tokenResult = z.string().parse(token);
-    jwt.verify(tokenResult, ENV.JWT_SECRET);
+    const jwtResult = jwt.verify(tokenResult, ENV.JWT_SECRET);
+    if (!isJWTValid(jwtResult)) {
+      throw new Error('Credentials Expired! Log in again!')
+    }
+
 
     const { error } = await supabase
       .from(tableResult)
