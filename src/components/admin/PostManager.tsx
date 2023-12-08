@@ -190,6 +190,7 @@ function DisplayItem({
   const [deleteItemState, deleteItemAction] = useFormState(onDeleteItem, null);
   const adminToken = useContext(AdminTokenContext);
   const router = useRouter();
+  const page = table
   useEffect(() => {
     if (hideItemState === null) return;
     if (hideItemState?.includes("success")) {
@@ -244,7 +245,7 @@ function DisplayItem({
   }, [deleteItemState]);
 
   return (
-    <PetSummary {...detail}>
+    <PetSummary {...detail} page={getPage(table)}>
       <Flex mt={4} justify={"space-between"}>
         <form action={hideItemAction}>
           <input type="hidden" name="id" value={detail.id} />
@@ -280,4 +281,15 @@ function MessageDisplay(props: Message) {
       </VStack>
     </Card>
   );
+}
+
+function getPage(table: Table) {
+  switch (table) {
+    case 'Missing':
+      return 'missing'
+    case 'Wish':
+      return 'wish'
+    default:
+      return 'adopt'
+  }
 }
