@@ -190,7 +190,7 @@ function DisplayItem({
   const [deleteItemState, deleteItemAction] = useFormState(onDeleteItem, null);
   const adminToken = useContext(AdminTokenContext);
   const router = useRouter();
-  const page = table
+  const page = table;
   useEffect(() => {
     if (hideItemState === null) return;
     if (hideItemState?.includes("success")) {
@@ -285,11 +285,11 @@ function MessageDisplay(props: Message) {
 
 function getPage(table: Table) {
   switch (table) {
-    case 'Missing':
-      return 'missing'
-    case 'Wish':
-      return 'wish'
+    case "Missing":
+      return "missing";
+    case "Wish":
+      return "wish";
     default:
-      return 'adopt'
+      return "adopt";
   }
 }

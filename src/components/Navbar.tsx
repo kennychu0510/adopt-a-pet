@@ -37,10 +37,12 @@ export default function Nav() {
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
-    if (adminToken !== null || pathname.includes("/admin/manage")) {
+    if (pathname.includes("/admin/manage")) {
       setIsAdmin(true);
-    } else {
+    } else if (pathname.includes("/admin")) {
       setIsAdmin(false);
+    } else {
+      setIsAdmin(adminToken !== null);
     }
   }, [adminToken, pathname]);
 

@@ -1,6 +1,7 @@
 import { RcFile } from "antd/es/upload";
+import imageCompression, { Options } from "browser-image-compression";
 
-export const getBase64 = (file: RcFile): Promise<string> =>
+export const getBase64 = (file: File): Promise<string> =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -44,4 +45,14 @@ export function getImageForPetType(type: string) {
     default:
       return "/assets/dog.jpeg";
   }
+}
+
+const options: Options = {
+  maxSizeMB: 0.5,
+  useWebWorker: true,
+};
+
+export async function compressImage(image: File) {
+  const compressedImage = await imageCompression(image, options);
+  return compressedImage;
 }

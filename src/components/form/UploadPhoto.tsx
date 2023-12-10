@@ -5,7 +5,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import { Modal, Upload, message } from "antd";
 import type { RcFile, UploadProps } from "antd/es/upload";
 import type { UploadChangeParam, UploadFile } from "antd/es/upload/interface";
-import { getBase64 } from "@/utils/helper";
+import { compressImage, getBase64 } from "@/utils/helper";
 
 const imageCheck = (file: RcFile) => {
   // const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
@@ -13,11 +13,13 @@ const imageCheck = (file: RcFile) => {
   if (!isImage) {
     message.error("You can only upload an image!");
   }
-  const isLt2M = file.size / 1024 / 1024 < 2;
-  if (!isLt2M) {
-    message.error("Image must smaller than 2MB!");
-  }
-  return isImage && isLt2M;
+
+  return isImage;
+  // const isLt2M = file.size / 1024 / 1024 < 2;
+  // if (!isLt2M) {
+  //   message.error("Image must smaller than 2MB!");
+  // }
+  // return isImage && isLt2M;
 };
 
 export default function UploadPhoto({

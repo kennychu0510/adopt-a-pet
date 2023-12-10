@@ -13,7 +13,7 @@ import { FORM_ERRORS, HK_CENTER_LNG, HK_CENTER_LAT } from "@/constants";
 import useFormHelper from "@/hooks/useFormHelper";
 import useFormSubmissionHelper from "@/hooks/useFormSubmissionHelper";
 import { ServerError, handleFetchError } from "@/utils/errorHelper";
-import { getBase64 } from "@/utils/helper";
+import { compressImage, getBase64 } from "@/utils/helper";
 import ToastifyConfig from "@/utils/toastify";
 import {
   Box,
@@ -84,7 +84,8 @@ export default function PostMissingForm() {
       const form = new FormData(event.target as any);
 
       if (fileList[0] && fileList[0]?.originFileObj) {
-        const base64Image = await getBase64(fileList[0]?.originFileObj);
+        const compressedImage = await compressImage(fileList[0].originFileObj);
+        const base64Image = await getBase64(compressedImage);
         form.append("image", base64Image);
       }
       form.append("type", type);
