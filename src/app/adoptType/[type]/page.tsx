@@ -4,7 +4,7 @@ import supabase from "@/utils/supabase";
 import { Badge, Center, Flex, Heading, Text, VStack } from "@chakra-ui/react";
 import React from "react";
 import _ from "lodash";
-import { getColorForAnimal } from "@/utils/helper";
+import { getColorForAnimal, getTimestampMinusOneWeek } from "@/utils/helper";
 import Link from "next/link";
 import ErrorPage from "@/components/ErrorPage";
 
@@ -16,10 +16,15 @@ export default async function AdoptPage({
 }) {
   const { error, data } =
     type === "all"
-      ? await supabase.from("Adoption").select("*").is("show", true)
+      ? await supabase
+          .from("Adoption")
+          .select("*")
+          .gte("created_at", getTimestampMinusOneWeek())
+          .is("show", true)
       : await supabase
           .from("Adoption")
           .select("*")
+          .gte("created_at", getTimestampMinusOneWeek())
           .eq("type", type)
           .is("show", true);
   if (!data) {

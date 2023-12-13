@@ -5,6 +5,7 @@ export async function getAdoptionListForLanding() {
   return supabase
     .from("Adoption")
     .select("*")
+    .gte("created_at", getTimestampMinusOneWeek())
     .limit(10)
     .order("created_at", { ascending: false })
     .is("show", true);

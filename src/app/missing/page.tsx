@@ -22,7 +22,7 @@ export default async function MissingPage() {
       {data.length > 0 ? (
         <>
           <Center mb={2}>
-            <Heading color={"blue.600"}>Missing Pets</Heading>
+            <Heading color={"red.600"}>Missing Pets</Heading>
           </Center>
           <Text textAlign={"center"} color={"gray.500"}>
             Missing pets reported in the past week
