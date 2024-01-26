@@ -12,8 +12,8 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('post missing form working properly', async ({ page }) => {
-  await page.goto(ROOT_URL + '/post/missing');
   await page.waitForLoadState('networkidle');
+  await page.goto(ROOT_URL + '/post/missing');
   await page.getByRole('button', {name: 'Submit'}).click();
   await expect(page.getByText('Please check your form!')).toBeVisible();
 
@@ -46,8 +46,8 @@ test('post missing form working properly', async ({ page }) => {
 
   await page.locator('.ant-picker-input > input').click()
   const yesterday = dayjs().subtract(1, 'day').format('YYYY-MM-DD')
-  await page.locator(`td[title="${yesterday}"]`).click();
-  await page.locator('.ant-picker-ok > button').click();
+  await page.keyboard.type(yesterday);
+  await page.keyboard.press('Enter');
   expect(page.getByText(FORM_ERRORS.DATE)).not.toBeVisible();
 
   await page.getByRole('button', {name: 'Submit'}).click();
@@ -76,8 +76,8 @@ test('post missing form working properly', async ({ page }) => {
   await page.fill('#petName', 'Jack');
   await page.fill('#description', "Jacky Chan's best friend!");
   await page.locator('.ant-picker-input > input').click()
-  await page.locator(`td[title="${yesterday}"]`).click();
-  await page.locator('.ant-picker-ok > button').click();
+  await page.keyboard.type(yesterday);
+  await page.keyboard.press('Enter');
   await page.getByRole('button', {name: 'Submit'}).click();
   await expect(page.getByText('Form posted successfully!')).toBeVisible();
   await expect(page).toHaveURL(ROOT_URL);
@@ -87,8 +87,8 @@ test('post missing form working properly', async ({ page }) => {
   expect(page.locator('[itemid="missing"]').getByText('Jack')).toBeVisible();
 
   await page.locator('[itemid="nav-Missing"]').click();
-  await expect(page).toHaveURL(ROOT_URL + '/missing');
   await page.waitForLoadState('networkidle');
+  await expect(page).toHaveURL(ROOT_URL + '/missing');
   expect(page.getByText('Missing Pets', {exact: true})).toBeVisible();
   expect(page.getByText('Mew')).toBeVisible();
   expect(page.getByText('Jack')).toBeVisible();
