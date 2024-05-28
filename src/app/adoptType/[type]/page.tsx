@@ -1,42 +1,25 @@
-import PetSummary from "@/components/PetSummary";
-import DetailPageLayout from "@/components/layouts/DetailPageLayout";
-import supabase from "@/utils/supabase";
-import { Badge, Center, Flex, Heading, Text, VStack } from "@chakra-ui/react";
-import React from "react";
-import _ from "lodash";
-import { getColorForAnimal, getTimestampMinusOneWeek } from "@/utils/helper";
-import Link from "next/link";
-import ErrorPage from "@/components/ErrorPage";
+import ErrorPage from '@/components/ErrorPage';
+import PetSummary from '@/components/PetSummary';
+import DetailPageLayout from '@/components/layouts/DetailPageLayout';
+import services from '@/services';
+import { getColorForAnimal } from '@/utils/helper';
+import { Badge, Center, Flex, Heading, Text, VStack } from '@chakra-ui/react';
+import _ from 'lodash';
+import Link from 'next/link';
 
 export const revalidate = 0;
-export default async function AdoptPage({
-  params: { type },
-}: {
-  params: { type: string };
-}) {
-  const { error, data } =
-    type === "all"
-      ? await supabase
-          .from("Adoption")
-          .select("*")
-          .gte("created_at", getTimestampMinusOneWeek())
-          .is("show", true)
-      : await supabase
-          .from("Adoption")
-          .select("*")
-          .gte("created_at", getTimestampMinusOneWeek())
-          .eq("type", type)
-          .is("show", true);
+export default async function AdoptPage({ params: { type } }: { params: { type: string } }) {
+  const { error, data } = await services.getAdoptionListByType(type);
   if (!data) {
     return <ErrorPage />;
   }
-  const petTypes = _.uniqBy(data ?? [], "type").map((item) => item.type);
+  const petTypes = _.uniqBy(data ?? [], 'type').map((item) => item.type);
   if (data.length === 0) {
     return (
       <DetailPageLayout error={error}>
         <Center mb={2}>
-          <Heading color={"blue.600"} textAlign={"center"}>
-            No {type === "all" ? "pet" : type} is up for adoption
+          <Heading color={'blue.600'} textAlign={'center'}>
+            No {type === 'all' ? 'pet' : type} is up for adoption
           </Heading>
         </Center>
       </DetailPageLayout>
@@ -45,9 +28,7 @@ export default async function AdoptPage({
   return (
     <DetailPageLayout error={error}>
       <Center mb={2}>
-        <Heading color={"blue.600"}>
-          Adopt {type === "all" ? "a pet" : `a ${type}`}
-        </Heading>
+        <Heading color={'blue.600'}>Adopt {type === 'all' ? 'a pet' : `a ${type}`}</Heading>
       </Center>
       <Flex gap={2}>
         {petTypes.map((item) => (
@@ -58,15 +39,11 @@ export default async function AdoptPage({
           </Link>
         ))}
       </Flex>
-      <Flex justify={"flex-end"}>
+      <Flex justify={'flex-end'}>
         <Text mr={1}>Total: </Text>
         <Text>{data?.length ?? 0}</Text>
       </Flex>
-      <VStack>
-        {data?.map((item) => (
-          <PetSummary page="adopt" {...item} key={item.id} />
-        ))}
-      </VStack>
+      <VStack>{data?.map((item) => <PetSummary page='adopt' {...item} key={item.id} />)}</VStack>
     </DetailPageLayout>
   );
 }
