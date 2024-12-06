@@ -1,3 +1,4 @@
+import { TableType } from '@/interface';
 import { Prisma, PrismaClient } from '@prisma/client';
 
 export default class PrismaRepository {
@@ -247,6 +248,47 @@ export default class PrismaRepository {
       return { error: null, message: 'Contact Us created successfully' };
     } catch (error) {
       return { error, message: 'Error in creating missing' };
+    }
+  }
+
+  private getUpdateFunction(table: TableType) {
+    switch (table) {
+      case TableType.Adoption:
+        return this.updateAdoption;
+      case TableType.Missing:
+        return this.updateMissing;
+      case TableType.Wish:
+        return this.updateWish;
+    }
+  }
+
+  async toggleShowItem(table: TableType, id: string, show: boolean) {
+    try {
+      await this.getUpdateFunction(table)?.(id, {
+        show,
+      });
+      return { error: null };
+    } catch (error) {
+      return { error };
+    }
+  }
+
+  async deleteItem(table: TableType, id: string) {
+    try {
+      switch (table) {
+        case TableType.Adoption:
+          await this.prisma.adoption.delete({ where: { id } });
+        case TableType.Missing:
+          await this.prisma.missing.delete({ where: { id } });
+        case TableType.Wish:
+          await this.prisma.wish.delete({ where: { id } });
+        default:
+          return {
+            error: 'invalid table',
+          };
+      }
+    } catch (error) {
+      return { error };
     }
   }
 }
