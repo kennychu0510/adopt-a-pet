@@ -10,7 +10,7 @@
     "gen-db-type": "npx supabase gen types typescript --project-id vzxnkcbyjsxmzpbbwjrx > ./src/utils/database.types.ts",
     "seed": "npx ts-node ./scripts/seed.ts"
   },
-  "engines": "18.x",
+  "engines": "18.19.0",
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/next-js": "^2.1.5",
