@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev -H 0.0.0.0",
-    "build": "next build",
-    "start": "prisma generate && next start",
+    "build": "prisma generate && next build",
+    "start": "next start",
     "lint": "npx prettier ./src --write && npx eslint --fix && next lint",
     "gen-db-type": "npx supabase gen types typescript --project-id vzxnkcbyjsxmzpbbwjrx > ./src/utils/database.types.ts",
     "seed": "npx ts-node ./scripts/seed.ts"
