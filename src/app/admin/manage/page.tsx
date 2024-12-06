@@ -1,13 +1,18 @@
-import { getAdoption, getMessages, getMissing, getWishes } from '@/app/api/admin/supabase';
 import AdminGuard from '@/components/admin/AdminGuard';
 import Logout from '@/components/admin/Logout';
 import PostManager from '@/components/admin/PostManager';
+import services from '@/services';
 import { Center, Heading, VStack } from '@chakra-ui/react';
 
 export const revalidate = 0;
 
 export default async function Page() {
-  const [adoptionList, wishList, missingList, messages] = await Promise.all([getAdoption(), getWishes(), getMissing(), getMessages()]);
+  const [adoptionList, wishList, missingList, messages] = await Promise.all([
+    services.getAdoptionListByType('all'),
+    services.getWishListList(),
+    services.getMissingList(),
+    services.getContactUsList(),
+  ]);
 
   return (
     <VStack minH={'80dvh'}>
@@ -19,10 +24,10 @@ export default async function Page() {
           </Heading>
           <PostManager
             data={{
-              adoptionList,
-              wishList,
-              missingList,
-              messages,
+              adoptionList: adoptionList.data,
+              wishList: wishList.data,
+              missingList: missingList.data,
+              messages: messages.data,
             }}
           />
         </VStack>
