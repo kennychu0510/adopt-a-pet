@@ -1,7 +1,9 @@
-import { AdoptionItem, MissingItem } from '@/interface';
-import { PrismaClient } from '@prisma/client';
 import fs from 'fs';
 import path from 'path';
+import z from 'zod';
+import { AdoptionSchema, MissingFormSchema } from '../../src/utils/ZodSchema';
+import supabase from '../../src/utils/supabase';
+
 function toBase64(filePath: string) {
   const img = fs.readFileSync(filePath);
   const prefix = `data:image/${path.extname(filePath)};base64,`;
@@ -35,7 +37,11 @@ const dog4Img = toBase64(__dirname + '/images/dog4.jpeg');
 const cat1Img = toBase64(__dirname + '/images/cat1.jpeg');
 const parrot1Img = toBase64(__dirname + '/images/parrot1.jpeg');
 
-const adoptionData: AdoptionItem[] = [
+type AdoptionForm = z.infer<typeof AdoptionSchema>;
+type MissingForm = z.infer<typeof MissingFormSchema>;
+type WishForm = z.infer<typeof MissingFormSchema>;
+
+const adoptionData: AdoptionForm[] = [
   {
     name: 'John',
     contact: 'john@gmail.com',
@@ -54,7 +60,7 @@ const adoptionData: AdoptionItem[] = [
   },
 ];
 
-const missingData: MissingItem[] = [
+const missingData: MissingForm[] = [
   {
     name: 'Jack',
     contact: 'jack@gmail.com',
@@ -81,21 +87,18 @@ const missingData: MissingItem[] = [
 
 async function main() {
   console.log('Seeding...');
-  const prisma = new PrismaClient();
   try {
     console.log('Cleaning database');
-    await prisma.adoption.deleteMany();
-    await prisma.missing.deleteMany();
-    await prisma.contactUs.deleteMany();
-    await prisma.wish.deleteMany();
+    await supabase.from('Adoption').delete().gte('id', 0);
+    await supabase.from('Missing').delete().gte('id', 0);
+    await supabase.from('Wish').delete().gte('id', 0);
+    await supabase.from('Contact Us').delete().gte('id', 0);
     console.log('Inserting Seed');
-    await prisma.adoption.createMany({ data: adoptionData });
-    await prisma.missing.createMany({ data: missingData });
+    await supabase.from('Adoption').insert(adoptionData);
+    await supabase.from('Missing').insert(missingData);
     console.log('Seeding Done');
   } catch (error) {
     console.log('Seeding Failed', error);
-  } finally {
-    await prisma.$disconnect();
   }
 }
 

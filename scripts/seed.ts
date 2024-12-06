@@ -1,9 +1,7 @@
-import { AdoptionSchema, MissingFormSchema } from '../src/utils/ZodSchema';
-import supabase from '../src/utils/supabase';
-import z from 'zod';
+import { AdoptionItem, MissingItem } from '@/interface';
+import { PrismaClient } from '@prisma/client';
 import fs from 'fs';
 import path from 'path';
-
 function toBase64(filePath: string) {
   const img = fs.readFileSync(filePath);
   const prefix = `data:image/${path.extname(filePath)};base64,`;
@@ -11,7 +9,7 @@ function toBase64(filePath: string) {
   return prefix + Buffer.from(img).toString('base64');
 }
 
-function getRandomLatLngWithinHKBoundary(): { lat: number, lng: number } {
+function getRandomLatLngWithinHKBoundary(): { lat: number; lng: number } {
   const minLat = 22.15;
   const maxLat = 22.58;
   const minLng = 113.82;
@@ -37,11 +35,7 @@ const dog4Img = toBase64(__dirname + '/images/dog4.jpeg');
 const cat1Img = toBase64(__dirname + '/images/cat1.jpeg');
 const parrot1Img = toBase64(__dirname + '/images/parrot1.jpeg');
 
-type AdoptionForm = z.infer<typeof AdoptionSchema>;
-type MissingForm = z.infer<typeof MissingFormSchema>;
-type WishForm = z.infer<typeof MissingFormSchema>;
-
-const adoptionData: AdoptionForm[] = [
+const adoptionData: AdoptionItem[] = [
   {
     name: 'John',
     contact: 'john@gmail.com',
@@ -60,7 +54,7 @@ const adoptionData: AdoptionForm[] = [
   },
 ];
 
-const missingData: MissingForm[] = [
+const missingData: MissingItem[] = [
   {
     name: 'Jack',
     contact: 'jack@gmail.com',
@@ -85,22 +79,24 @@ const missingData: MissingForm[] = [
   },
 ];
 
-
 async function main() {
   console.log('Seeding...');
+  const prisma = new PrismaClient();
   try {
-    console.log('Cleaning database')
-    await supabase.from('Adoption').delete().gte('id', 0);
-    await supabase.from('Missing').delete().gte('id', 0);
-    await supabase.from('Wish').delete().gte('id', 0);
-    await supabase.from('Contact Us').delete().gte('id', 0);
-    console.log('Inserting Seed')
-    await supabase.from('Adoption').insert(adoptionData)
-    await supabase.from('Missing').insert(missingData)
+    console.log('Cleaning database');
+    await prisma.adoption.deleteMany();
+    await prisma.missing.deleteMany();
+    await prisma.contactUs.deleteMany();
+    await prisma.wish.deleteMany();
+    console.log('Inserting Seed');
+    await prisma.adoption.createMany({ data: adoptionData });
+    await prisma.missing.createMany({ data: missingData });
     console.log('Seeding Done');
   } catch (error) {
     console.log('Seeding Failed', error);
+  } finally {
+    await prisma.$disconnect();
   }
 }
 
-main()
+main();
