@@ -31,7 +31,9 @@ export async function POST(request: Request) {
       }
     } else if (formType === 'contact') {
       const contactForm = ContactUsSchema.parse(form);
+      console.log('inserting contact form', contactForm);
       const { error } = await services.createContactUs(contactForm);
+      console.log({ error });
       if (error) {
         return NextResponse.json({ message: error.toString() }, { status: 500 });
       }

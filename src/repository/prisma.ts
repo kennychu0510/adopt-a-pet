@@ -10,7 +10,12 @@ export default class PrismaRepository {
   async getAdoptionListForLanding() {
     try {
       return {
-        data: await this.prisma.adoption.findMany({ take: 10 }),
+        data: await this.prisma.adoption.findMany({
+          take: 10,
+          orderBy: {
+            created_at: 'desc',
+          },
+        }),
         error: null,
       };
     } catch (error) {
@@ -24,7 +29,12 @@ export default class PrismaRepository {
   async getMissingListForLanding() {
     try {
       return {
-        data: await this.prisma.missing.findMany({ take: 10 }),
+        data: await this.prisma.missing.findMany({
+          take: 10,
+          orderBy: {
+            created_at: 'desc',
+          },
+        }),
         error: null,
       };
     } catch (error) {
@@ -38,7 +48,12 @@ export default class PrismaRepository {
   async getWishListForLanding() {
     try {
       return {
-        data: await this.prisma.wish.findMany({ take: 10 }),
+        data: await this.prisma.wish.findMany({
+          take: 10,
+          orderBy: {
+            created_at: 'desc',
+          },
+        }),
         error: null,
       };
     } catch (error) {
@@ -65,7 +80,19 @@ export default class PrismaRepository {
 
   async getAdoptionListByType(type: string) {
     try {
-      const data = type === 'all' ? await this.prisma.adoption.findMany() : await this.prisma.adoption.findMany({ where: { type } });
+      const data =
+        type === 'all'
+          ? await this.prisma.adoption.findMany({
+              orderBy: {
+                created_at: 'desc',
+              },
+            })
+          : await this.prisma.adoption.findMany({
+              where: { type },
+              orderBy: {
+                created_at: 'desc',
+              },
+            });
       return {
         data,
         error: null,
@@ -81,7 +108,11 @@ export default class PrismaRepository {
   async getMissingList() {
     try {
       return {
-        data: await this.prisma.missing.findMany(),
+        data: await this.prisma.missing.findMany({
+          orderBy: {
+            created_at: 'desc',
+          },
+        }),
         error: null,
       };
     } catch (error) {
@@ -109,7 +140,11 @@ export default class PrismaRepository {
   async getWishListList() {
     try {
       return {
-        data: await this.prisma.wish.findMany(),
+        data: await this.prisma.wish.findMany({
+          orderBy: {
+            created_at: 'desc',
+          },
+        }),
         error: null,
       };
     } catch (error) {
@@ -137,7 +172,11 @@ export default class PrismaRepository {
   async getContactUsList() {
     try {
       return {
-        data: await this.prisma.contactUs.findMany(),
+        data: await this.prisma.contactUs.findMany({
+          orderBy: {
+            created_at: 'desc',
+          },
+        }),
         error: null,
       };
     } catch (error) {
@@ -150,7 +189,7 @@ export default class PrismaRepository {
 
   async createAdoption(data: Prisma.AdoptionCreateInput) {
     try {
-      this.prisma.adoption.create({ data });
+      await this.prisma.adoption.create({ data });
       return { error: null, message: 'Adoption created successfully' };
     } catch (error) {
       return { error, message: 'Error in creating adoption' };
@@ -159,7 +198,7 @@ export default class PrismaRepository {
 
   async createMissing(data: Prisma.MissingCreateInput) {
     try {
-      this.prisma.missing.create({ data });
+      await this.prisma.missing.create({ data });
       return { error: null, message: 'Missing created successfully' };
     } catch (error) {
       return { error, message: 'Error in creating missing' };
@@ -168,7 +207,7 @@ export default class PrismaRepository {
 
   async createWish(data: Prisma.WishCreateInput) {
     try {
-      this.prisma.wish.create({ data });
+      await this.prisma.wish.create({ data });
       return { error: null, message: 'Wish created successfully' };
     } catch (error) {
       return { error, message: 'Error in creating missing' };
@@ -177,7 +216,7 @@ export default class PrismaRepository {
 
   async updateAdoption(id: string, data: Prisma.AdoptionUpdateInput) {
     try {
-      this.prisma.adoption.update({ where: { id }, data });
+      await this.prisma.adoption.update({ where: { id }, data });
       return { error: null, message: 'Adoption updated successfully' };
     } catch (error) {
       return { error, message: 'Error in creating missing' };
@@ -186,7 +225,7 @@ export default class PrismaRepository {
 
   async updateMissing(id: string, data: Prisma.MissingUpdateInput) {
     try {
-      this.prisma.missing.update({ where: { id }, data });
+      await this.prisma.missing.update({ where: { id }, data });
       return { error: null, message: 'Missing updated successfully' };
     } catch (error) {
       return { error, message: 'Error in creating missing' };
@@ -195,7 +234,7 @@ export default class PrismaRepository {
 
   async updateWish(id: string, data: Prisma.WishUpdateInput) {
     try {
-      this.prisma.wish.update({ where: { id }, data });
+      await this.prisma.wish.update({ where: { id }, data });
       return { error: null, message: 'Wish updated successfully' };
     } catch (error) {
       return { error, message: 'Error in creating missing' };
@@ -204,7 +243,7 @@ export default class PrismaRepository {
 
   async createContactUs(data: Prisma.ContactUsCreateInput) {
     try {
-      this.prisma.contactUs.create({ data });
+      await this.prisma.contactUs.create({ data });
       return { error: null, message: 'Contact Us created successfully' };
     } catch (error) {
       return { error, message: 'Error in creating missing' };
