@@ -1,0 +1,112 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  //! FOR SQLITE
+  // provider = "sqlite"
+  // url      = env("DATABASE_URL_SQLITE")
+
+  //! FOR SUPABASE
+  // provider = "postgresql"
+  // url = env("DATABASE_URL_SUPABASE")
+
+  //! FOR MONGODB
+  provider = "mongodb"
+  url      = env("DATABASE_URL_MONGO")
+}
+
+// !SQL
+// model Adoption {
+//   id          Int      @id @default(autoincrement())
+//   created_at  DateTime @default(now())
+//   name        String
+//   image       String
+//   description String
+//   type        String
+//   contact     String
+//   petName     String
+//   show        Boolean  @default(true)
+// }
+
+// model Missing {
+//   id          Int      @id @default(autoincrement())
+//   created_at  DateTime @default(now())
+//   name        String
+//   petName     String
+//   image       String
+//   description String
+//   type        String
+//   contact     String
+//   lastSeen    DateTime
+//   lat         Float
+//   lng         Float
+//   show        Boolean  @default(true)
+// }
+
+// model Wish {
+//   id          Int      @id @default(autoincrement())
+//   created_at  DateTime @default(now())
+//   description String
+//   name        String
+//   contact     String
+//   type        String
+//   show        Boolean  @default(true)
+// }
+
+// model ContactUs {
+//   id         Int      @id @default(autoincrement())
+//   created_at DateTime @default(now())
+//   contact    String
+//   name       String
+//   message    String
+// }
+
+// !MONGO
+model Adoption {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  created_at  DateTime @default(now())
+  name        String
+  image       String
+  description String
+  type        String
+  contact     String
+  petName     String
+  show        Boolean  @default(true)
+}
+
+model Missing {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  created_at  DateTime @default(now())
+  name        String
+  petName     String
+  image       String
+  description String
+  type        String
+  contact     String
+  lastSeen    DateTime
+  lat         Float
+  lng         Float
+  show        Boolean  @default(true)
+}
+
+model Wish {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  created_at  DateTime @default(now())
+  description String
+  name        String
+  contact     String
+  type        String
+  show        Boolean  @default(true)
+}
+
+model ContactUs {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  created_at DateTime @default(now())
+  contact    String
+  name       String
+  message    String
+}

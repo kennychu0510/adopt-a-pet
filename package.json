@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "next dev -H 0.0.0.0",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "npx prettier ./src --write && npx eslint --fix && next lint",
     "gen-db-type": "npx supabase gen types typescript --project-id vzxnkcbyjsxmzpbbwjrx > ./src/utils/database.types.ts",
     "seed": "npx ts-node ./scripts/seed.ts"
   },
+  "engines": "18.19.0",
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/next-js": "^2.1.5",
@@ -17,6 +18,7 @@
     "@clerk/nextjs": "^4.29.3",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@prisma/client": "^6.0.1",
     "@supabase/auth-helpers-nextjs": "^0.8.4",
     "@supabase/supabase-js": "^2.38.4",
     "@vercel/analytics": "^1.1.1",
@@ -28,6 +30,7 @@
     "g": "^2.0.1",
     "jsonwebtoken": "^9.0.2",
     "next": "^14.1.1",
+    "prisma": "^6.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",

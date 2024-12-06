@@ -10,5 +10,8 @@
       "database": "postgres",
       "password": "postgres"
     }
-  ]
+  ],
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "always"
+  }
 }
