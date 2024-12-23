@@ -1,19 +1,22 @@
-## Adopt a Pet
+# Adopt A Pet - README
 
-Written in typescript, frontend created with Next.js, supabase used for backend. Chakra UI and Ant Design used as UI frameworks. 
+## Overview
 
-## To Start the Server Locally
+**Adopt A Pet** is a user-friendly platform designed to connect pet lovers with animals in need of homes. Whether you’re looking to adopt a pet, share details about a lost pet, or express interest in specific types of pets you’re looking to adopt, this website is here to help.
 
-Copy .env.local.sample and save it as .env.local and fill in the values.
+---
 
-A supabase project is required.
+## Key Features
 
-Starting the frontend Nextjs server:
+### 1. **Pet Adoption Listings**
+- Users can upload details about pets they have available for adoption, including:
+  - Photos
+  - Descriptions
+  - Contact information
 
-1. npm install
-2. npm build
-3. npm run start
+### 2. **Lost and Found Pets**
+- A dedicated section for users to share information about pets that have gone missing, helping the community to reunite lost pets with their owners.
 
-Starting the local Supabase backend services (supabse CLI must be installed):
-
-[https://supabase.com/docs/guides/cli]()
+### 3. **Adoption Wish Form**
+- Users can fill out a form to specify the type of pet they’re interested in adopting.
+- This helps match users with potential pets that meet their preferences.
